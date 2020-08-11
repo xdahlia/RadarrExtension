@@ -13,15 +13,20 @@ import UIKit
 class ShareViewController: UIViewController {
     
     @IBOutlet weak var titleIDLabel: UILabel!
+    @IBOutlet weak var viewHeight: NSLayoutConstraint!
+    @IBOutlet weak var extensionView: UIView!
+
+    //MARK: - Control Properties
     @IBOutlet weak var searchToggle: UISegmentedControl!
     @IBOutlet weak var settingsStack: UIStackView!
     @IBOutlet weak var editSwitch: UISwitch!
-    @IBOutlet weak var viewHeight: NSLayoutConstraint!
-    @IBOutlet weak var extensionView: UIView!
+
+    //MARK: - Settings Properties
     @IBOutlet weak var serverAddressField: UITextField!
     @IBOutlet weak var radarrAPIKeyField: UITextField!
     @IBOutlet weak var rootFolderPathField: UITextField!
 
+    //MARK: - Initialization
     var radarr = Radarr()
     var settings = Settings()
 
@@ -61,6 +66,8 @@ class ShareViewController: UIViewController {
 
         self.handleSharedFile()
     }
+    
+    //MARK: - Handle buttons / controls
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         
@@ -108,6 +115,8 @@ class ShareViewController: UIViewController {
         }
     }
     
+    //MARK: - Handle Keyboard
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
            // if keyboard size is not available for some reason, dont do anything
@@ -128,6 +137,8 @@ class ShareViewController: UIViewController {
         
       settings.save()
     }
+    
+    //MARK: - Core Functionality
 
     private func handleSharedFile() {
         if let item = extensionContext?.inputItems.first as? NSExtensionItem {
@@ -151,6 +162,67 @@ class ShareViewController: UIViewController {
             })
         }
     }
+    
+    func sendMovieToRadarrFromIMDB(id: String, nowOption: Bool) {
+
+            // remember to move api key before pushing to GitHub
+            let urlString = "https://api.themoviedb.org/3/find/" + id + "?external_source=imdb_id&api_key=***REMOVED***"
+
+            let url = URL(string: urlString)
+            
+            if let url = url {
+                
+                let session = URLSession.shared
+                
+                let task = session.dataTask(with: url) { (data, response, error) in
+                    
+                    if let json = data {
+                        
+                        let jsonString = String(data: json, encoding: .utf8)!
+                        
+                        if let tmdb = self.jsonToTMDB(json: jsonString)?.movie_results[0] {
+                            
+                            // search options
+                            self.radarr.monitored = nowOption
+                            self.radarr.addOptions.searchForMovie = nowOption
+                            
+                            self.radarr.title = tmdb.title
+                            self.radarr.tmdbId = tmdb.id
+                            self.radarr.year = self.extractYearFromDate(date: tmdb.release_date)
+
+                            if let titleSlug = tmdb.title.convertedToSlug() {
+                                self.radarr.titleSlug = "\(titleSlug)-\(tmdb.id)"
+                            }
+                            self.radarr.images[0].url = "https://image.tmdb.org/t/p/w1280\(tmdb.poster_path)"
+                            self.radarr.rootFolderPath = self.settings.rootFolderPath
+                            
+                        }
+                        
+                        if let radarrJSON = self.radarrToJson(data: self.radarr) {
+                            self.postURL(from: radarrJSON)
+                        }
+
+    //                    print(self.radarr)
+       
+                    }
+                    
+                    if let response = response {
+                        print(response)
+                    }
+                    
+                    if let error = error {
+    //                    print(error.localizedDescription)
+                        self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                        
+                    }
+                    
+                }
+                task.resume()
+            }
+            
+        }
+    
+    //MARK: - Utility Functions
     
     func extractIDFromIMDBUrl(url: NSURL) -> String {
         
@@ -258,70 +330,13 @@ class ShareViewController: UIViewController {
 
     }
     
-    func sendMovieToRadarrFromIMDB(id: String, nowOption: Bool) {
-
-        // remember to move api key before pushing to GitHub
-        let urlString = "https://api.themoviedb.org/3/find/" + id + "?external_source=imdb_id&api_key=***REMOVED***"
-
-        let url = URL(string: urlString)
-        
-        if let url = url {
-            
-            let session = URLSession.shared
-            
-            let task = session.dataTask(with: url) { (data, response, error) in
-                
-                if let json = data {
-                    
-                    let jsonString = String(data: json, encoding: .utf8)!
-                    
-                    if let tmdb = self.jsonToTMDB(json: jsonString)?.movie_results[0] {
-                        
-                        // search options
-                        self.radarr.monitored = nowOption
-                        self.radarr.addOptions.searchForMovie = nowOption
-                        
-                        self.radarr.title = tmdb.title
-                        self.radarr.tmdbId = tmdb.id
-                        self.radarr.year = self.extractYearFromDate(date: tmdb.release_date)
-
-                        if let titleSlug = tmdb.title.convertedToSlug() {
-                            self.radarr.titleSlug = "\(titleSlug)-\(tmdb.id)"
-                        }
-                        self.radarr.images[0].url = "https://image.tmdb.org/t/p/w1280\(tmdb.poster_path)"
-                        self.radarr.rootFolderPath = self.settings.rootFolderPath
-                        
-                    }
-                    
-                    if let radarrJSON = self.radarrToJson(data: self.radarr) {
-                        self.postURL(from: radarrJSON)
-                    }
-
-//                    print(self.radarr)
-   
-                }
-                
-                if let response = response {
-                    print(response)
-                }
-                
-                if let error = error {
-//                    print(error.localizedDescription)
-                    self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-                    
-                }
-                
-            }
-            task.resume()
-        }
-        
-    }
-    
     func extractYearFromDate(date: String) -> Int {
         guard let int = Int(String(date.prefix(4))) else { return 0 }
         return int
             
     }
+    
+    //MARK: - Display Alerts
     
     func displayUIAlertController(title: String, message: String) {
 
@@ -357,6 +372,8 @@ class ShareViewController: UIViewController {
     }
     
 }
+
+//MARK: - Extensions
 
 extension ShareViewController: UITextFieldDelegate {
     
