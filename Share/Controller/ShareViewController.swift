@@ -152,13 +152,14 @@ class ShareViewController: UIViewController {
                             self.settings.imdbID = self.extractIDFromIMDBUrl(url: shareURL)
                             
                             if let domain = shareURL.host {
-                                
                                 if domain != "www.imdb.com" {
                                     self.displayErrorUIAlertController(title: "Error", message: "You must share from either IMDB app or website", dismissShareSheet: true)
                                 }
-                            
                             }
                             
+                        }
+                        if let error = error {
+                            self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                         }
                     })
                 }
@@ -167,63 +168,76 @@ class ShareViewController: UIViewController {
     }
     
     func sendMovieToRadarrFromIMDB(id: String, nowOption: Bool) {
+        
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.themoviedb.org"
+        components.path = "/3/find/" + id
+        components.queryItems = [
+            URLQueryItem(name: "external_source", value: "imdb_id"),
+            URLQueryItem(name: "api_key", value: "***REMOVED***")
+        ]
 
-            // remember to move api key before pushing to GitHub
-            let urlString = "https://api.themoviedb.org/3/find/" + id + "?external_source=imdb_id&api_key=***REMOVED***"
+        // Getting a URL from our components is as simple as
+        // accessing the 'url' property.
+        let url = components.url
 
-            let url = URL(string: urlString)
+//        // remember to move api key before pushing to GitHub
+//        let urlString = "https://api.themoviedb.org/3/find/" + id + "?external_source=imdb_id&api_key=***REMOVED***"
+//
+//        let url = URL(string: urlString)
+        
+        if let url = url {
             
-            if let url = url {
+            let session = URLSession.shared
+            
+            let task = session.dataTask(with: url) { (data, response, error) in
                 
-                let session = URLSession.shared
-                
-                let task = session.dataTask(with: url) { (data, response, error) in
+                if let json = data {
                     
-                    if let json = data {
+                    let jsonString = String(data: json, encoding: .utf8)!
+                    
+                    if let tmdb = self.jsonToTMDB(json: jsonString)?.movie_results[0] {
                         
-                        let jsonString = String(data: json, encoding: .utf8)!
+                        // search options
+                        self.radarr.monitored = nowOption
+                        self.radarr.addOptions.searchForMovie = nowOption
                         
-                        if let tmdb = self.jsonToTMDB(json: jsonString)?.movie_results[0] {
-                            
-                            // search options
-                            self.radarr.monitored = nowOption
-                            self.radarr.addOptions.searchForMovie = nowOption
-                            
-                            self.radarr.title = tmdb.title
-                            self.radarr.tmdbId = tmdb.id
-                            self.radarr.year = self.extractYearFromDate(date: tmdb.release_date)
-
-                            if let titleSlug = tmdb.title.convertedToSlug() {
-                                self.radarr.titleSlug = "\(titleSlug)-\(tmdb.id)"
-                            }
-                            self.radarr.images[0].url = "https://image.tmdb.org/t/p/w1280\(tmdb.poster_path)"
-                            self.radarr.rootFolderPath = self.settings.rootFolderPath
-                            
+                        self.radarr.title = tmdb.title
+                        self.radarr.tmdbId = tmdb.id
+                        self.radarr.year = self.extractYearFromDate(date: tmdb.release_date)
+                        
+                        if let titleSlug = tmdb.title.convertedToSlug() {
+                            self.radarr.titleSlug = "\(titleSlug)-\(tmdb.id)"
                         }
-                        
-                        if let radarrJSON = self.radarrToJson(data: self.radarr) {
-                            self.postURL(from: radarrJSON)
-                        }
-
-    //                    print(self.radarr)
-       
-                    }
-                    
-                    if let response = response {
-                        print(response)
-                    }
-                    
-                    if let error = error {
-    //                    print(error.localizedDescription)
-                        self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                        self.radarr.images[0].url = "https://image.tmdb.org/t/p/w1280\(tmdb.poster_path)"
+                        self.radarr.rootFolderPath = self.settings.rootFolderPath
                         
                     }
+                    
+                    if let radarrJSON = self.radarrToJson(data: self.radarr) {
+                        self.postURL(from: radarrJSON)
+                    }
+                    
+                    //                    print(self.radarr)
                     
                 }
-                task.resume()
+                
+                if let response = response {
+                    print(response)
+                }
+                
+                if let error = error {
+                    //                    print(error.localizedDescription)
+                    self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                    
+                }
+                
             }
-            
+            task.resume()
         }
+        
+    }
     
     //MARK: - Utility Functions
     
