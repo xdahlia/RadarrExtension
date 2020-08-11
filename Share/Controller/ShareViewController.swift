@@ -319,6 +319,7 @@ class ShareViewController: UIViewController {
                 
                 if let error = error {
 //                    print(error.localizedDescription)
+                    // TODO: display error
                     self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                     
                 }
@@ -341,13 +342,12 @@ class ShareViewController: UIViewController {
     func displayUIAlertController(title: String, message: String) {
 
         DispatchQueue.main.async {
-            
+
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
-            
-            sleep(2)
-            alert.dismiss(animated: true, completion: nil)
-            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+            self.present(alert, animated:true, completion:{ Timer.scheduledTimer(withTimeInterval: 1, repeats:false, block: {_ in
+                self.dismiss(animated: true, completion: nil)
+                self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+            })})
 
         }
 
