@@ -10,7 +10,7 @@ import UIKit
 //import MobileCoreServices
 
 @objc(ShareExtensionViewController)
-class ShareViewController: UIViewController, UITextFieldDelegate {
+class ShareViewController: UIViewController {
     
     @IBOutlet weak var titleIDLabel: UILabel!
     @IBOutlet weak var searchToggle: UISegmentedControl!
@@ -340,21 +340,25 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
     
     func displayErrorUIAlertController(title: String, message: String, dismissShareSheet: Bool) {
 
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
                 
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                if dismissShareSheet {
+                    self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+                }
                 
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
-                    
-                    if dismissShareSheet {
-                        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-                    }
-                    
-                }))
-                
-                self.present(alert, animated: true, completion: nil)
-            }
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+}
+
+extension ShareViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
