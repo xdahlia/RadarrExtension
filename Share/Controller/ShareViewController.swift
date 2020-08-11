@@ -6,6 +6,10 @@
 //  Copyright © 2020 Ivan Ou. All rights reserved.
 //
 
+// FIXME: -
+// FIXME: Settings changes are only effective on subsequent load
+// FIXME: -
+
 import UIKit
 //import MobileCoreServices
 
@@ -75,7 +79,6 @@ class ShareViewController: UIViewController {
             displayErrorUIAlertController(title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
         } else {
             self.sendMovieToRadarrFromIMDB(id: settings.imdbID, nowOption: settings.searchNow)
-            self.displayUIAlertController(title: "Done", message: "Movie sent to Radarr!")
         }
         
     }
@@ -315,11 +318,11 @@ class ShareViewController: UIViewController {
                 
                 if let response = response {
                     print(response)
+                    self.displayUIAlertController(title: "Done", message: "Movie sent to Radarr!")
                 }
                 
                 if let error = error {
 //                    print(error.localizedDescription)
-                    // TODO: display error
                     self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                     
                 }
