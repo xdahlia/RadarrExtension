@@ -63,9 +63,14 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
-        self.sendMovieToRadarrFromIMDB(id: settings.imdbID, nowOption: settings.searchNow)
-        self.displayUIAlertController(title: "Done", message: "Movie sent to Radarr!")
-//        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        
+        if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" {
+            displayErrorUIAlertController(title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
+        } else {
+            self.sendMovieToRadarrFromIMDB(id: settings.imdbID, nowOption: settings.searchNow)
+            self.displayUIAlertController(title: "Done", message: "Movie sent to Radarr!")
+        }
+        
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -170,7 +175,8 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
                 return model
          
             } catch {
-                print(error)
+//                print(error.localizedDescription)
+                displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                 return nil
                 
             }
@@ -189,7 +195,8 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
             return json
             
         } catch {
-            print(error.localizedDescription)
+//            print(error.localizedDescription)
+            displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
             
             return nil
         }
@@ -207,7 +214,9 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
                 return model
          
             } catch {
-                print(error)
+//                print(error.localizedDescription)
+                displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                
                 return nil
                 
             }
@@ -237,7 +246,9 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 if let error = error {
-                    print(error)
+//                    print(error.localizedDescription)
+                    self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                    
                 }
   
             }
@@ -295,7 +306,9 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 if let error = error {
-                    print(error)
+//                    print(error.localizedDescription)
+                    self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                    
                 }
                 
             }
@@ -311,34 +324,34 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
     }
     
     func displayUIAlertController(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         DispatchQueue.main.async {
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
-        }
-        
-        let when = DispatchTime.now() + 3
-        DispatchQueue.main.asyncAfter(deadline: when){
-            // your code with delay
+            
+            sleep(2)
             alert.dismiss(animated: true, completion: nil)
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+
         }
+
     }
     
     func displayErrorUIAlertController(title: String, message: String, dismissShareSheet: Bool) {
-            
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
-                
-                if dismissShareSheet {
-                    self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-                }
-                
-            }))
-            
+
             DispatchQueue.main.async {
+                
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
+                    
+                    if dismissShareSheet {
+                        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+                    }
+                    
+                }))
+                
                 self.present(alert, animated: true, completion: nil)
             }
         }
