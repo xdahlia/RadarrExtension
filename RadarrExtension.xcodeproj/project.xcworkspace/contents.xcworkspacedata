@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TestExtension.xcodeproj">
+      location = "self:/Users/ivanou/Desktop/Projects/TestExtension/RadarrExtension.xcodeproj">
    </FileRef>
 </Workspace>

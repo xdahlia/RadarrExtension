@@ -13,10 +13,40 @@
 		E43A9F0024D0C771000C23DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43A9EFE24D0C771000C23DB /* Main.storyboard */; };
 		E43A9F0224D0C774000C23DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E43A9F0124D0C774000C23DB /* Assets.xcassets */; };
 		E43A9F0524D0C774000C23DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43A9F0324D0C774000C23DB /* LaunchScreen.storyboard */; };
+		E43A9F1324D0C7F7000C23DB /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1224D0C7F7000C23DB /* ShareViewController.swift */; };
+		E43A9F1624D0C7F7000C23DB /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43A9F1424D0C7F7000C23DB /* MainInterface.storyboard */; };
+		E43A9F1A24D0C7F7000C23DB /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E43A9F1024D0C7F7000C23DB /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1F24D1D332000C23DB /* Radarr.swift */; };
+		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
+		E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* Settings.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E43A9F1824D0C7F7000C23DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E43A9EED24D0C771000C23DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E43A9F0F24D0C7F7000C23DB;
+			remoteInfo = Share;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E43A9F1E24D0C7F7000C23DB /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E43A9F1A24D0C7F7000C23DB /* Share.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		E43A9EF524D0C771000C23DB /* TestExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43A9EF524D0C771000C23DB /* Raddar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raddar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43A9EF824D0C771000C23DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E43A9EFC24D0C771000C23DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,10 +54,28 @@
 		E43A9F0124D0C774000C23DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E43A9F0424D0C774000C23DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E43A9F0624D0C774000C23DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E43A9F1024D0C7F7000C23DB /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43A9F1224D0C7F7000C23DB /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		E43A9F1524D0C7F7000C23DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E43A9F1724D0C7F7000C23DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E43A9F1F24D1D332000C23DB /* Radarr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radarr.swift; sourceTree = "<group>"; };
+		E43A9F2124D206AC000C23DB /* TMDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB.swift; sourceTree = "<group>"; };
+		E43A9F3D24D38FB3000C23DB /* ShareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareDebug.entitlements; sourceTree = "<group>"; };
+		E43A9F3E24D390CC000C23DB /* RaddarDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaddarDebug.entitlements; sourceTree = "<group>"; };
+		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
+		E4B1DBCA24E23D1E008BC46C /* Raddar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raddar.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E43A9EF224D0C771000C23DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43A9F0D24D0C7F7000C23DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,7 +88,9 @@
 		E43A9EEC24D0C771000C23DB = {
 			isa = PBXGroup;
 			children = (
+				E4B1DBCA24E23D1E008BC46C /* Raddar.entitlements */,
 				E43A9EF724D0C771000C23DB /* TestExtension */,
+				E43A9F1124D0C7F7000C23DB /* Share */,
 				E43A9EF624D0C771000C23DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,7 +98,8 @@
 		E43A9EF624D0C771000C23DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E43A9EF524D0C771000C23DB /* TestExtension.app */,
+				E43A9EF524D0C771000C23DB /* Raddar.app */,
+				E43A9F1024D0C7F7000C23DB /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,6 +107,7 @@
 		E43A9EF724D0C771000C23DB /* TestExtension */ = {
 			isa = PBXGroup;
 			children = (
+				E43A9F3E24D390CC000C23DB /* RaddarDebug.entitlements */,
 				E43A9EF824D0C771000C23DB /* AppDelegate.swift */,
 				E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */,
 				E43A9EFC24D0C771000C23DB /* ViewController.swift */,
@@ -67,25 +119,83 @@
 			path = TestExtension;
 			sourceTree = "<group>";
 		};
+		E43A9F1124D0C7F7000C23DB /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				E4B1DBC924E23D1B008BC46C /* Share.entitlements */,
+				E43A9F3D24D38FB3000C23DB /* ShareDebug.entitlements */,
+				E43A9F2324D24456000C23DB /* Model */,
+				E43A9F2424D24477000C23DB /* View */,
+				E43A9F2524D24486000C23DB /* Controller */,
+				E43A9F1724D0C7F7000C23DB /* Info.plist */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		E43A9F2324D24456000C23DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E43A9F1F24D1D332000C23DB /* Radarr.swift */,
+				E43A9F2124D206AC000C23DB /* TMDB.swift */,
+				E4B1DBC724E2068C008BC46C /* Settings.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E43A9F2424D24477000C23DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E43A9F1424D0C7F7000C23DB /* MainInterface.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E43A9F2524D24486000C23DB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E43A9F1224D0C7F7000C23DB /* ShareViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E43A9EF424D0C771000C23DB /* TestExtension */ = {
+		E43A9EF424D0C771000C23DB /* RadarrExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E43A9F0924D0C774000C23DB /* Build configuration list for PBXNativeTarget "TestExtension" */;
+			buildConfigurationList = E43A9F0924D0C774000C23DB /* Build configuration list for PBXNativeTarget "RadarrExtension" */;
 			buildPhases = (
 				E43A9EF124D0C771000C23DB /* Sources */,
 				E43A9EF224D0C771000C23DB /* Frameworks */,
 				E43A9EF324D0C771000C23DB /* Resources */,
+				E43A9F1E24D0C7F7000C23DB /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E43A9F1924D0C7F7000C23DB /* PBXTargetDependency */,
+			);
+			name = RadarrExtension;
+			productName = TestExtension;
+			productReference = E43A9EF524D0C771000C23DB /* Raddar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E43A9F0F24D0C7F7000C23DB /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E43A9F1B24D0C7F7000C23DB /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				E43A9F0C24D0C7F7000C23DB /* Sources */,
+				E43A9F0D24D0C7F7000C23DB /* Frameworks */,
+				E43A9F0E24D0C7F7000C23DB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TestExtension;
-			productName = TestExtension;
-			productReference = E43A9EF524D0C771000C23DB /* TestExtension.app */;
-			productType = "com.apple.product-type.application";
+			name = Share;
+			productName = Share;
+			productReference = E43A9F1024D0C7F7000C23DB /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -100,9 +210,12 @@
 					E43A9EF424D0C771000C23DB = {
 						CreatedOnToolsVersion = 11.6;
 					};
+					E43A9F0F24D0C7F7000C23DB = {
+						CreatedOnToolsVersion = 11.6;
+					};
 				};
 			};
-			buildConfigurationList = E43A9EF024D0C771000C23DB /* Build configuration list for PBXProject "TestExtension" */;
+			buildConfigurationList = E43A9EF024D0C771000C23DB /* Build configuration list for PBXProject "RadarrExtension" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +228,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E43A9EF424D0C771000C23DB /* TestExtension */,
+				E43A9EF424D0C771000C23DB /* RadarrExtension */,
+				E43A9F0F24D0C7F7000C23DB /* Share */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +242,14 @@
 				E43A9F0524D0C774000C23DB /* LaunchScreen.storyboard in Resources */,
 				E43A9F0224D0C774000C23DB /* Assets.xcassets in Resources */,
 				E43A9F0024D0C771000C23DB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43A9F0E24D0C7F7000C23DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E43A9F1624D0C7F7000C23DB /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +266,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43A9F0C24D0C7F7000C23DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E43A9F1324D0C7F7000C23DB /* ShareViewController.swift in Sources */,
+				E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */,
+				E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */,
+				E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E43A9F1924D0C7F7000C23DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E43A9F0F24D0C7F7000C23DB /* Share */;
+			targetProxy = E43A9F1824D0C7F7000C23DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E43A9EFE24D0C771000C23DB /* Main.storyboard */ = {
@@ -161,6 +302,14 @@
 				E43A9F0424D0C774000C23DB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E43A9F1424D0C7F7000C23DB /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E43A9F1524D0C7F7000C23DB /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -283,43 +432,91 @@
 		E43A9F0A24D0C774000C23DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TestExtension/RaddarDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S92K442HVS;
 				INFOPLIST_FILE = TestExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.TestExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.RadarrExtension;
+				PRODUCT_NAME = Raddar;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		E43A9F0B24D0C774000C23DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Raddar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S92K442HVS;
 				INFOPLIST_FILE = TestExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.TestExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.RadarrExtension;
+				PRODUCT_NAME = Raddar;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		E43A9F1C24D0C7F7000C23DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/ShareDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S92K442HVS;
+				INFOPLIST_FILE = Share/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.RadarrExtension.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E43A9F1D24D0C7F7000C23DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S92K442HVS;
+				INFOPLIST_FILE = Share/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.RadarrExtension.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E43A9EF024D0C771000C23DB /* Build configuration list for PBXProject "TestExtension" */ = {
+		E43A9EF024D0C771000C23DB /* Build configuration list for PBXProject "RadarrExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E43A9F0724D0C774000C23DB /* Debug */,
@@ -328,11 +525,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E43A9F0924D0C774000C23DB /* Build configuration list for PBXNativeTarget "TestExtension" */ = {
+		E43A9F0924D0C774000C23DB /* Build configuration list for PBXNativeTarget "RadarrExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E43A9F0A24D0C774000C23DB /* Debug */,
 				E43A9F0B24D0C774000C23DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E43A9F1B24D0C7F7000C23DB /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E43A9F1C24D0C7F7000C23DB /* Debug */,
+				E43A9F1D24D0C7F7000C23DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
