@@ -19,6 +19,7 @@
 		E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1F24D1D332000C23DB /* Radarr.swift */; };
 		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
 		E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* Settings.swift */; };
+		E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		E4B1DBCA24E23D1E008BC46C /* Raddar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raddar.entitlements; sourceTree = "<group>"; };
+		E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				E43A9F1424D0C7F7000C23DB /* MainInterface.storyboard */,
+				E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43A9F1324D0C7F7000C23DB /* ShareViewController.swift in Sources */,
+				E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */,
 				E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */,
 				E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */,
 				E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */,
