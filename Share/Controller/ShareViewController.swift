@@ -131,6 +131,15 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
                     attachment.loadItem(forTypeIdentifier: "public.url", options: nil, completionHandler: { (url, error) -> Void in
                         if let shareURL = url as? NSURL {
                             self.settings.imdbID = self.extractIDFromIMDBUrl(url: shareURL)
+                            
+                            if let domain = shareURL.host {
+                                
+                                if domain != "www.imdb.com" {
+                                    self.displayErrorUIAlertController(title: "Error", message: "You must share from either IMDB app or website", dismissShareSheet: true)
+                                }
+                            
+                            }
+                            
                         }
                     })
                 }
@@ -304,11 +313,7 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
     func displayUIAlertController(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-//        alert.addAction(UIAlertAction(title: "Now", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
-//            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-//        }))
-        
+
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
@@ -320,6 +325,23 @@ class ShareViewController: UIViewController, UITextFieldDelegate {
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
         }
     }
+    
+    func displayErrorUIAlertController(title: String, message: String, dismissShareSheet: Bool) {
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
+                
+                if dismissShareSheet {
+                    self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+                }
+                
+            }))
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
