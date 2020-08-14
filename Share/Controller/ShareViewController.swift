@@ -216,18 +216,10 @@ class ShareViewController: UIViewController {
                         self.postURL(from: radarrJSON)
                     }
                     
-//                    print(self.radarr)
-                    
                 }
                 
-//                if let response = response {
-//                    print(response)
-//                }
-                
                 if let error = error {
-//                    print(error.localizedDescription)
                     self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-                    
                 }
                 
             }
@@ -267,10 +259,6 @@ class ShareViewController: UIViewController {
                     return
                 }
                 
-//                if let data = data {
-//                    print(data)
-//                }
-                
                 self.displayUIAlertController(title: "Done", message: "Movie sent to Radarr!")
                 
             }
@@ -289,6 +277,7 @@ class ShareViewController: UIViewController {
             replaced = replaced.replacingOccurrences(of: "/", with: "")
             return replaced
         } else {
+            self.displayErrorUIAlertController(title: "Error", message: "Error extracting IMDB ID from url", dismissShareSheet: false)
             return "Error extracting IMDB ID from url"
         }
         
@@ -305,7 +294,6 @@ class ShareViewController: UIViewController {
                 return model
                 
             } catch {
-//                print(error.localizedDescription)
                 displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                 return nil
                 
@@ -325,9 +313,7 @@ class ShareViewController: UIViewController {
             return json
             
         } catch {
-//            print(error.localizedDescription)
             displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-            
             return nil
         }
         
@@ -344,9 +330,7 @@ class ShareViewController: UIViewController {
                 return model
                 
             } catch {
-//                print(error.localizedDescription)
                 displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-                
                 return nil
                 
             }
