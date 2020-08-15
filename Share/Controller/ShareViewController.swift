@@ -16,6 +16,7 @@
 
 import UIKit
 //import MobileCoreServices
+import Zephyr
 
 @objc(ShareExtensionViewController)
 class ShareViewController: UIViewController {
@@ -43,6 +44,8 @@ class ShareViewController: UIViewController {
         
 //        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
+//        Zephyr.debugEnabled = true
+        Zephyr.sync(keys: ["serverAddress", "radarAPIKey", "rootFolderPath", "searchNow"])
         settings.load()
         
         serverAddressField.text = settings.radarrServerAddress
@@ -102,6 +105,7 @@ class ShareViewController: UIViewController {
         }
         
         settings.save()
+        Zephyr.sync(keys: ["searchNow"])
         
     }
     
@@ -144,6 +148,9 @@ class ShareViewController: UIViewController {
         settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
         
         settings.save()
+//        Zephyr.debugEnabled = true
+        Zephyr.sync(keys: ["serverAddress", "radarAPIKey", "rootFolderPath"])
+
     }
     
     //MARK: - Core Functionality

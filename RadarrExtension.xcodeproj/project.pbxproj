@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,8 @@
 		E43A9F1A24D0C7F7000C23DB /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E43A9F1024D0C7F7000C23DB /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1F24D1D332000C23DB /* Radarr.swift */; };
 		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
+		E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F024E71A3B0057D135 /* Zephyr */; };
+		E4AAC3F424E773DB0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F324E773DB0057D135 /* Zephyr */; };
 		E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* Settings.swift */; };
 		E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4AAC3F424E773DB0057D135 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +98,7 @@
 				E43A9EF724D0C771000C23DB /* TestExtension */,
 				E43A9F1124D0C7F7000C23DB /* Share */,
 				E43A9EF624D0C771000C23DB /* Products */,
+				E4AAC3F224E773DB0057D135 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +166,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		E4AAC3F224E773DB0057D135 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -179,6 +191,9 @@
 				E43A9F1924D0C7F7000C23DB /* PBXTargetDependency */,
 			);
 			name = RadarrExtension;
+			packageProductDependencies = (
+				E4AAC3F024E71A3B0057D135 /* Zephyr */,
+			);
 			productName = TestExtension;
 			productReference = E43A9EF524D0C771000C23DB /* Raddar.app */;
 			productType = "com.apple.product-type.application";
@@ -196,6 +211,9 @@
 			dependencies = (
 			);
 			name = Share;
+			packageProductDependencies = (
+				E4AAC3F324E773DB0057D135 /* Zephyr */,
+			);
 			productName = Share;
 			productReference = E43A9F1024D0C7F7000C23DB /* Share.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -227,6 +245,9 @@
 				Base,
 			);
 			mainGroup = E43A9EEC24D0C771000C23DB;
+			packageReferences = (
+				E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */,
+			);
 			productRefGroup = E43A9EF624D0C771000C23DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -552,6 +573,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArtSabintsev/Zephyr.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4AAC3F024E71A3B0057D135 /* Zephyr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */;
+			productName = Zephyr;
+		};
+		E4AAC3F324E773DB0057D135 /* Zephyr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */;
+			productName = Zephyr;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E43A9EED24D0C771000C23DB /* Project object */;
 }
