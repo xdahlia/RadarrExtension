@@ -42,12 +42,12 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
+        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
         // Sync UserDefaults with iCloud
         // Load UserDefaults data into Settings model
 //        Zephyr.debugEnabled = true
-        Zephyr.sync(keys: ["serverAddress", "radarAPIKey", "rootFolderPath", "searchNow"])
+        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
         settings.load()
         
         // Populate settings text fields with data from Settings model
@@ -66,10 +66,12 @@ class ShareViewController: UIViewController {
             searchToggle.selectedSegmentIndex = 1
         }
         
+        // Round top corners
         extensionView.layer.cornerRadius = CGFloat(8)
         extensionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         extensionView.clipsToBounds = true
         
+        // Settings panel initially closed
         viewHeight.constant = 240
         settingsStack.isHidden = true
         

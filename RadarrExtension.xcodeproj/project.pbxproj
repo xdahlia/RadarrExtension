@@ -20,6 +20,8 @@
 		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
 		E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F024E71A3B0057D135 /* Zephyr */; };
 		E4AAC3F424E773DB0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F324E773DB0057D135 /* Zephyr */; };
+		E4AAC3F924EB41DC0057D135 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F824EB41DC0057D135 /* KeychainAccess */; };
+		E4AAC3FB24EB41F20057D135 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3FA24EB41F20057D135 /* KeychainAccess */; };
 		E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* Settings.swift */; };
 		E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4AAC3F924EB41DC0057D135 /* KeychainAccess in Frameworks */,
 				E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4AAC3FB24EB41F20057D135 /* KeychainAccess in Frameworks */,
 				E4AAC3F424E773DB0057D135 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +213,7 @@
 			name = RadarrExtension;
 			packageProductDependencies = (
 				E4AAC3F024E71A3B0057D135 /* Zephyr */,
+				E4AAC3F824EB41DC0057D135 /* KeychainAccess */,
 			);
 			productName = RadarrExtension;
 			productReference = E43A9EF524D0C771000C23DB /* Radarr.app */;
@@ -229,6 +234,7 @@
 			name = Share;
 			packageProductDependencies = (
 				E4AAC3F324E773DB0057D135 /* Zephyr */,
+				E4AAC3FA24EB41F20057D135 /* KeychainAccess */,
 			);
 			productName = Share;
 			productReference = E43A9F1024D0C7F7000C23DB /* Share.appex */;
@@ -263,6 +269,7 @@
 			mainGroup = E43A9EEC24D0C771000C23DB;
 			packageReferences = (
 				E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */,
+				E4AAC3F724EB41DC0057D135 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = E43A9EF624D0C771000C23DB /* Products */;
 			projectDirPath = "";
@@ -603,6 +610,14 @@
 				minimumVersion = 3.6.0;
 			};
 		};
+		E4AAC3F724EB41DC0057D135 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -615,6 +630,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */;
 			productName = Zephyr;
+		};
+		E4AAC3F824EB41DC0057D135 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4AAC3F724EB41DC0057D135 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		E4AAC3FA24EB41F20057D135 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4AAC3F724EB41DC0057D135 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
