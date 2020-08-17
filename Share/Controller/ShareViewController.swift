@@ -310,27 +310,6 @@ class ShareViewController: UIViewController {
         
     }
     
-    // Instantiate Radarr model from JSON
-    func jsonToRadarr(json: String) -> Radarr? {
-        
-        let decoder = JSONDecoder()
-        
-        if let jsonData = json.data(using: .utf8) {
-            
-            do {
-                let model = try decoder.decode(Radarr.self, from: jsonData)
-                return model
-                
-            } catch {
-                displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-                return nil
-                
-            }
-        } else {
-            return nil
-        }
-    }
-    
     // Instantiate TMDB model from JSON
     func jsonToTMDB(json: String) -> TMDB? {
         
