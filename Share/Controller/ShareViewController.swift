@@ -16,7 +16,6 @@
 
 import UIKit
 //import MobileCoreServices
-import Zephyr
 
 @objc(ShareExtensionViewController)
 class ShareViewController: UIViewController {
@@ -42,12 +41,9 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
+//        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
-        // Sync UserDefaults with iCloud
-        // Load UserDefaults data into Settings model
-//        Zephyr.debugEnabled = true
-        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
+        // Load UserDefaults data
         settings.load()
         
         // Populate settings text fields with data from Settings model
@@ -115,9 +111,8 @@ class ShareViewController: UIViewController {
             settings.searchNow = false
         }
         
+        // Save UserDefaults data
         settings.save()
-        
-        Zephyr.sync(keys: ["searchNow"])
         
     }
     
@@ -158,16 +153,14 @@ class ShareViewController: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         // move back the root view origin to zero
         self.view.frame.origin.y = 0
-        
-        settings.radarrServerAddress = serverAddressField.text ?? ""
-        settings.radarrAPIKey = radarrAPIKeyField.text ?? ""
-        settings.rootFolderPath = rootFolderPathField.text ?? ""
+    
+        settings.radarrServerAddress = serverAddressField.text!
+        settings.radarrAPIKey = radarrAPIKeyField.text!
+        settings.rootFolderPath = rootFolderPathField.text!
         settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
         
+        // Save UserDefaults data
         settings.save()
-        
-//        Zephyr.debugEnabled = true
-        Zephyr.sync(keys: ["serverAddress", "radarAPIKey", "rootFolderPath"])
 
     }
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainAccess
+import Zephyr
 
 struct Settings {
     
@@ -22,24 +23,34 @@ struct Settings {
     var searchNow: Bool = false
     
     func save() {
+        // Save UserDefaults
         defaults.setValue(radarrServerAddress, forKey: "serverAddress")
-//        defaults.setValue(radarrAPIKey, forKey: "radarAPIKey")
         defaults.setValue(rootFolderPath, forKey: "rootFolderPath")
         defaults.setValue(searchNow, forKey: "searchNow")
         
-        // Save the user password into keychain
+        // Sync UserDefaults with iCloud
+        Zephyr.debugEnabled = true
+        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
+        
+        // Save into Keychain
         keychain["radarAPIKey"] = radarrAPIKey
     }
     
     mutating func load() {
+        
+        // Sync UserDefaults with iCloud
+        Zephyr.debugEnabled = true
+        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
+        
+        // Load UserDefaults
         radarrServerAddress = defaults.string(forKey: "serverAddress") ?? ""
-//        radarrAPIKey = defaults.string(forKey: "radarAPIKey") ?? ""
         rootFolderPath = defaults.string(forKey: "rootFolderPath") ?? ""
         searchNow = defaults.bool(forKey: "searchNow")
         
-        // Load the user password
+        // Load from Keychain
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
         
+        // Construct Radarr URL
         urlString = "\(radarrServerAddress)/api/movie?apikey=\(radarrAPIKey)"
     }
     
