@@ -64,7 +64,7 @@
 		E43A9F1F24D1D332000C23DB /* Radarr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radarr.swift; sourceTree = "<group>"; };
 		E43A9F2124D206AC000C23DB /* TMDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB.swift; sourceTree = "<group>"; };
 		E43A9F3D24D38FB3000C23DB /* ShareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareDebug.entitlements; sourceTree = "<group>"; };
-		E43A9F3E24D390CC000C23DB /* RaddarDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaddarDebug.entitlements; sourceTree = "<group>"; };
+		E43A9F3E24D390CC000C23DB /* RadarrDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RadarrDebug.entitlements; sourceTree = "<group>"; };
 		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Radarr.entitlements; sourceTree = "<group>"; };
@@ -94,7 +94,6 @@
 		E43A9EEC24D0C771000C23DB = {
 			isa = PBXGroup;
 			children = (
-				E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */,
 				E43A9EF724D0C771000C23DB /* RadarrExtension */,
 				E43A9F1124D0C7F7000C23DB /* Share */,
 				E43A9EF624D0C771000C23DB /* Products */,
@@ -114,13 +113,13 @@
 		E43A9EF724D0C771000C23DB /* RadarrExtension */ = {
 			isa = PBXGroup;
 			children = (
-				E43A9F3E24D390CC000C23DB /* RaddarDebug.entitlements */,
+				E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */,
+				E43A9F3E24D390CC000C23DB /* RadarrDebug.entitlements */,
 				E43A9EF824D0C771000C23DB /* AppDelegate.swift */,
 				E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */,
-				E43A9EFC24D0C771000C23DB /* ViewController.swift */,
-				E43A9EFE24D0C771000C23DB /* Main.storyboard */,
+				E4AAC3F524EA02E70057D135 /* View */,
+				E4AAC3F624EA02F70057D135 /* Controller */,
 				E43A9F0124D0C774000C23DB /* Assets.xcassets */,
-				E43A9F0324D0C774000C23DB /* LaunchScreen.storyboard */,
 				E43A9F0624D0C774000C23DB /* Info.plist */,
 			);
 			path = RadarrExtension;
@@ -171,6 +170,23 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4AAC3F524EA02E70057D135 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E43A9EFE24D0C771000C23DB /* Main.storyboard */,
+				E43A9F0324D0C774000C23DB /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E4AAC3F624EA02F70057D135 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E43A9EFC24D0C771000C23DB /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,7 +475,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = RadarrExtension/RaddarDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = RadarrExtension/RadarrDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = S92K442HVS;
@@ -482,7 +498,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Radarr.entitlements;
+				CODE_SIGN_ENTITLEMENTS = RadarrExtension/Radarr.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = S92K442HVS;

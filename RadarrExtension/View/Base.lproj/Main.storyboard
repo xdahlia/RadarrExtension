@@ -18,37 +18,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GgE-CU-B97">
                                 <rect key="frame" x="20" y="44" width="374" height="818"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oz2-1t-eyD">
-                                        <rect key="frame" x="20" y="196" width="334" height="525"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">Instructions 
-- Begin by sharing a movie link from either IMDB app or webpage
-
-Settings 
-1. Radarr Server Settings Use this format: “http://111.222.333.444:1234“ 
-2. Radarr API Key Use the API Key from your Radarr Server. 
-3. rootFolderPath Enter the path to your movies folder using the following sample format:  Windows “C:\Movies\”  Linux “/Movies/“
-</string>
-                                        <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uX2-fl-L1E">
-                                        <rect key="frame" x="-20" y="35" width="414" height="80"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uX2-fl-L1E" userLabel="LogoView">
+                                        <rect key="frame" x="-20" y="35" width="414" height="750"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ui8-XS-X3p">
-                                                <rect key="frame" x="120" y="0.0" width="173" height="80"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ui8-XS-X3p">
+                                                <rect key="frame" x="60" y="186" width="294" height="146"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="294" id="O0W-Af-ytE"/>
+                                                    <constraint firstAttribute="height" constant="146" id="Yen-bz-jty"/>
+                                                </constraints>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="gf9-nS-mhd"/>
+                                            <constraint firstItem="ui8-XS-X3p" firstAttribute="centerX" secondItem="uX2-fl-L1E" secondAttribute="centerX" id="Av0-dn-1ml"/>
+                                            <constraint firstAttribute="height" constant="750" id="gf9-nS-mhd"/>
+                                            <constraint firstItem="ui8-XS-X3p" firstAttribute="top" secondItem="uX2-fl-L1E" secondAttribute="top" constant="186" id="wiq-KU-RZp"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="OUF-Up-Arh">
-                                        <rect key="frame" x="73.5" y="123" width="227.5" height="40"/>
+                                        <rect key="frame" x="73.5" y="793" width="227.5" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radarr" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYs-BS-WXd">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="40"/>
@@ -70,18 +60,34 @@ Settings 
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Zqd-ag-XJ9">
-                                        <rect key="frame" x="168" y="729" width="39" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </pageControl>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oz2-1t-eyD">
+                                        <rect key="frame" x="20" y="866" width="334" height="525"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="525" id="bMT-gS-F38"/>
+                                        </constraints>
+                                        <string key="text">Instructions 
+- Begin by sharing a movie link from either IMDB app or webpage
+
+Settings 
+1. Radarr Server Settings Use this format: “http://111.222.333.444:1234“ 
+2. Radarr API Key Use the API Key from your Radarr Server. 
+3. rootFolderPath Enter the path to your movies folder using the following sample format:  Windows “C:\Movies\”  Linux “/Movies/“
+</string>
+                                        <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Oz2-1t-eyD" firstAttribute="top" secondItem="OUF-Up-Arh" secondAttribute="bottom" constant="33" id="MS8-X7-eXp"/>
+                                    <constraint firstItem="Oz2-1t-eyD" firstAttribute="leading" secondItem="GgE-CU-B97" secondAttribute="leading" constant="20" id="O7g-xS-4k5"/>
+                                    <constraint firstItem="Oz2-1t-eyD" firstAttribute="centerX" secondItem="GgE-CU-B97" secondAttribute="centerX" id="Oa7-cL-d16"/>
                                     <constraint firstAttribute="trailing" secondItem="uX2-fl-L1E" secondAttribute="trailing" constant="-20" id="RfH-H7-QpX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Oz2-1t-eyD" secondAttribute="trailing" constant="20" id="THX-a0-0iE"/>
                                     <constraint firstItem="uX2-fl-L1E" firstAttribute="leading" secondItem="GgE-CU-B97" secondAttribute="leading" constant="-20" id="Zsw-BP-qH0"/>
+                                    <constraint firstItem="uX2-fl-L1E" firstAttribute="top" secondItem="GgE-CU-B97" secondAttribute="top" constant="35" id="bzT-F0-Xj3"/>
                                     <constraint firstItem="OUF-Up-Arh" firstAttribute="top" secondItem="uX2-fl-L1E" secondAttribute="bottom" constant="8" id="d3L-z9-aee"/>
                                     <constraint firstItem="OUF-Up-Arh" firstAttribute="centerX" secondItem="GgE-CU-B97" secondAttribute="centerX" id="f12-ua-wg9"/>
-                                    <constraint firstItem="OUF-Up-Arh" firstAttribute="centerX" secondItem="GgE-CU-B97" secondAttribute="centerX" id="gH6-H8-Bye"/>
-                                    <constraint firstItem="uX2-fl-L1E" firstAttribute="top" secondItem="GgE-CU-B97" secondAttribute="top" constant="35" id="rmr-7V-JIG"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -94,6 +100,12 @@ Settings 
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="logoHeight" destination="Yen-bz-jty" id="uCP-1c-hc3"/>
+                        <outlet property="logoVerticalPosition" destination="wiq-KU-RZp" id="C9d-CE-anQ"/>
+                        <outlet property="logoViewHeight" destination="gf9-nS-mhd" id="Ivy-CZ-E1p"/>
+                        <outlet property="logoWidth" destination="O0W-Af-ytE" id="uR7-qY-LBS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

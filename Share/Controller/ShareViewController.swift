@@ -44,14 +44,18 @@ class ShareViewController: UIViewController {
         
 //        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
+        // Sync UserDefaults with iCloud
+        // Load UserDefaults data into Settings model
 //        Zephyr.debugEnabled = true
         Zephyr.sync(keys: ["serverAddress", "radarAPIKey", "rootFolderPath", "searchNow"])
         settings.load()
         
+        // Populate settings text fields with data from Settings model
         serverAddressField.text = settings.radarrServerAddress
         radarrAPIKeyField.text = settings.radarrAPIKey
         rootFolderPathField.text = settings.rootFolderPath
         
+        // Register text field delegates
         serverAddressField.delegate = self
         radarrAPIKeyField.delegate = self
         rootFolderPathField.delegate = self
@@ -66,20 +70,21 @@ class ShareViewController: UIViewController {
         extensionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         extensionView.clipsToBounds = true
         
+        viewHeight.constant = 240
+        settingsStack.isHidden = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
-        
-        viewHeight.constant = 240
-        settingsStack.isHidden = true
-        
+
         self.handleSharedFile()
     }
     
     //MARK: - Handle buttons / controls
     
+    // Check for empty settings fields before sending movie to Radarr server
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         
         if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" {
@@ -90,10 +95,14 @@ class ShareViewController: UIViewController {
         
     }
     
+    // Dismiss share sheet when "Cancel" button pressed
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
     }
     
+    // Save Search Now preference when segmented control is changed
+    // Call settings.save() to save to UserDefaults
+    // Call Zephyr.sync to sync selected UserDefaults to iCloud
     @IBAction func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
         
         let selectedSegment = sender.selectedSegmentIndex
@@ -105,10 +114,12 @@ class ShareViewController: UIViewController {
         }
         
         settings.save()
+        
         Zephyr.sync(keys: ["searchNow"])
         
     }
     
+    // Expand / collapse settings fields when "Edit Settings" toggled
     @IBAction func editSwitchPressed(_ sender: UISwitch) {
         if sender.isOn {
             viewHeight.constant = 430
@@ -128,6 +139,7 @@ class ShareViewController: UIViewController {
     
     //MARK: - Handle Keyboard
     
+    // Move text fields up when keyboard appears
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             // if keyboard size is not available for some reason, dont do anything
@@ -138,6 +150,9 @@ class ShareViewController: UIViewController {
         self.view.frame.origin.y = 0 - keyboardSize.height
     }
     
+    // Auto save user text from text fields into Settings model when keyboard is dismissed
+    // Call settings.save() to save to UserDefaults
+    // Call Zephyr.sync to sync selected UserDefaults to iCloud
     @objc func keyboardWillHide(notification: NSNotification) {
         // move back the root view origin to zero
         self.view.frame.origin.y = 0
@@ -148,6 +163,7 @@ class ShareViewController: UIViewController {
         settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
         
         settings.save()
+        
 //        Zephyr.debugEnabled = true
         Zephyr.sync(keys: ["serverAddress", "radarAPIKey", "rootFolderPath"])
 
@@ -155,6 +171,7 @@ class ShareViewController: UIViewController {
     
     //MARK: - Core Functionality
     
+    // Take shared IMDB url and call "extractIDFromIMDBUrl"
     private func handleSharedFile() {
         if let item = extensionContext?.inputItems.first as? NSExtensionItem {
             item.attachments?.forEach({ (attachment) in
@@ -179,6 +196,7 @@ class ShareViewController: UIViewController {
         }
     }
     
+    // Extract movie data from TMDB, fill Radarr model with movie data, call "postURL" with data
     func sendMovieToRadarrFromIMDB(id: String, nowOption: Bool) {
         
         // TODO: Remember to move api key before pushing to GitHub
@@ -235,6 +253,7 @@ class ShareViewController: UIViewController {
         
     }
     
+    // POST JSON to Radarr server
     func postURL(from data: Data) {
         
         if let url = URL(string: settings.urlString) {
@@ -277,6 +296,7 @@ class ShareViewController: UIViewController {
     
     //MARK: - Utility Functions
     
+    // Extract IMDB title id from url
     func extractIDFromIMDBUrl(url: NSURL) -> String {
         
         if let url = url.absoluteString {
@@ -290,6 +310,7 @@ class ShareViewController: UIViewController {
         
     }
     
+    // Instantiate Radarr model from JSON
     func jsonToRadarr(json: String) -> Radarr? {
         
         let decoder = JSONDecoder()
@@ -310,22 +331,7 @@ class ShareViewController: UIViewController {
         }
     }
     
-    func radarrToJson(data: Radarr) -> Data? {
-        
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .withoutEscapingSlashes
-        
-        do {
-            let json = try encoder.encode(data)
-            return json
-            
-        } catch {
-            displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-            return nil
-        }
-        
-    }
-    
+    // Instantiate TMDB model from JSON
     func jsonToTMDB(json: String) -> TMDB? {
         
         let decoder = JSONDecoder()
@@ -346,6 +352,24 @@ class ShareViewController: UIViewController {
         }
     }
     
+    // Construct JSON from Radarr model
+    func radarrToJson(data: Radarr) -> Data? {
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .withoutEscapingSlashes
+        
+        do {
+            let json = try encoder.encode(data)
+            return json
+            
+        } catch {
+            displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+            return nil
+        }
+        
+    }
+    
+    // Extract year from date
     func extractYearFromDate(date: String) -> Int {
         guard let int = Int(String(date.prefix(4))) else { return 0 }
         return int
@@ -354,6 +378,7 @@ class ShareViewController: UIViewController {
     
     //MARK: - Display Alerts
     
+    // Display alert box and auto dismiss after delay
     func displayUIAlertController(title: String, message: String) {
         
         DispatchQueue.main.async {
@@ -368,6 +393,7 @@ class ShareViewController: UIViewController {
         
     }
     
+    // Display alert box with options to dismiss itself or share sheet as well
     func displayErrorUIAlertController(title: String, message: String, dismissShareSheet: Bool) {
         
         DispatchQueue.main.async {
@@ -377,11 +403,13 @@ class ShareViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
                 
                 if dismissShareSheet {
+                    // Dismiss share sheet
                     self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
                 }
                 
             }))
             
+            // Dismiss itself
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -392,6 +420,7 @@ class ShareViewController: UIViewController {
 
 extension ShareViewController: UITextFieldDelegate {
     
+    // Set textfields as first responder
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
         
@@ -406,6 +435,7 @@ extension ShareViewController: UITextFieldDelegate {
     
 }
 
+// Converts string "movie title's string" to slug "movie-title-s-string"
 // From Hacking With Swift
 extension String {
     private static let slugSafeCharacters = CharacterSet(charactersIn: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-")

@@ -15,23 +15,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hiu-ux-kpZ">
+                                <rect key="frame" x="0.0" y="35" width="414" height="750"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="750" id="Frp-40-Lah"/>
+                                </constraints>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="d6W-Hv-Tfb">
-                                <rect key="frame" x="60" y="186" width="294" height="146"/>
+                                <rect key="frame" x="60" y="230" width="294" height="146"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="d6W-Hv-Tfb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="142" id="94u-33-4Ws"/>
+                            <constraint firstItem="d6W-Hv-Tfb" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="230" id="94u-33-4Ws"/>
                             <constraint firstItem="d6W-Hv-Tfb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="60" id="Cj4-Wc-VZt"/>
                             <constraint firstAttribute="trailing" secondItem="d6W-Hv-Tfb" secondAttribute="trailing" constant="60" id="S4z-U0-uaf"/>
                             <constraint firstItem="d6W-Hv-Tfb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VYK-2r-Agg"/>
+                            <constraint firstItem="Hiu-ux-kpZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dDt-SC-Pdj"/>
+                            <constraint firstItem="Hiu-ux-kpZ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="35" id="t81-lf-8uG"/>
+                            <constraint firstItem="Hiu-ux-kpZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="u1l-OZ-rKz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
