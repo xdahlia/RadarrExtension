@@ -33,6 +33,7 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var serverAddressField: UITextField!
     @IBOutlet weak var radarrAPIKeyField: UITextField!
     @IBOutlet weak var rootFolderPathField: UITextField!
+    @IBOutlet weak var tmdbAPIKeyField: UITextField!
     
     //MARK: - Initialization
     var radarr = Radarr()
@@ -50,11 +51,13 @@ class ShareViewController: UIViewController {
         serverAddressField.text = settings.radarrServerAddress
         radarrAPIKeyField.text = settings.radarrAPIKey
         rootFolderPathField.text = settings.rootFolderPath
+        tmdbAPIKeyField.text = settings.tmdbAPIKey
         
         // Register text field delegates
         serverAddressField.delegate = self
         radarrAPIKeyField.delegate = self
         rootFolderPathField.delegate = self
+        tmdbAPIKeyField.delegate = self
         
         if settings.searchNow {
             searchToggle.selectedSegmentIndex = 0
@@ -85,7 +88,7 @@ class ShareViewController: UIViewController {
     // Check for empty settings fields before sending movie to Radarr server
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         
-        if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" {
+        if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" || tmdbAPIKeyField.text! == "" {
             displayErrorUIAlertController(title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
         } else {
             self.sendMovieToRadarrFromIMDB(id: settings.imdbID, nowOption: settings.searchNow)
@@ -119,7 +122,7 @@ class ShareViewController: UIViewController {
     // Expand / collapse settings fields when "Edit Settings" toggled
     @IBAction func editSwitchPressed(_ sender: UISwitch) {
         if sender.isOn {
-            viewHeight.constant = 430
+            viewHeight.constant = 490
             settingsStack.isHidden = false
             UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
@@ -157,6 +160,7 @@ class ShareViewController: UIViewController {
         settings.radarrServerAddress = serverAddressField.text!
         settings.radarrAPIKey = radarrAPIKeyField.text!
         settings.rootFolderPath = rootFolderPathField.text!
+        settings.tmdbAPIKey = tmdbAPIKeyField.text!
         settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
         
         // Save UserDefaults data
@@ -194,14 +198,13 @@ class ShareViewController: UIViewController {
     // Extract movie data from TMDB, fill Radarr model with movie data, call "postURL" with data
     func sendMovieToRadarrFromIMDB(id: String, nowOption: Bool) {
         
-        // TODO: Remember to move api key before pushing to GitHub
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.themoviedb.org"
         components.path = "/3/find/" + id
         components.queryItems = [
             URLQueryItem(name: "external_source", value: "imdb_id"),
-            URLQueryItem(name: "api_key", value: "***REMOVED***")
+            URLQueryItem(name: "api_key", value: settings.tmdbAPIKey)
         ]
         
         if let url = components.url {

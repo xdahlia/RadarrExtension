@@ -21,6 +21,7 @@ struct Settings {
     var rootFolderPath: String = ""
     var urlString: String = ""
     var searchNow: Bool = false
+    var tmdbAPIKey: String = ""
     
     func save() {
         
@@ -28,6 +29,7 @@ struct Settings {
         keychain["serverAddress"] = radarrServerAddress
         keychain["radarAPIKey"] = radarrAPIKey
         keychain["rootFolderPath"] = rootFolderPath
+        keychain["tmdbAPIKey"] = tmdbAPIKey
         
         // Save UserDefaults
 //        defaults.setValue(radarrServerAddress, forKey: "serverAddress")
@@ -46,6 +48,7 @@ struct Settings {
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
         radarrServerAddress = keychain["serverAddress"] ?? ""
         rootFolderPath = keychain["rootFolderPath"] ?? ""
+        tmdbAPIKey = keychain["tmdbAPIKey"] ?? ""
         
         // Sync UserDefaults with iCloud
 //        Zephyr.debugEnabled = true

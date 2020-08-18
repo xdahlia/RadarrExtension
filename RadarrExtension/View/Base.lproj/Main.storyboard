@@ -65,14 +65,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="525" id="bMT-gS-F38"/>
                                         </constraints>
-                                        <string key="text">Instructions 
+                                        <mutableString key="text">Instructions 
 - Begin by sharing a movie link from either IMDB app or webpage
 
 Settings 
-1. Radarr Server Settings Use this format: “http://111.222.333.444:1234“ 
+1. Radarr Server Settings Use this format: 
+“http://111.222.333.444:1234“ 
 2. Radarr API Key Use the API Key from your Radarr Server. 
 3. rootFolderPath Enter the path to your movies folder using the following sample format:  Windows “C:\Movies\”  Linux “/Movies/“
-</string>
+</mutableString>
                                         <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
