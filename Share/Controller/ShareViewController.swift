@@ -41,7 +41,7 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
+        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
         // Load UserDefaults data
         settings.load()

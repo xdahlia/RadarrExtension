@@ -23,33 +23,39 @@ struct Settings {
     var searchNow: Bool = false
     
     func save() {
-        // Save UserDefaults
-        defaults.setValue(radarrServerAddress, forKey: "serverAddress")
-        defaults.setValue(rootFolderPath, forKey: "rootFolderPath")
-        defaults.setValue(searchNow, forKey: "searchNow")
-        
-        // Sync UserDefaults with iCloud
-        Zephyr.debugEnabled = true
-        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
         
         // Save into Keychain
+        keychain["serverAddress"] = radarrServerAddress
         keychain["radarAPIKey"] = radarrAPIKey
+        keychain["rootFolderPath"] = rootFolderPath
+        
+        // Save UserDefaults
+//        defaults.setValue(radarrServerAddress, forKey: "serverAddress")
+//        defaults.setValue(rootFolderPath, forKey: "rootFolderPath")
+        defaults.setValue(searchNow, forKey: "searchNow")
+//
+//        // Sync UserDefaults with iCloud
+////        Zephyr.debugEnabled = true
+//        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
+        
     }
     
     mutating func load() {
         
-        // Sync UserDefaults with iCloud
-        Zephyr.debugEnabled = true
-        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
-        
-        // Load UserDefaults
-        radarrServerAddress = defaults.string(forKey: "serverAddress") ?? ""
-        rootFolderPath = defaults.string(forKey: "rootFolderPath") ?? ""
-        searchNow = defaults.bool(forKey: "searchNow")
-        
         // Load from Keychain
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
+        radarrServerAddress = keychain["serverAddress"] ?? ""
+        rootFolderPath = keychain["rootFolderPath"] ?? ""
         
+        // Sync UserDefaults with iCloud
+//        Zephyr.debugEnabled = true
+//        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
+//
+//        // Load UserDefaults
+//        radarrServerAddress = defaults.string(forKey: "serverAddress") ?? ""
+//        rootFolderPath = defaults.string(forKey: "rootFolderPath") ?? ""
+        searchNow = defaults.bool(forKey: "searchNow")
+
         // Construct Radarr URL
         urlString = "\(radarrServerAddress)/api/movie?apikey=\(radarrAPIKey)"
     }
