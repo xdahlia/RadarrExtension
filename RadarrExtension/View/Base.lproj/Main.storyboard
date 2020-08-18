@@ -60,7 +60,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oz2-1t-eyD">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oz2-1t-eyD">
                                         <rect key="frame" x="20" y="866" width="334" height="525"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="525" id="bMT-gS-F38"/>
@@ -72,8 +72,11 @@ Settings 
 1. Radarr Server Settings Use this format: 
 “http://111.222.333.444:1234“ 
 2. Radarr API Key Use the API Key from your Radarr Server. 
-3. rootFolderPath Enter the path to your movies folder using the following sample format:  Windows “C:\Movies\”  Linux “/Movies/“
-</mutableString>
+3. Radarr rootFolderPath Enter the path to your movies folder using the following sample format:  Windows “C:\Movies\” Linux “/Movies/“
+
+4. TMDB API Key
+Get your API key at:
+https://developers.themoviedb.org/3/getting-started/introduction</mutableString>
                                         <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
