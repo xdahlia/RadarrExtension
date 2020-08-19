@@ -65,8 +65,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="525" id="bMT-gS-F38"/>
                                         </constraints>
-                                        <mutableString key="text">Instructions 
-- Begin by sharing a movie link from either IMDB app or webpage
+                                        <mutableString key="text">Begin by sharing a movie link from either IMDB app or webpage
 
 Settings 
 1. Radarr Server Settings Use this format: 
@@ -78,7 +77,7 @@ Settings 
 Get your API key at:
 https://developers.themoviedb.org/3/getting-started/introduction</mutableString>
                                         <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>

@@ -6,17 +6,23 @@
 //  Copyright © 2020 Ivan Ou. All rights reserved.
 //
 
-// FIXME: -
+// FIXME: - FIXMEs: -
 // FIXME: Settings changes are only effective on subsequent load (done?)
-// FIXME: -
+// FIXME: Welcome screen animation
+// FIXME:
 
-// TODO: -
+// TODO: - TODOs: -
 // TODO: Construct Radarr URL from components
-// TODO: -
+// TODO: Make README file
+// TODO: Remove sesitive data from history
+// TODO: Move settings to main app
+// TODO:
+
 
 import UIKit
-//import MobileCoreServices
+// import MobileCoreServices
 
+//MARK: - View Controller -
 @objc(ShareExtensionViewController)
 class ShareViewController: UIViewController {
     
@@ -24,18 +30,18 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var extensionView: UIView!
     
-    //MARK: - Control Properties
+    //MARK: - Control Properties -
     @IBOutlet weak var searchToggle: UISegmentedControl!
     @IBOutlet weak var settingsStack: UIStackView!
     @IBOutlet weak var editSwitch: UISwitch!
     
-    //MARK: - Settings Properties
+    //MARK: - Settings Properties -
     @IBOutlet weak var serverAddressField: UITextField!
     @IBOutlet weak var radarrAPIKeyField: UITextField!
     @IBOutlet weak var rootFolderPathField: UITextField!
     @IBOutlet weak var tmdbAPIKeyField: UITextField!
     
-    //MARK: - Initialization
+    //MARK: - Initialization -
     var radarr = Radarr()
     var settings = Settings()
     
@@ -83,7 +89,7 @@ class ShareViewController: UIViewController {
         self.handleSharedFile()
     }
     
-    //MARK: - Handle buttons / controls
+    //MARK: - Handle buttons / controls -
     
     // Check for empty settings fields before sending movie to Radarr server
     @IBAction func sendButtonPressed(_ sender: UIButton) {
@@ -137,7 +143,7 @@ class ShareViewController: UIViewController {
         }
     }
     
-    //MARK: - Handle Keyboard
+    //MARK: - Handle Keyboard -
     
     // Move text fields up when keyboard appears
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -168,7 +174,7 @@ class ShareViewController: UIViewController {
 
     }
     
-    //MARK: - Core Functionality
+    //MARK: - Core Functionality -
     
     // Take shared IMDB url and call "extractIDFromIMDBUrl"
     private func handleSharedFile() {
@@ -292,7 +298,7 @@ class ShareViewController: UIViewController {
         
     }
     
-    //MARK: - Utility Functions
+    //MARK: - Utility Functions -
     
     // Extract IMDB title id from url
     func extractIDFromIMDBUrl(url: NSURL) -> String {
@@ -353,7 +359,7 @@ class ShareViewController: UIViewController {
         
     }
     
-    //MARK: - Display Alerts
+    //MARK: - Display Alerts -
     
     // Display alert box and auto dismiss after delay
     func displayUIAlertController(title: String, message: String) {
@@ -393,7 +399,7 @@ class ShareViewController: UIViewController {
     
 }
 
-//MARK: - Extensions
+//MARK: - Extensions -
 
 extension ShareViewController: UITextFieldDelegate {
     
