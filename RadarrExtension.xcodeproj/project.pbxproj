@@ -18,6 +18,8 @@
 		E43A9F1A24D0C7F7000C23DB /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E43A9F1024D0C7F7000C23DB /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1F24D1D332000C23DB /* Radarr.swift */; };
 		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
+		E47564DD24EDEE8000B0D5B5 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = E47564DB24EDEE7F00B0D5B5 /* header.png */; };
+		E47564DE24EDEE8000B0D5B5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E47564DC24EDEE7F00B0D5B5 /* README.md */; };
 		E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F024E71A3B0057D135 /* Zephyr */; };
 		E4AAC3F424E773DB0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F324E773DB0057D135 /* Zephyr */; };
 		E4AAC3F924EB41DC0057D135 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F824EB41DC0057D135 /* KeychainAccess */; };
@@ -67,6 +69,8 @@
 		E43A9F2124D206AC000C23DB /* TMDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB.swift; sourceTree = "<group>"; };
 		E43A9F3D24D38FB3000C23DB /* ShareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareDebug.entitlements; sourceTree = "<group>"; };
 		E43A9F3E24D390CC000C23DB /* RadarrDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RadarrDebug.entitlements; sourceTree = "<group>"; };
+		E47564DB24EDEE7F00B0D5B5 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
+		E47564DC24EDEE7F00B0D5B5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Radarr.entitlements; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 		E43A9EEC24D0C771000C23DB = {
 			isa = PBXGroup;
 			children = (
+				E47564DB24EDEE7F00B0D5B5 /* header.png */,
+				E47564DC24EDEE7F00B0D5B5 /* README.md */,
 				E43A9EF724D0C771000C23DB /* RadarrExtension */,
 				E43A9F1124D0C7F7000C23DB /* Share */,
 				E43A9EF624D0C771000C23DB /* Products */,
@@ -288,6 +294,8 @@
 			files = (
 				E43A9F0524D0C774000C23DB /* LaunchScreen.storyboard in Resources */,
 				E43A9F0224D0C774000C23DB /* Assets.xcassets in Resources */,
+				E47564DE24EDEE8000B0D5B5 /* README.md in Resources */,
+				E47564DD24EDEE8000B0D5B5 /* header.png in Resources */,
 				E43A9F0024D0C771000C23DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
