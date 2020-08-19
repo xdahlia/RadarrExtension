@@ -6,19 +6,6 @@
 //  Copyright © 2020 Ivan Ou. All rights reserved.
 //
 
-// FIXME: - FIXMEs: -
-// FIXME: Settings changes are only effective on subsequent load (done?)
-// FIXME: Welcome screen animation
-// FIXME:
-
-// TODO: - TODOs: -
-// TODO: Construct Radarr URL from components
-// TODO: Make README file
-// TODO: Remove sesitive data from history
-// TODO: Move settings to main app
-// TODO:
-
-
 import UIKit
 // import MobileCoreServices
 
