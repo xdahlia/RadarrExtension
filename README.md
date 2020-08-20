@@ -2,29 +2,37 @@
 > iOS extension share sheet that takes a movie url from IMDb app or website and sends it to Radarr server.
 
 [![Swift Version][swift-image]][swift-url]
+
+<!--
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
-[![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+-->
 
-One to two paragraph statement about your product and what it does.
+[![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
+
+<!--
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+-->
+
+Ever wish you could send a movie to Radarr straight from an IMDb movie page? Well now you can! No more re-searching for a movie you already found in yet another interface.
 
 ![](header.png)
 
 ## Features
 
-- [x] Feature 1
-- [x] Feature 2
-- [x] Feature 3
-- [x] Feature 4
-- [x] Feature 5
+- [x] Set whether to search immediately or later
+- [x] Set monitored status
+- [x] Set quality profile
+- [x] Set min availability
+- [x] Set path
 
 ## Requirements
 
 - iOS 13.0+
-- Xcode 7.3
+- Xcode 11+
 
+<!--
 ## Installation
 
 #### CocoaPods
@@ -59,14 +67,19 @@ ez.detectScreenShot { () -> () in
 ## Contribute
 
 We would love you for the contribution to **YourLibraryName**, check the ``LICENSE`` file for more info.
+-->
+
 
 ## Meta
 
+<!--
 Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
 
 Distributed under the XYZ license. See ``LICENSE`` for more information.
+-->
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+[https://github.com/xdahlia/RadaarExtension](https://github.com/dbader/)
+
 
 [swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
 [swift-url]: https://swift.org/
