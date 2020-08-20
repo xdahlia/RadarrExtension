@@ -29,6 +29,11 @@ Ever wish you could send a movie to Radarr straight from an IMDb movie page? Wel
 - iOS 13.0+
 - Xcode 11+
 
+## Dependencies
+
+- KeychainAccess 4.2+
+- Zephyr 3.6+
+
 <!--
 ## Installation
 
