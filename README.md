@@ -2,15 +2,12 @@
 > iOS extension share sheet that takes a movie url from IMDb app or website and sends it to Radarr server.
 
 [![Swift Version][swift-image]][swift-url]
-
 <!--
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
 -->
-
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
-
 <!--
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 -->
@@ -78,7 +75,7 @@ Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@examp
 Distributed under the XYZ license. See ``LICENSE`` for more information.
 -->
 
-[https://github.com/xdahlia/RadaarExtension](https://github.com/dbader/)
+[https://github.com/xdahlia/RadaarExtension](https://github.com/xdahlia/RadaarExtension)
 
 
 [swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
