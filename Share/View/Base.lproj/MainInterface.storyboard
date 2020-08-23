@@ -19,22 +19,16 @@
                                 <rect key="frame" x="0.0" y="406" width="414" height="490"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="PuY-F4-NbI" userLabel="Main Stack View">
-                                        <rect key="frame" x="20" y="20" width="334" height="410"/>
+                                        <rect key="frame" x="40" y="20" width="334" height="408.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radarr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yxh-cb-VYf">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20.5" id="Zg1-j1-GPC"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iqZ-Nh-ita">
-                                                <rect key="frame" x="0.0" y="35" width="334" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="owy-HB-SfV"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="34.5" width="334" height="32"/>
                                                 <segments>
                                                     <segment title="Search Now"/>
                                                     <segment title="Search Later"/>
@@ -44,27 +38,24 @@
                                                 </connections>
                                             </segmentedControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-wM-5Je" userLabel="Edit Stack View">
-                                                <rect key="frame" x="0.0" y="80.5" width="334" height="30.5"/>
+                                                <rect key="frame" x="0.0" y="79.5" width="334" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sr7-NF-rlf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="30.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="31"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lj7-vE-TKn">
-                                                        <rect key="frame" x="285" y="0.0" width="51" height="30.5"/>
+                                                        <rect key="frame" x="285" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="editSwitchPressed:" destination="j1y-V4-xli" eventType="valueChanged" id="M6l-vl-k3s"/>
                                                         </connections>
                                                     </switch>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30.5" id="Xyo-WH-Ay3"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="S3h-1I-xQi" userLabel="Settings Stack View">
-                                                <rect key="frame" x="0.0" y="125.5" width="334" height="236"/>
+                                                <rect key="frame" x="0.0" y="124.5" width="334" height="236"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radarr Server Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3x-JA-bHe">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="18"/>
@@ -119,7 +110,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Hq-Sj-geO" userLabel="Buttons Stack View">
-                                                <rect key="frame" x="0.0" y="376" width="334" height="34"/>
+                                                <rect key="frame" x="0.0" y="374.5" width="334" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlv-Y3-5dU" customClass="RoundButton" customModule="Share" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="157" height="34"/>
@@ -157,27 +148,25 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="7Hq-Sj-geO" secondAttribute="bottom" id="66A-pd-rp9"/>
-                                            <constraint firstItem="iqZ-Nh-ita" firstAttribute="top" secondItem="Yxh-cb-VYf" secondAttribute="bottom" constant="14.5" id="F27-bo-bKd"/>
+                                            <constraint firstItem="IX8-wM-5Je" firstAttribute="top" secondItem="iqZ-Nh-ita" secondAttribute="bottom" constant="14" id="7Z9-9H-bwF"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="PuY-F4-NbI" secondAttribute="trailing" constant="20" symbolic="YES" id="3eu-wE-g3f"/>
-                                    <constraint firstAttribute="height" constant="490" id="5Zp-QH-wR4"/>
-                                    <constraint firstAttribute="bottom" secondItem="PuY-F4-NbI" secondAttribute="bottom" constant="60" id="CjQ-9a-ra7"/>
-                                    <constraint firstItem="PuY-F4-NbI" firstAttribute="centerX" secondItem="pTX-v6-cmr" secondAttribute="centerX" id="PrN-9S-3Fm"/>
-                                    <constraint firstItem="PuY-F4-NbI" firstAttribute="leading" secondItem="pTX-v6-cmr" secondAttribute="leading" constant="20" symbolic="YES" id="tLX-wE-obj"/>
-                                    <constraint firstItem="PuY-F4-NbI" firstAttribute="top" secondItem="pTX-v6-cmr" secondAttribute="top" constant="20" id="w2m-g1-t8w"/>
+                                    <constraint firstItem="PuY-F4-NbI" firstAttribute="leading" secondItem="pTX-v6-cmr" secondAttribute="leading" priority="999" constant="20" id="B6u-Dr-lu4"/>
+                                    <constraint firstAttribute="height" constant="490" id="eQW-3x-dXY"/>
+                                    <constraint firstAttribute="trailing" secondItem="PuY-F4-NbI" secondAttribute="trailing" priority="998" constant="20" id="mBl-HO-PcU"/>
+                                    <constraint firstItem="PuY-F4-NbI" firstAttribute="centerX" secondItem="pTX-v6-cmr" secondAttribute="centerX" id="yeM-tS-Vxk"/>
+                                    <constraint firstItem="PuY-F4-NbI" firstAttribute="top" secondItem="pTX-v6-cmr" secondAttribute="top" constant="20" id="zi6-m6-9e1"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pTX-v6-cmr" secondAttribute="trailing" id="FR9-YB-ahL"/>
-                            <constraint firstAttribute="bottom" secondItem="pTX-v6-cmr" secondAttribute="bottom" id="XOE-ri-XAY"/>
-                            <constraint firstItem="pTX-v6-cmr" firstAttribute="leading" secondItem="wbc-yd-nQP" secondAttribute="leading" id="fY8-JN-ReD"/>
+                            <constraint firstItem="pTX-v6-cmr" firstAttribute="leading" secondItem="1Xd-am-t49" secondAttribute="leading" id="8Tl-Xj-CGl"/>
+                            <constraint firstAttribute="bottom" secondItem="pTX-v6-cmr" secondAttribute="bottom" id="oDQ-Nm-Gfv"/>
+                            <constraint firstItem="pTX-v6-cmr" firstAttribute="trailing" secondItem="1Xd-am-t49" secondAttribute="trailing" id="sqp-Wm-F3e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Xd-am-t49"/>
                     </view>
@@ -191,7 +180,7 @@
                         <outlet property="settingsStack" destination="S3h-1I-xQi" id="mAV-cp-G29"/>
                         <outlet property="titleIDLabel" destination="Yxh-cb-VYf" id="d5F-4Z-jLq"/>
                         <outlet property="tmdbAPIKeyField" destination="utW-i3-Fnp" id="TBT-CD-DVn"/>
-                        <outlet property="viewHeight" destination="5Zp-QH-wR4" id="AAq-Dc-T0U"/>
+                        <outlet property="viewHeight" destination="eQW-3x-dXY" id="YjQ-Xm-HI2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
