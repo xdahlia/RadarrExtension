@@ -11,7 +11,7 @@ import KeychainAccess
 import Zephyr
 
 struct Settings {
-    
+
     let defaults = UserDefaults.standard
     let keychain = Keychain(service: "com.ivanou.RadarrExtension")
     
