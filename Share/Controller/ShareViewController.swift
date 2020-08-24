@@ -29,8 +29,8 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var tmdbAPIKeyField: UITextField!
     
     //MARK: - Initialization -
-    var tmdbService = TMDBService()
-    var radarrService = RadarrService()
+    var tmdbService = TMDBService.shared
+    var radarrService = RadarrService.shared
     var radarr = Radarr()
     var settings = Settings()
     

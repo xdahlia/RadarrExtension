@@ -10,6 +10,8 @@ import Foundation
 
 class TMDBService {
     
+    static let shared = TMDBService()
+    
     var ImdbId: String = "" {
         didSet {
             setProperties()

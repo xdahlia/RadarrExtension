@@ -10,6 +10,8 @@ import Foundation
 
 class RadarrService {
     
+    static let shared = RadarrService()
+    
     // Encode JSON from Radarr model
     func radarrToJSON(data: Radarr) -> Data? {
         
