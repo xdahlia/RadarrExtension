@@ -113,18 +113,17 @@ class ShareViewController: UIViewController {
                             if let domain = shareURL.host {
                                 if domain != "www.imdb.com" {
                                     self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "You must share from either IMDB app or website", dismissShareSheet: true)
+                                } else {
+                                    // Extract IMDB movie ID
+                                    self.settings.imdbID = self.extractIDFromIMDBUrl(url: shareURL)
+                                    
+                                    // Send movie id to TMDBService as soon as possible
+                                    self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
+                                    self.tmdbService.ImdbId = self.settings.imdbID
+                                    
+                                    // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
                                 }
                             }
-                            
-                            // Extract IMDB movie ID
-                            self.settings.imdbID = self.extractIDFromIMDBUrl(url: shareURL)
-                            
-                            // Send movie id to TMDBService as soon as possible
-                            self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
-                            self.tmdbService.ImdbId = self.settings.imdbID
-                            
-                            // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
-                            
                         }
                         
                         if let error = error {

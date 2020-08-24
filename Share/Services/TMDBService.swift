@@ -39,7 +39,7 @@ class TMDBService {
                 return
             }
             // Set movie details from JSON
-            if let tmdb = self.jsonToTMDB(json: json)?.movie_results[0] { // FIXME: "Out of index crash" if not shared with expected data
+            if let tmdb = self.jsonToTMDB(json: json)?.movie_results[0] {
                 
                 self.TmdbId = tmdb.id
                 self.title = tmdb.title
