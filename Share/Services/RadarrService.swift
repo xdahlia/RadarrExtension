@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class RadarrService {
     
     static let shared = RadarrService()
+    var alertService = AlertService.shared
+    var viewController = UIViewController()
     
     // Encode JSON from Radarr model
     func radarrToJSON(data: Radarr) -> Data? {
@@ -25,8 +28,7 @@ class RadarrService {
             return json
 
         } catch {
-            // FIXME: Fix error handling
-            //displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
             print(error.localizedDescription)
             return nil
         }
@@ -46,8 +48,7 @@ class RadarrService {
             let task = session.dataTask(with: request) { (data, response, error) in
                 
                 if let error = error {
-                    // FIXME: Fix error handling
-                    //self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                    self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                     print(error.localizedDescription)
                     return
                 }
@@ -56,25 +57,20 @@ class RadarrService {
                         let statusCode = (response as? HTTPURLResponse)?.statusCode
                         
                         if statusCode == 400 {
-                            // FIXME: Fix error handling
-                            //self.displayErrorUIAlertController(title: "Error", message: "Movie already exists", dismissShareSheet: false)
+                            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "Movie already exists", dismissShareSheet: false)
                             print("Movie already exists")
                         } else if statusCode == 401 {
-                            // FIXME: Fix error handling
-                            //self.displayErrorUIAlertController(title: "Error", message: "The Radarr API Key may be wrong", dismissShareSheet: false)
+                            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "The Radarr API Key may be wrong", dismissShareSheet: false)
                             print("The Radarr API Key may be wrong")
                         } else {
-                            // FIXME: Fix error handling
-                            //self.displayErrorUIAlertController(title: "Error", message: "A problem ocurred sending movie to Radarr", dismissShareSheet: false)
+                            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "A problem ocurred sending movie to Radarr", dismissShareSheet: false)
                             print("A problem ocurred sending movie to Radarr")
                         }
                         
                     return
                 }
                 
-                // FIXME: Fix error handling
-                //self.displayUIAlertController(title: "Done", message: "Movie sent to Radarr!")
-                print("Movie sent to Radarr!")
+                self.alertService.displayUIAlertController(sender: self.viewController, title: "Done", message: "Movie sent to Radarr!")
                 
             }
             task.resume()

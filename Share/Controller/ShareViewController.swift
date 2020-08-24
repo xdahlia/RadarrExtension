@@ -31,6 +31,7 @@ class ShareViewController: UIViewController {
     //MARK: - Initialization -
     var tmdbService = TMDBService.shared
     var radarrService = RadarrService.shared
+    var alertService = AlertService.shared
     var radarr = Radarr()
     var settings = Settings()
     
@@ -90,6 +91,10 @@ class ShareViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
+        
+        // Make reference to itself available to RadarrService and TMDBService
+        radarrService.viewController = self
+        tmdbService.viewController = self
 
         self.handleSharedFile()
     }
@@ -107,7 +112,7 @@ class ShareViewController: UIViewController {
                             // Dismiss share sheet if not from IMDB movie page
                             if let domain = shareURL.host {
                                 if domain != "www.imdb.com" {
-                                    self.displayErrorUIAlertController(title: "Error", message: "You must share from either IMDB app or website", dismissShareSheet: true)
+                                    self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "You must share from either IMDB app or website", dismissShareSheet: true)
                                 }
                             }
                             
@@ -123,7 +128,7 @@ class ShareViewController: UIViewController {
                         }
                         
                         if let error = error {
-                            self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                            self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                         }
                     })
                 }
@@ -233,7 +238,7 @@ class ShareViewController: UIViewController {
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         
         if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" || tmdbAPIKeyField.text! == "" {
-            displayErrorUIAlertController(title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
+            self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
         } else {
             self.sendMovieToRadarr()
         }
@@ -250,50 +255,10 @@ class ShareViewController: UIViewController {
             replaced = replaced.replacingOccurrences(of: "/", with: "")
             return replaced
         } else {
-            self.displayErrorUIAlertController(title: "Error", message: "Error extracting IMDB ID from url", dismissShareSheet: false)
+            self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "Error extracting IMDB ID from url", dismissShareSheet: false)
             return "Error extracting IMDB ID from url"
         }
-        
     }
-    
-    //MARK: - Display Alerts -
-    
-    // Display alert box and auto dismiss after delay
-    func displayUIAlertController(title: String, message: String) {
-        
-        DispatchQueue.main.async {
-            
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            self.present(alert, animated:true, completion:{ Timer.scheduledTimer(withTimeInterval: 1, repeats:false, block: {_ in
-                self.dismiss(animated: true, completion: nil)
-                self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-            })})
-            
-        }
-        
-    }
-    
-    // Display alert box with options to dismiss itself or share sheet as well
-    func displayErrorUIAlertController(title: String, message: String, dismissShareSheet: Bool) {
-        
-        DispatchQueue.main.async {
-            
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
-                
-                if dismissShareSheet {
-                    // Dismiss share sheet
-                    self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-                }
-                
-            }))
-            
-            // Dismiss itself
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
 }
 
 //MARK: - Extensions -

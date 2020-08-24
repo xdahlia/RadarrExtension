@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class TMDBService {
     
     static let shared = TMDBService()
+    var alertService = AlertService.shared
+    var viewController = UIViewController()
     
     var ImdbId: String = "" {
         didSet {
@@ -36,7 +39,7 @@ class TMDBService {
                 return
             }
             // Set movie details from JSON
-            if let tmdb = self.jsonToTMDB(json: json)?.movie_results[0] {
+            if let tmdb = self.jsonToTMDB(json: json)?.movie_results[0] { // FIXME: "Out of index crash" if not shared with expected data
                 
                 self.TmdbId = tmdb.id
                 self.title = tmdb.title
@@ -81,8 +84,7 @@ class TMDBService {
             }
             
             if let error = error {
-                // FIXME: Fix error handling
-                //                self.displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                 userCompletionHandler(nil, error)
             }
             
@@ -102,8 +104,7 @@ class TMDBService {
                 return model
                 
             } catch {
-                // FIXME: Fix error handling
-                //                displayErrorUIAlertController(title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
                 return nil
                 
             }
@@ -119,3 +120,5 @@ class TMDBService {
     }
     
 }
+
+
