@@ -11,12 +11,12 @@ import Foundation
 struct Radarr: Codable {
     
     var title: String = ""
-    let qualityProfileId: Int = 4
+    var qualityProfileId: Int = 4
     var tmdbId: Int = 0
     var titleSlug: String = ""
     var monitored: Bool = false
-    let minimumAvailability: String = "released"
-    let profileId: Int = 4
+    var minimumAvailability: String = "released"
+    var profileId: Int = 4
     var year: Int = 0
     var rootFolderPath: String = ""
     var addOptions: Option = Option()
@@ -27,7 +27,7 @@ struct Radarr: Codable {
     }
 
     struct Image: Codable {
-        let covertype: String = "poster"
+        var covertype: String = "poster"
         var url: String = ""
     }
 

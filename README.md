@@ -1,7 +1,7 @@
 # RadarrExtension
 > iOS extension share sheet that takes a movie url from IMDb app or website and sends it to Radarr server.
 
-[![Swift Version][swift-image]][swift-url][![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
+[![Swift Version][swift-image]][swift-url] [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 <!--
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
@@ -87,10 +87,15 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 
 [https://github.com/xdahlia/RadarrExtension](https://github.com/xdahlia/RadarrExtension/)
 
+## Acknowledgements / Disclaimer / Copyright / Attribution
+- [TMDb API](https://developers.themoviedb.org/3)
+- [IMDb API](https://developer.imdb.com)
+- [Radarr Logo](https://github.com/Radarr/Radarr)
+- Unofficial / Not affiated with Radarr
 
-[swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-5.1-yellow.svg
 [swift-url]: https://swift.org/
-[license-image]: https://img.shields.io/badge/License-MIT-blue.svg
+[license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
 [license-url]: LICENSE
 [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
