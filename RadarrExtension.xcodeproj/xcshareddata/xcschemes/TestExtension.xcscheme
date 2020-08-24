@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E43A9EF424D0C771000C23DB"
-               BuildableName = "Radarr.app"
+               BuildableName = "RadarrExt.app"
                BlueprintName = "RadarrExtension"
                ReferencedContainer = "container:RadarrExtension.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43A9EF424D0C771000C23DB"
-            BuildableName = "Radarr.app"
+            BuildableName = "RadarrExt.app"
             BlueprintName = "RadarrExtension"
             ReferencedContainer = "container:RadarrExtension.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43A9EF424D0C771000C23DB"
-            BuildableName = "Radarr.app"
+            BuildableName = "RadarrExt.app"
             BlueprintName = "RadarrExtension"
             ReferencedContainer = "container:RadarrExtension.xcodeproj">
          </BuildableReference>

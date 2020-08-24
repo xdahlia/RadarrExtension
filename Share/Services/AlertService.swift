@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AlertService {
+final class AlertService {
     
     static let shared = AlertService()
     
@@ -43,7 +43,6 @@ class AlertService {
                     // Dismiss share sheet
                     sender.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
                 }
-                
             }))
             
             // Dismiss itself

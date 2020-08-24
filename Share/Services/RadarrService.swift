@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RadarrService {
+final class RadarrService {
     
     static let shared = RadarrService()
     var alertService = AlertService.shared

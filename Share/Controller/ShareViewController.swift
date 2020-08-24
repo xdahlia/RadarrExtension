@@ -43,6 +43,13 @@ class ShareViewController: UIViewController {
         tmdbAPIKeyField.text = settings.tmdbAPIKey
     }
     
+    fileprivate func setSettingsTextFieldContentTypes() {
+        serverAddressField.textContentType = .URL
+        radarrAPIKeyField.textContentType = .newPassword
+        rootFolderPathField.textContentType = .URL
+        tmdbAPIKeyField.textContentType = .newPassword
+    }
+    
     fileprivate func setSettingsTextFieldDelegates() {
         // Register text field delegates
         serverAddressField.delegate = self
@@ -74,6 +81,11 @@ class ShareViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    fileprivate func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,9 +97,9 @@ class ShareViewController: UIViewController {
         setSettingsTextFieldContent()
         setSettingsTextFieldDelegates()
         
-        setupViewSettings()
+        setSettingsTextFieldContentTypes()
         
-        registerKeyboardObservers()
+        setupViewSettings()
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
@@ -169,6 +181,7 @@ class ShareViewController: UIViewController {
         
         // move the root view up by the distance of keyboard height
         self.view.frame.origin.y = 0 - keyboardSize.height
+        print(keyboardSize.height)
     }
     
     // Auto save user text from text fields into Settings model when keyboard is dismissed
@@ -213,6 +226,7 @@ class ShareViewController: UIViewController {
     // Expand / collapse settings fields when "Edit Settings" toggled
     @IBAction func editSwitchPressed(_ sender: UISwitch) {
         if sender.isOn {
+            registerKeyboardObservers()
             viewHeight.constant = 490
             settingsStack.isHidden = false
             UIView.animate(withDuration: 0.5) {
@@ -225,6 +239,7 @@ class ShareViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
             }
+            removeKeyboardObservers()
         }
     }
     

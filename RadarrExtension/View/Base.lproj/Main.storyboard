@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Radarr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RadarrExt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="ui8-XS-X3p" firstAttribute="centerX" secondItem="uX2-fl-L1E" secondAttribute="centerX" id="Av0-dn-1ml"/>
                                             <constraint firstAttribute="height" constant="750" id="gf9-nS-mhd"/>
@@ -65,7 +65,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="525" id="bMT-gS-F38"/>
                                         </constraints>
-                                        <mutableString key="text">Begin by sharing a movie link from either IMDB app or webpage
+                                        <string key="text">Begin by sharing a movie link from either IMDB app or webpage
 
 Settings 
 1. Radarr Server Settings Use this format: 
@@ -75,7 +75,7 @@ Settings 
 
 4. TMDB API Key
 Get your API key at:
-https://developers.themoviedb.org/3/getting-started/introduction</mutableString>
+https://developers.themoviedb.org/3/getting-started/introduction</string>
                                         <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

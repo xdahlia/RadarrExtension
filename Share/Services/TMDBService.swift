@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TMDBService {
+final class TMDBService {
     
     static let shared = TMDBService()
     var alertService = AlertService.shared
