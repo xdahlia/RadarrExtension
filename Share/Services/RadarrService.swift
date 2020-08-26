@@ -12,7 +12,7 @@ import UIKit
 final class RadarrService {
     
     static let shared = RadarrService()
-    var alertService = AlertService.shared
+    private var alertService = AlertService.shared
     var viewController = UIViewController()
     
     // Encode JSON from Radarr model

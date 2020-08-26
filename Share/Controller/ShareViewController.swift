@@ -29,11 +29,11 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var tmdbAPIKeyField: UITextField!
     
     //MARK: - Initialization -
-    var tmdbService = TMDBService.shared
-    var radarrService = RadarrService.shared
-    var alertService = AlertService.shared
-    var radarr = Radarr()
-    var settings = Settings()
+    private var tmdbService = TMDBService.shared
+    private var radarrService = RadarrService.shared
+    private var alertService = AlertService.shared
+    private var radarr = Radarr()
+    private var settings = Settings()
     
     fileprivate func setSettingsTextFieldContent() {
         // Populate settings text fields with data from Settings model
@@ -120,22 +120,17 @@ class ShareViewController: UIViewController {
                 if attachment.hasItemConformingToTypeIdentifier("public.url") {
                     attachment.loadItem(forTypeIdentifier: "public.url", options: nil, completionHandler: { (url, error) -> Void in
                         if let shareURL = url as? NSURL {
-                            
-                            // Dismiss share sheet if not from IMDB movie page
-                            if let domain = shareURL.host {
-                                if domain != "www.imdb.com" {
-                                    self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "You must share from either IMDB app or website", dismissShareSheet: true)
-                                } else {
-                                    // Extract IMDB movie ID
-                                    self.settings.imdbID = self.extractIDFromIMDBUrl(url: shareURL)
-                                    
-                                    // Send movie id to TMDBService as soon as possible
-                                    self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
-                                    self.tmdbService.ImdbId = self.settings.imdbID
-                                    
-                                    // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
-                                }
+                            do {
+                                try validateURL(with: shareURL)
+
+                                self.settings.imdbID = shareURL.pathComponents![2]
+                                // Send movie id to TMDBService as soon as possible
+                                self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
+                                self.tmdbService.ImdbId = self.settings.imdbID
+                            } catch {
+                                self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: error.localizedDescription, dismissShareSheet: true)
                             }
+                            // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
                         }
                         
                         if let error = error {
@@ -148,7 +143,7 @@ class ShareViewController: UIViewController {
     }
     
     // Extract movie data from TMDB, fill Radarr model with movie data, call "postURL" with data
-    func sendMovieToRadarr() {
+    private func sendMovieToRadarr() {
         
         // Fill Radarr model with user settings and movie data
         self.radarr.monitored = settings.searchNow
@@ -173,7 +168,7 @@ class ShareViewController: UIViewController {
     //MARK: - Handle Keyboard -
     
     // Move text fields up when keyboard appears
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             // if keyboard size is not available for some reason, dont do anything
             return
@@ -187,7 +182,7 @@ class ShareViewController: UIViewController {
     // Auto save user text from text fields into Settings model when keyboard is dismissed
     // Call settings.save() to save to UserDefaults
     // Call Zephyr.sync to sync selected UserDefaults to iCloud
-    @objc func keyboardWillHide(notification: NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         // move back the root view origin to zero
         self.view.frame.origin.y = 0
     
@@ -208,7 +203,7 @@ class ShareViewController: UIViewController {
     // Save Search Now preference when segmented control is changed
     // Call settings.save() to save to UserDefaults
     // Call Zephyr.sync to sync selected UserDefaults to iCloud
-    @IBAction func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
+    @IBAction private func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
         
         let selectedSegment = sender.selectedSegmentIndex
         
@@ -224,7 +219,7 @@ class ShareViewController: UIViewController {
     }
     
     // Expand / collapse settings fields when "Edit Settings" toggled
-    @IBAction func editSwitchPressed(_ sender: UISwitch) {
+    @IBAction private func editSwitchPressed(_ sender: UISwitch) {
         if sender.isOn {
             registerKeyboardObservers()
             viewHeight.constant = 490
@@ -244,12 +239,12 @@ class ShareViewController: UIViewController {
     }
     
     // Dismiss share sheet when "Cancel" button pressed
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+    @IBAction private func cancelButtonPressed(_ sender: UIButton) {
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
     }
     
     // Check for empty settings fields before sending movie to Radarr server
-    @IBAction func sendButtonPressed(_ sender: UIButton) {
+    @IBAction private func sendButtonPressed(_ sender: UIButton) {
         
         if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" || tmdbAPIKeyField.text! == "" {
             self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
@@ -258,20 +253,21 @@ class ShareViewController: UIViewController {
         }
         
     }
+}
+
+// MARK: - Validation -
+
+func validateURL(with url: NSURL) throws {
+    guard url.host == "www.imdb.com" else {
+        throw ValidationError.notIMDb
+    }
+
+    guard url.pathComponents!.count > 2 else {
+        throw ValidationError.notMovie
+    }
     
-    //MARK: - Utility Functions -
-    
-    // Extract IMDB title id from url
-    func extractIDFromIMDBUrl(url: NSURL) -> String {
-        
-        if let url = url.absoluteString {
-            var replaced = url.replacingOccurrences(of: "https://www.imdb.com/title/", with: "")
-            replaced = replaced.replacingOccurrences(of: "/", with: "")
-            return replaced
-        } else {
-            self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "Error extracting IMDB ID from url", dismissShareSheet: false)
-            return "Error extracting IMDB ID from url"
-        }
+    guard url.pathComponents![1] == "title" else {
+        throw ValidationError.notMovie
     }
 }
 

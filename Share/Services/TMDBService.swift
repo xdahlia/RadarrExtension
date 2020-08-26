@@ -12,7 +12,7 @@ import UIKit
 final class TMDBService {
     
     static let shared = TMDBService()
-    var alertService = AlertService.shared
+    private var alertService = AlertService.shared
     var viewController = UIViewController()
     
     var ImdbId: String = "" {
@@ -35,20 +35,25 @@ final class TMDBService {
         
         fetchJsonFrom(url: url) { (jsonString, error) in
             
-            guard let json = jsonString else {
-                return
-            }
-            // Set movie details from JSON
-            if let tmdb = self.jsonToTMDB(json: json)?.movie_results[0] {
+            if let json = jsonString {
                 
-                self.TmdbId = tmdb.id
-                self.title = tmdb.title
-                self.release_date = self.extractYearFromDate(date: tmdb.release_date)
-                self.poster_path = "https://image.tmdb.org/t/p/w1280\(tmdb.poster_path)"
-                
+                if let tmdb = self.jsonToTMDB(json: json) {
+                    let results = tmdb.movie_results
+
+                    if results.count != 0 {
+                        let title = results[0]
+                        
+                        // Set movie details from JSON
+                        self.TmdbId = title.id
+                        self.title = title.title // TODO: check for correct data
+                        self.release_date = self.extractYearFromDate(date: title.release_date)
+                        self.poster_path = "https://image.tmdb.org/t/p/w1280\(title.poster_path)"
+                    } else {
+                        self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "Shared link does not contain movie data", dismissShareSheet: false)
+                    }
+                }
             }
         }
-        
     }
     
     // Construct TMDB API url with given IMDB movie id
@@ -77,9 +82,10 @@ final class TMDBService {
         let session = URLSession.shared
         
         let task = session.dataTask(with: url) { (data, response, error) in
-            
+
             if let json = data {
                 let jsonString = String(data: json, encoding: .utf8)!
+//                print(jsonString)
                 userCompletionHandler(jsonString, nil)
             }
             
