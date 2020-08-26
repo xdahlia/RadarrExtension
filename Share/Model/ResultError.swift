@@ -8,31 +8,30 @@
 
 import Foundation
 
-enum ValidationError: Error {
-    case notIMDb
-    case notMovie
-    case noResult
+enum ResultError: Error {
+    case fourHundred
+    case fourZeroOne
+    case general
 }
 
-extension ValidationError: LocalizedError {
+extension ResultError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .notIMDb:
+        case .fourHundred:
             return NSLocalizedString(
-                "Link must be shared from IMDb app or website",
+                "Movie already exists",
                 comment: ""
             )
-        case .notMovie:
+        case .fourZeroOne:
             return NSLocalizedString(
-                "Shared link is not an IMDb movie page",
+                "The Radarr API Key may be wrong",
                 comment: ""
             )
-        case .noResult:
+        case .general:
             return NSLocalizedString(
-                "Shared link does not contain movie data",
+                "A problem ocurred sending movie to Radarr",
                 comment: ""
             )
-
         }
     }
 }

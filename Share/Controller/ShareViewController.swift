@@ -35,57 +35,6 @@ class ShareViewController: UIViewController {
     private var radarr = Radarr()
     private var settings = Settings()
     
-    fileprivate func setSettingsTextFieldContent() {
-        // Populate settings text fields with data from Settings model
-        serverAddressField.text = settings.radarrServerAddress
-        radarrAPIKeyField.text = settings.radarrAPIKey
-        rootFolderPathField.text = settings.rootFolderPath
-        tmdbAPIKeyField.text = settings.tmdbAPIKey
-    }
-    
-    fileprivate func setSettingsTextFieldContentTypes() {
-        serverAddressField.textContentType = .URL
-        radarrAPIKeyField.textContentType = .newPassword
-        rootFolderPathField.textContentType = .URL
-        tmdbAPIKeyField.textContentType = .newPassword
-    }
-    
-    fileprivate func setSettingsTextFieldDelegates() {
-        // Register text field delegates
-        serverAddressField.delegate = self
-        radarrAPIKeyField.delegate = self
-        rootFolderPathField.delegate = self
-        tmdbAPIKeyField.delegate = self
-    }
-    
-    fileprivate func setupViewSettings() {
-        // Set search toggle state
-        if settings.searchNow {
-            searchToggle.selectedSegmentIndex = 0
-        } else {
-            searchToggle.selectedSegmentIndex = 1
-        }
-        
-        // Round top corners
-        extensionView.layer.cornerRadius = CGFloat(8)
-        extensionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        extensionView.clipsToBounds = true
-        
-        // Settings panel initially closed
-        viewHeight.constant = 240
-        settingsStack.isHidden = true
-    }
-    
-    fileprivate func registerKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    fileprivate func removeKeyboardObservers() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,13 +43,13 @@ class ShareViewController: UIViewController {
         // Load UserDefaults data
         settings.load()
         
+        // Initial setup
         setSettingsTextFieldContent()
         setSettingsTextFieldDelegates()
-        
         setSettingsTextFieldContentTypes()
-        
         setupViewSettings()
         
+        // Keyboard dismissal gesture
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         
@@ -121,7 +70,7 @@ class ShareViewController: UIViewController {
                     attachment.loadItem(forTypeIdentifier: "public.url", options: nil, completionHandler: { (url, error) -> Void in
                         if let shareURL = url as? NSURL {
                             do {
-                                try validateURL(with: shareURL)
+                                try self.validateURL(with: shareURL)
 
                                 self.settings.imdbID = shareURL.pathComponents![2]
                                 // Send movie id to TMDBService as soon as possible
@@ -176,22 +125,17 @@ class ShareViewController: UIViewController {
         
         // move the root view up by the distance of keyboard height
         self.view.frame.origin.y = 0 - keyboardSize.height
-        print(keyboardSize.height)
+//        print(keyboardSize.height)
     }
     
     // Auto save user text from text fields into Settings model when keyboard is dismissed
     // Call settings.save() to save to UserDefaults
-    // Call Zephyr.sync to sync selected UserDefaults to iCloud
     @objc private func keyboardWillHide(notification: NSNotification) {
         // move back the root view origin to zero
         self.view.frame.origin.y = 0
     
         // Store user settings
-        settings.radarrServerAddress = serverAddressField.text!
-        settings.radarrAPIKey = radarrAPIKeyField.text!
-        settings.rootFolderPath = rootFolderPathField.text!
-        settings.tmdbAPIKey = tmdbAPIKeyField.text!
-        settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
+        self.storeUserSettings()
         
         // Save UserDefaults data
         settings.save()
@@ -215,7 +159,7 @@ class ShareViewController: UIViewController {
         
         // Save UserDefaults data
         settings.save()
-        
+
     }
     
     // Expand / collapse settings fields when "Edit Settings" toggled
@@ -253,21 +197,80 @@ class ShareViewController: UIViewController {
         }
         
     }
-}
+    
+    // MARK: - Validation -
 
-// MARK: - Validation -
-
-func validateURL(with url: NSURL) throws {
-    guard url.host == "www.imdb.com" else {
-        throw ValidationError.notIMDb
-    }
-
-    guard url.pathComponents!.count > 2 else {
-        throw ValidationError.notMovie
+    private func validateURL(with url: NSURL) throws {
+        guard url.host == "www.imdb.com" else {
+            throw UrlError.notIMDb
+        }
+        guard url.pathComponents!.count > 2 else {
+            throw UrlError.notMovie
+        }
+        guard url.pathComponents![1] == "title" else {
+            throw UrlError.notMovie
+        }
     }
     
-    guard url.pathComponents![1] == "title" else {
-        throw ValidationError.notMovie
+    // MARK: - Setup Functions -
+    
+    fileprivate func setSettingsTextFieldContent() {
+        // Populate settings text fields with data from Settings model
+        serverAddressField.text = settings.radarrServerAddress
+        radarrAPIKeyField.text = settings.radarrAPIKey
+        rootFolderPathField.text = settings.rootFolderPath
+        tmdbAPIKeyField.text = settings.tmdbAPIKey
+    }
+    
+    fileprivate func setSettingsTextFieldContentTypes() {
+        serverAddressField.textContentType = .URL
+        radarrAPIKeyField.textContentType = .newPassword
+        rootFolderPathField.textContentType = .URL
+        tmdbAPIKeyField.textContentType = .newPassword
+    }
+    
+    fileprivate func setSettingsTextFieldDelegates() {
+        // Register text field delegates
+        serverAddressField.delegate = self
+        radarrAPIKeyField.delegate = self
+        rootFolderPathField.delegate = self
+        tmdbAPIKeyField.delegate = self
+    }
+    
+    fileprivate func setupViewSettings() {
+        // Set search toggle state
+        if settings.searchNow {
+            searchToggle.selectedSegmentIndex = 0
+        } else {
+            searchToggle.selectedSegmentIndex = 1
+        }
+        
+        // Round top corners
+        extensionView.layer.cornerRadius = CGFloat(8)
+        extensionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        extensionView.clipsToBounds = true
+        
+        // Settings panel initially closed
+        viewHeight.constant = 240
+        settingsStack.isHidden = true
+    }
+    
+    fileprivate func registerKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    fileprivate func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    fileprivate func storeUserSettings() {
+        settings.radarrServerAddress = serverAddressField.text!
+        settings.radarrAPIKey = radarrAPIKeyField.text!
+        settings.rootFolderPath = rootFolderPathField.text!
+        settings.tmdbAPIKey = tmdbAPIKeyField.text!
+        settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
     }
 }
 

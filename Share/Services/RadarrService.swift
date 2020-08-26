@@ -17,19 +17,15 @@ final class RadarrService {
     
     // Encode JSON from Radarr model
     func radarrToJSON(data: Radarr) -> Data? {
-        
-        debugPrint(data)
-        
+
         let encoder = JSONEncoder()
         encoder.outputFormatting = .withoutEscapingSlashes
         
         do {
             let json = try encoder.encode(data)
             return json
-
         } catch {
             self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-            print(error.localizedDescription)
             return nil
         }
     }
@@ -49,31 +45,35 @@ final class RadarrService {
                 
                 if let error = error {
                     self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-                    print(error.localizedDescription)
-                    return
-                }
-                guard let httpResponse = response as? HTTPURLResponse,
-                    (200...299).contains(httpResponse.statusCode) else {
-                        let statusCode = (response as? HTTPURLResponse)?.statusCode
-                        
-                        if statusCode == 400 {
-                            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "Movie already exists", dismissShareSheet: false)
-                            print("Movie already exists")
-                        } else if statusCode == 401 {
-                            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "The Radarr API Key may be wrong", dismissShareSheet: false)
-                            print("The Radarr API Key may be wrong")
-                        } else {
-                            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: "A problem ocurred sending movie to Radarr", dismissShareSheet: false)
-                            print("A problem ocurred sending movie to Radarr")
-                        }
-                        
                     return
                 }
                 
+                do {
+                    try self.validateResponse(with: response!)
+                } catch {
+                    self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: true)
+                }
+
                 self.alertService.displayUIAlertController(sender: self.viewController, title: "Done", message: "Movie sent to Radarr!")
                 
             }
             task.resume()
+        }
+    }
+    
+    // Checks for valid response
+    func validateResponse(with response: URLResponse) throws {
+        guard let httpResponse = response as? HTTPURLResponse,
+            (200...299).contains(httpResponse.statusCode) else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode
+                
+                if statusCode == 400 {
+                    throw ResultError.fourHundred
+                } else if statusCode == 401 {
+                    throw ResultError.fourZeroOne
+                } else {
+                    throw ResultError.general
+                }
         }
     }
 
