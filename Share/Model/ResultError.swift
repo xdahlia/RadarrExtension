@@ -9,14 +9,17 @@
 import Foundation
 
 enum ResultError: Error {
+    
     case fourHundred
     case fourZeroOne
     case general
 }
 
 extension ResultError: LocalizedError {
+    
     var errorDescription: String? {
         switch self {
+            
         case .fourHundred:
             return NSLocalizedString(
                 "Movie already exists",

@@ -48,10 +48,7 @@ class ShareViewController: UIViewController {
         setSettingsTextFieldDelegates()
         setSettingsTextFieldContentTypes()
         setupViewSettings()
-        
-        // Keyboard dismissal gesture
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+        registerGesture()
         
         // Make reference to itself available to RadarrService and TMDBService
         radarrService.viewController = self
@@ -62,29 +59,48 @@ class ShareViewController: UIViewController {
     
     //MARK: - Core Functionality -
     
-    // Take shared IMDB url and call "extractIDFromIMDBUrl"
+    // Take shared IMDb url, extract id, send to TMDb model
     private func handleSharedFile() {
+        
         if let item = extensionContext?.inputItems.first as? NSExtensionItem {
             item.attachments?.forEach({ (attachment) in
                 if attachment.hasItemConformingToTypeIdentifier("public.url") {
-                    attachment.loadItem(forTypeIdentifier: "public.url", options: nil, completionHandler: { (url, error) -> Void in
-                        if let shareURL = url as? NSURL {
-                            do {
-                                try self.validateURL(with: shareURL)
+                    
+                    attachment.loadItem(
+                        forTypeIdentifier: "public.url",
+                        options: nil,
+                        completionHandler: { (url, error) -> Void in
+                            
+                            if let shareURL = url as? NSURL {
+                                do {
+                                    try self.validateURL(with: shareURL)
 
-                                self.settings.imdbID = shareURL.pathComponents![2]
-                                // Send movie id to TMDBService as soon as possible
-                                self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
-                                self.tmdbService.ImdbId = self.settings.imdbID
-                            } catch {
-                                self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: error.localizedDescription, dismissShareSheet: true)
+                                    self.settings.imdbID = shareURL.pathComponents![2]
+                                    // Send movie id to TMDBService as soon as possible
+                                    self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
+                                    self.tmdbService.ImdbId = self.settings.imdbID
+                                    
+                                } catch {
+                                    
+                                    self.alertService.displayErrorUIAlertController(
+                                        sender: self,
+                                        title: "Error",
+                                        message: error.localizedDescription,
+                                        dismissShareSheet: true
+                                    )
+                                }
+                                // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
                             }
-                            // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
-                        }
-                        
-                        if let error = error {
-                            self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
-                        }
+                            
+                            if let error = error {
+                                
+                                self.alertService.displayErrorUIAlertController(
+                                    sender: self,
+                                    title: "Error",
+                                    message: error.localizedDescription,
+                                    dismissShareSheet: false
+                                )
+                            }
                     })
                 }
             })
@@ -108,8 +124,12 @@ class ShareViewController: UIViewController {
         
         // Construct JSON from Radarr model
         if let radarrJSON = radarrService.radarrToJSON(data: self.radarr) {
+            
             // Post JSON to Radarr server
-            radarrService.postJSON(from: radarrJSON, url: settings.urlString)
+            radarrService.postJSON(
+                from: radarrJSON,
+                url: settings.urlString
+            )
         }
         
     }
@@ -118,8 +138,11 @@ class ShareViewController: UIViewController {
     
     // Move text fields up when keyboard appears
     @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            // if keyboard size is not available for some reason, dont do anything
+        
+        guard let keyboardSize =
+            (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+            as? NSValue)?.cgRectValue
+        else {
             return
         }
         
@@ -131,6 +154,7 @@ class ShareViewController: UIViewController {
     // Auto save user text from text fields into Settings model when keyboard is dismissed
     // Call settings.save() to save to UserDefaults
     @objc private func keyboardWillHide(notification: NSNotification) {
+        
         // move back the root view origin to zero
         self.view.frame.origin.y = 0
     
@@ -164,14 +188,18 @@ class ShareViewController: UIViewController {
     
     // Expand / collapse settings fields when "Edit Settings" toggled
     @IBAction private func editSwitchPressed(_ sender: UISwitch) {
+        
         if sender.isOn {
+            
             registerKeyboardObservers()
             viewHeight.constant = 490
             settingsStack.isHidden = false
             UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
             }
+            
         } else {
+            
             view.endEditing(true)
             settingsStack.isHidden = true
             viewHeight.constant = 240
@@ -184,14 +212,27 @@ class ShareViewController: UIViewController {
     
     // Dismiss share sheet when "Cancel" button pressed
     @IBAction private func cancelButtonPressed(_ sender: UIButton) {
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        
+        self.extensionContext!.completeRequest(
+            returningItems: [],
+            completionHandler: nil
+        )
     }
     
     // Check for empty settings fields before sending movie to Radarr server
     @IBAction private func sendButtonPressed(_ sender: UIButton) {
         
-        if serverAddressField.text! == "" || radarrAPIKeyField.text! == "" || rootFolderPathField.text! == "" || tmdbAPIKeyField.text! == "" {
-            self.alertService.displayErrorUIAlertController(sender: self, title: "Error", message: "All settings fields must be filled out", dismissShareSheet: false)
+        if serverAddressField.text! == ""
+            || radarrAPIKeyField.text! == ""
+            || rootFolderPathField.text! == ""
+            || tmdbAPIKeyField.text! == ""
+        {
+            self.alertService.displayErrorUIAlertController(
+                sender: self,
+                title: "Error",
+                message: "All settings fields must be filled out",
+                dismissShareSheet: false
+            )
         } else {
             self.sendMovieToRadarr()
         }
@@ -201,6 +242,7 @@ class ShareViewController: UIViewController {
     // MARK: - Validation -
 
     private func validateURL(with url: NSURL) throws {
+        
         guard url.host == "www.imdb.com" else {
             throw UrlError.notIMDb
         }
@@ -215,6 +257,7 @@ class ShareViewController: UIViewController {
     // MARK: - Setup Functions -
     
     fileprivate func setSettingsTextFieldContent() {
+        
         // Populate settings text fields with data from Settings model
         serverAddressField.text = settings.radarrServerAddress
         radarrAPIKeyField.text = settings.radarrAPIKey
@@ -223,6 +266,7 @@ class ShareViewController: UIViewController {
     }
     
     fileprivate func setSettingsTextFieldContentTypes() {
+        
         serverAddressField.textContentType = .URL
         radarrAPIKeyField.textContentType = .newPassword
         rootFolderPathField.textContentType = .URL
@@ -230,6 +274,7 @@ class ShareViewController: UIViewController {
     }
     
     fileprivate func setSettingsTextFieldDelegates() {
+        
         // Register text field delegates
         serverAddressField.delegate = self
         radarrAPIKeyField.delegate = self
@@ -238,6 +283,7 @@ class ShareViewController: UIViewController {
     }
     
     fileprivate func setupViewSettings() {
+        
         // Set search toggle state
         if settings.searchNow {
             searchToggle.selectedSegmentIndex = 0
@@ -256,21 +302,52 @@ class ShareViewController: UIViewController {
     }
     
     fileprivate func registerKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     fileprivate func removeKeyboardObservers() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     fileprivate func storeUserSettings() {
+        
         settings.radarrServerAddress = serverAddressField.text!
         settings.radarrAPIKey = radarrAPIKeyField.text!
         settings.rootFolderPath = rootFolderPathField.text!
         settings.tmdbAPIKey = tmdbAPIKeyField.text!
         settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
+    }
+    
+    fileprivate func registerGesture() {
+        
+        // Keyboard dismissal gesture
+        let tap = UITapGestureRecognizer(
+            target: self.view,
+            action: #selector(UIView.endEditing)
+        )
+        view.addGestureRecognizer(tap)
     }
 }
 
@@ -280,6 +357,7 @@ extension ShareViewController: UITextFieldDelegate {
     
     // Set textfields as first responder
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         let nextTag = textField.tag + 1
         
         if let nextResponder = textField.superview?.viewWithTag(nextTag) {
@@ -296,6 +374,7 @@ extension ShareViewController: UITextFieldDelegate {
 // Converts string "movie title's string" to slug "movie-title-s-string"
 // From Hacking With Swift
 extension String {
+    
     private static let slugSafeCharacters = CharacterSet(charactersIn: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-")
     
     public func convertedToSlug() -> String? {

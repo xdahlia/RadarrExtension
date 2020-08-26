@@ -24,8 +24,15 @@ final class RadarrService {
         do {
             let json = try encoder.encode(data)
             return json
+            
         } catch {
-            self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+            
+            self.alertService.displayErrorUIAlertController(
+                sender: self.viewController,
+                title: "Error",
+                message: error.localizedDescription,
+                dismissShareSheet: false
+            )
             return nil
         }
     }
@@ -36,25 +43,42 @@ final class RadarrService {
         if let url = URL(string: url) {
             
             var request = URLRequest(url: url)
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpBody = data
-            request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.httpBody = data
+                request.httpMethod = "POST"
             
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, response, error) in
                 
                 if let error = error {
-                    self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: false)
+                    
+                    self.alertService.displayErrorUIAlertController(
+                        sender: self.viewController,
+                        title: "Error", message:
+                        error.localizedDescription,
+                        dismissShareSheet: false
+                    )
                     return
                 }
                 
                 do {
                     try self.validateResponse(with: response!)
+                    
                 } catch {
-                    self.alertService.displayErrorUIAlertController(sender: self.viewController, title: "Error", message: error.localizedDescription, dismissShareSheet: true)
+                    
+                    self.alertService.displayErrorUIAlertController(
+                        sender: self.viewController,
+                        title: "Error",
+                        message: error.localizedDescription,
+                        dismissShareSheet: true
+                    )
                 }
 
-                self.alertService.displayUIAlertController(sender: self.viewController, title: "Done", message: "Movie sent to Radarr!")
+                self.alertService.displayUIAlertController(
+                    sender: self.viewController,
+                    title: "Done",
+                    message: "Movie sent to Radarr!"
+                )
                 
             }
             task.resume()
@@ -63,14 +87,21 @@ final class RadarrService {
     
     // Checks for valid response
     func validateResponse(with response: URLResponse) throws {
-        guard let httpResponse = response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode) else {
+        
+        guard let httpResponse =
+            
+            response as? HTTPURLResponse,
+            (200...299).contains(httpResponse.statusCode)
+            
+        else {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode
                 
                 if statusCode == 400 {
                     throw ResultError.fourHundred
+                    
                 } else if statusCode == 401 {
                     throw ResultError.fourZeroOne
+                    
                 } else {
                     throw ResultError.general
                 }

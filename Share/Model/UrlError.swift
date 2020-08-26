@@ -9,14 +9,17 @@
 import Foundation
 
 enum UrlError: Error {
+    
     case notIMDb
     case notMovie
     case noResult
 }
 
 extension UrlError: LocalizedError {
+    
     var errorDescription: String? {
         switch self {
+            
         case .notIMDb:
             return NSLocalizedString(
                 "Link must be shared from IMDb app or website",

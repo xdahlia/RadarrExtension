@@ -16,37 +16,82 @@ final class AlertService {
     //MARK: - Display Alerts -
     
     // Display alert box and auto dismiss after delay
-    func displayUIAlertController(sender: UIViewController, title: String, message: String) {
+    func displayUIAlertController(
+        sender: UIViewController,
+        title: String,
+        message: String
+    ) {
         
         DispatchQueue.main.async {
             
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            sender.present(alert, animated:true, completion:{ Timer.scheduledTimer(withTimeInterval: 1, repeats:false, block: {_ in
-                sender.dismiss(animated: true, completion: nil)
-                sender.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-            })})
+            let alert = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
             
+            sender.present(
+                alert,
+                animated:true,
+                completion:{
+                    
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats:false, block: {_ in
+                    
+                        sender.dismiss(
+                            animated: true,
+                            completion: nil
+                        )
+                        sender.extensionContext!.completeRequest(
+                            returningItems: [],
+                            completionHandler: nil
+                        )
+                    
+                    })
+            })
         }
-        
+    
     }
     
     // Display alert box with options to dismiss itself or share sheet as well
-    func displayErrorUIAlertController(sender: UIViewController, title: String, message: String, dismissShareSheet: Bool) {
+    func displayErrorUIAlertController(
+        sender: UIViewController,
+        title: String,
+        message: String,
+        dismissShareSheet: Bool
+    ) {
         
         DispatchQueue.main.async {
             
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
             
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> () in
+            alert.addAction(
                 
-                if dismissShareSheet {
-                    // Dismiss share sheet
-                    sender.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-                }
-            }))
+                UIAlertAction(
+                    title: "Ok",
+                    style: UIAlertAction.Style.default,
+                    handler: { (action: UIAlertAction!) -> () in
+                
+                        if dismissShareSheet {
+                            
+                            // Dismiss share sheet
+                            sender.extensionContext!.completeRequest(
+                                returningItems: [],
+                                completionHandler: nil
+                            )
+                        }
+                    }
+                )
+            )
             
             // Dismiss itself
-            sender.present(alert, animated: true, completion: nil)
+            sender.present(
+                alert, animated: true,
+                completion: nil
+            )
         }
     }
     
