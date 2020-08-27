@@ -27,6 +27,11 @@
 		E4B066A224F6D25A005684BB /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
 		E4B066A424F6FD66005684BB /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A324F6FD66005684BB /* ResultError.swift */; };
 		E4B066D224F742EA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
+		E4B0670E24F77313005684BB /* RadarrExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0670D24F77313005684BB /* RadarrExtTests.swift */; };
+		E4B0671624F773A7005684BB /* ValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0671524F773A7005684BB /* ValidationServiceTests.swift */; };
+		E4B0671724F773BA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
+		E4B0671824F77503005684BB /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
+		E4B0671924F77505005684BB /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A324F6FD66005684BB /* ResultError.swift */; };
 		E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* Settings.swift */; };
 		E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
 		E4E2025D24F1E98C00713D2B /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2025C24F1E98C00713D2B /* TMDBService.swift */; };
@@ -41,6 +46,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E43A9F0F24D0C7F7000C23DB;
 			remoteInfo = Share;
+		};
+		E4B0671024F77314005684BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E43A9EED24D0C771000C23DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E43A9EF424D0C771000C23DB;
+			remoteInfo = RadarrExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -80,6 +92,10 @@
 		E4B066A124F6D25A005684BB /* UrlError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlError.swift; sourceTree = "<group>"; };
 		E4B066A324F6FD66005684BB /* ResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultError.swift; sourceTree = "<group>"; };
 		E4B066D124F742EA005684BB /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		E4B0670B24F77313005684BB /* RadarrExtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarrExtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B0670D24F77313005684BB /* RadarrExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrExtTests.swift; sourceTree = "<group>"; };
+		E4B0670F24F77314005684BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4B0671524F773A7005684BB /* ValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceTests.swift; sourceTree = "<group>"; };
 		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Radarr.entitlements; sourceTree = "<group>"; };
@@ -108,6 +124,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4B0670824F77313005684BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -118,6 +141,7 @@
 				E47564DC24EDEE7F00B0D5B5 /* README.md */,
 				E43A9EF724D0C771000C23DB /* RadarrExtension */,
 				E43A9F1124D0C7F7000C23DB /* Share */,
+				E4B0670C24F77313005684BB /* RadarrExtTests */,
 				E43A9EF624D0C771000C23DB /* Products */,
 				E4AAC3F224E773DB0057D135 /* Frameworks */,
 			);
@@ -128,6 +152,7 @@
 			children = (
 				E43A9EF524D0C771000C23DB /* RadarrExt.app */,
 				E43A9F1024D0C7F7000C23DB /* Share.appex */,
+				E4B0670B24F77313005684BB /* RadarrExtTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +239,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		E4B0670C24F77313005684BB /* RadarrExtTests */ = {
+			isa = PBXGroup;
+			children = (
+				E4B0670D24F77313005684BB /* RadarrExtTests.swift */,
+				E4B0670F24F77314005684BB /* Info.plist */,
+				E4B0671524F773A7005684BB /* ValidationServiceTests.swift */,
+			);
+			path = RadarrExtTests;
+			sourceTree = "<group>";
+		};
 		E4E2025B24F1E8D600713D2B /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +307,24 @@
 			productReference = E43A9F1024D0C7F7000C23DB /* Share.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		E4B0670A24F77313005684BB /* RadarrExtTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4B0671424F77314005684BB /* Build configuration list for PBXNativeTarget "RadarrExtTests" */;
+			buildPhases = (
+				E4B0670724F77313005684BB /* Sources */,
+				E4B0670824F77313005684BB /* Frameworks */,
+				E4B0670924F77313005684BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4B0671124F77314005684BB /* PBXTargetDependency */,
+			);
+			name = RadarrExtTests;
+			productName = RadarrExtTests;
+			productReference = E4B0670B24F77313005684BB /* RadarrExtTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -287,6 +340,10 @@
 					};
 					E43A9F0F24D0C7F7000C23DB = {
 						CreatedOnToolsVersion = 11.6;
+					};
+					E4B0670A24F77313005684BB = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = E43A9EF424D0C771000C23DB;
 					};
 				};
 			};
@@ -309,6 +366,7 @@
 			targets = (
 				E43A9EF424D0C771000C23DB /* RadarrExtension */,
 				E43A9F0F24D0C7F7000C23DB /* Share */,
+				E4B0670A24F77313005684BB /* RadarrExtTests */,
 			);
 		};
 /* End PBXProject section */
@@ -331,6 +389,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43A9F1624D0C7F7000C23DB /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4B0670924F77313005684BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +430,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4B0670724F77313005684BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4B0671624F773A7005684BB /* ValidationServiceTests.swift in Sources */,
+				E4B0671924F77505005684BB /* ResultError.swift in Sources */,
+				E4B0670E24F77313005684BB /* RadarrExtTests.swift in Sources */,
+				E4B0671824F77503005684BB /* UrlError.swift in Sources */,
+				E4B0671724F773BA005684BB /* ValidationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -372,6 +449,11 @@
 			isa = PBXTargetDependency;
 			target = E43A9F0F24D0C7F7000C23DB /* Share */;
 			targetProxy = E43A9F1824D0C7F7000C23DB /* PBXContainerItemProxy */;
+		};
+		E4B0671124F77314005684BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E43A9EF424D0C771000C23DB /* RadarrExtension */;
+			targetProxy = E4B0671024F77314005684BB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -609,6 +691,46 @@
 			};
 			name = Release;
 		};
+		E4B0671224F77314005684BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S92K442HVS;
+				INFOPLIST_FILE = RadarrExtTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.RadarrExtTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadarrExt.app/RadarrExt";
+			};
+			name = Debug;
+		};
+		E4B0671324F77314005684BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S92K442HVS;
+				INFOPLIST_FILE = RadarrExtTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanou.RadarrExtTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadarrExt.app/RadarrExt";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -635,6 +757,15 @@
 			buildConfigurations = (
 				E43A9F1C24D0C7F7000C23DB /* Debug */,
 				E43A9F1D24D0C7F7000C23DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4B0671424F77314005684BB /* Build configuration list for PBXNativeTarget "RadarrExtTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4B0671224F77314005684BB /* Debug */,
+				E4B0671324F77314005684BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
