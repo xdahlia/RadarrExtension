@@ -13,6 +13,7 @@ final class RadarrService {
     
     static let shared = RadarrService()
     private var alertService = AlertService.shared
+    private var validationService = ValidationService.shared
     var viewController = UIViewController()
     
     // Encode JSON from Radarr model
@@ -62,7 +63,7 @@ final class RadarrService {
                 }
                 
                 do {
-                    try self.validateResponse(with: response!)
+                    try self.validationService.validateRadarrResponse(with: response!)
                     
                 } catch {
                     
@@ -84,28 +85,4 @@ final class RadarrService {
             task.resume()
         }
     }
-    
-    // Checks for valid response
-    func validateResponse(with response: URLResponse) throws {
-        
-        guard let httpResponse =
-            
-            response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode)
-            
-        else {
-                let statusCode = (response as? HTTPURLResponse)?.statusCode
-                
-                if statusCode == 400 {
-                    throw ResultError.fourHundred
-                    
-                } else if statusCode == 401 {
-                    throw ResultError.fourZeroOne
-                    
-                } else {
-                    throw ResultError.general
-                }
-        }
-    }
-
 }

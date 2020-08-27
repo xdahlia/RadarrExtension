@@ -34,6 +34,7 @@ class ShareViewController: UIViewController {
     private var alertService = AlertService.shared
     private var radarr = Radarr()
     private var settings = Settings()
+    private var validationService = ValidationService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +46,10 @@ class ShareViewController: UIViewController {
         
         // Initial setup
         setSettingsTextFieldContent()
-        setSettingsTextFieldDelegates()
         setSettingsTextFieldContentTypes()
-        setupViewSettings()
+        setSettingsTextFieldDelegates()
         registerGesture()
+        setupViewSettings()
         
         // Make reference to itself available to RadarrService and TMDBService
         radarrService.viewController = self
@@ -73,7 +74,7 @@ class ShareViewController: UIViewController {
                             
                             if let shareURL = url as? NSURL {
                                 do {
-                                    try self.validateURL(with: shareURL)
+                                    try self.validationService.validateSharedURL(with: shareURL)
 
                                     self.settings.imdbID = shareURL.pathComponents![2]
                                     // Send movie id to TMDBService as soon as possible
@@ -237,21 +238,6 @@ class ShareViewController: UIViewController {
             self.sendMovieToRadarr()
         }
         
-    }
-    
-    // MARK: - Validation -
-
-    private func validateURL(with url: NSURL) throws {
-        
-        guard url.host == "www.imdb.com" else {
-            throw UrlError.notIMDb
-        }
-        guard url.pathComponents!.count > 2 else {
-            throw UrlError.notMovie
-        }
-        guard url.pathComponents![1] == "title" else {
-            throw UrlError.notMovie
-        }
     }
     
     // MARK: - Setup Functions -

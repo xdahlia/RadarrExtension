@@ -26,6 +26,7 @@
 		E4AAC3FB24EB41F20057D135 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3FA24EB41F20057D135 /* KeychainAccess */; };
 		E4B066A224F6D25A005684BB /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
 		E4B066A424F6FD66005684BB /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A324F6FD66005684BB /* ResultError.swift */; };
+		E4B066D224F742EA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
 		E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* Settings.swift */; };
 		E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
 		E4E2025D24F1E98C00713D2B /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2025C24F1E98C00713D2B /* TMDBService.swift */; };
@@ -78,6 +79,7 @@
 		E47564DC24EDEE7F00B0D5B5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E4B066A124F6D25A005684BB /* UrlError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlError.swift; sourceTree = "<group>"; };
 		E4B066A324F6FD66005684BB /* ResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultError.swift; sourceTree = "<group>"; };
+		E4B066D124F742EA005684BB /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Radarr.entitlements; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				E4E2025C24F1E98C00713D2B /* TMDBService.swift */,
 				E4E2025F24F2164F00713D2B /* RadarrService.swift */,
 				E4E2026124F35A9F00713D2B /* AlertService.swift */,
+				E4B066D124F742EA005684BB /* ValidationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E4E2026024F2164F00713D2B /* RadarrService.swift in Sources */,
 				E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */,
 				E4B066A224F6D25A005684BB /* UrlError.swift in Sources */,
+				E4B066D224F742EA005684BB /* ValidationService.swift in Sources */,
 				E4B1DBC824E2068C008BC46C /* Settings.swift in Sources */,
 				E4E2026224F35A9F00713D2B /* AlertService.swift in Sources */,
 				E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */,
