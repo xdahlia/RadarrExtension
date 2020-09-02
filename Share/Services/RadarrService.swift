@@ -16,6 +16,9 @@ final class RadarrService {
     private var validationService = ValidationService.shared
     var viewController = UIViewController()
     
+    private init() {
+    }
+    
     // Encode JSON from Radarr model
     func radarrToJSON(data: Radarr) -> Data? {
 

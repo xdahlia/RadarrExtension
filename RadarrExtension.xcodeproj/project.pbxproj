@@ -27,7 +27,6 @@
 		E4B066A224F6D25A005684BB /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
 		E4B066A424F6FD66005684BB /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A324F6FD66005684BB /* ResultError.swift */; };
 		E4B066D224F742EA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
-		E4B0670E24F77313005684BB /* RadarrExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0670D24F77313005684BB /* RadarrExtTests.swift */; };
 		E4B0671624F773A7005684BB /* ValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0671524F773A7005684BB /* ValidationServiceTests.swift */; };
 		E4B0671724F773BA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
 		E4B0671824F77503005684BB /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
@@ -95,7 +94,6 @@
 		E4B066A324F6FD66005684BB /* ResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultError.swift; sourceTree = "<group>"; };
 		E4B066D124F742EA005684BB /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		E4B0670B24F77313005684BB /* RadarrExtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarrExtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4B0670D24F77313005684BB /* RadarrExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrExtTests.swift; sourceTree = "<group>"; };
 		E4B0670F24F77314005684BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4B0671524F773A7005684BB /* ValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceTests.swift; sourceTree = "<group>"; };
 		E4B1DBC724E2068C008BC46C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 		E4B0670C24F77313005684BB /* RadarrExtTests */ = {
 			isa = PBXGroup;
 			children = (
-				E4B0670D24F77313005684BB /* RadarrExtTests.swift */,
 				E4B0670F24F77314005684BB /* Info.plist */,
 				E4B0671524F773A7005684BB /* ValidationServiceTests.swift */,
 			);
@@ -452,7 +449,6 @@
 			files = (
 				E4B0671624F773A7005684BB /* ValidationServiceTests.swift in Sources */,
 				E4B0671924F77505005684BB /* ResultError.swift in Sources */,
-				E4B0670E24F77313005684BB /* RadarrExtTests.swift in Sources */,
 				E4B0671824F77503005684BB /* UrlError.swift in Sources */,
 				E4B0671724F773BA005684BB /* ValidationService.swift in Sources */,
 			);

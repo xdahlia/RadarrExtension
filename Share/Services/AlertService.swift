@@ -13,6 +13,9 @@ final class AlertService {
     
     static let shared = AlertService()
     
+    private init() {
+    }
+    
     //MARK: - Display Alerts -
     
     // Display alert box and auto dismiss after delay

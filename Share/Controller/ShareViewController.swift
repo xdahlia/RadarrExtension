@@ -11,7 +11,7 @@ import UIKit
 
 //MARK: - View Controller -
 @objc(ShareExtensionViewController)
-class ShareViewController: UIViewController {
+final class ShareViewController: UIViewController {
     
     @IBOutlet weak var titleIDLabel: UILabel!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
@@ -29,12 +29,12 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var tmdbAPIKeyField: UITextField!
     
     //MARK: - Initialization -
-    private var tmdbService = TMDBService.shared
-    private var radarrService = RadarrService.shared
-    private var alertService = AlertService.shared
+    private let tmdbService = TMDBService.shared
+    private let radarrService = RadarrService.shared
+    private let alertService = AlertService.shared
+    private let validationService = ValidationService.shared
     private var radarr = Radarr()
     private var settings = Settings()
-    private var validationService = ValidationService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

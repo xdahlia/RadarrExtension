@@ -26,6 +26,9 @@ final class TMDBService {
     private(set) var release_date: Int = 0
     private(set) var poster_path: String = ""
     var tmdbAPIKey: String = ""
+    
+    private init() {
+    }
  
     // Set movie details triggered by tmdbId change
     private func setProperties() {

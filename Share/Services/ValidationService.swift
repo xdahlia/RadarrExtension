@@ -12,6 +12,9 @@ struct ValidationService {
     
     static let shared = ValidationService()
     
+    private init() {
+    }
+    
     // MARK: - Validation -
 
     func validateSharedURL(with url: NSURL) throws {
