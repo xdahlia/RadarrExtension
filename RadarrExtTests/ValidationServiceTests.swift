@@ -15,7 +15,7 @@ class ValidationServiceTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        validation = ValidationService()
+        validation = ValidationService.shared
     }
     
     override func tearDown() {
