@@ -13,41 +13,30 @@ import UIKit
 @objc(ShareExtensionViewController)
 final class ShareViewController: UIViewController {
     
+    @IBOutlet weak var settingsView: SettingsView!
+    
     @IBOutlet weak var titleIDLabel: UILabel!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var extensionView: UIView!
     
     //MARK: - Control Properties -
     @IBOutlet weak var searchToggle: UISegmentedControl!
-    @IBOutlet weak var settingsStack: UIStackView!
     @IBOutlet weak var editSwitch: UISwitch!
-    
-    //MARK: - Settings Properties -
-    @IBOutlet weak var serverAddressField: UITextField!
-    @IBOutlet weak var radarrAPIKeyField: UITextField!
-    @IBOutlet weak var rootFolderPathField: UITextField!
-    @IBOutlet weak var tmdbAPIKeyField: UITextField!
     
     //MARK: - Initialization -
     private let tmdbService = TMDBService.shared
     private let radarrService = RadarrService.shared
     private let alertService = AlertService.shared
     private let validationService = ValidationService.shared
+    private var settingsService = SettingsService.shared
     private var radarr = Radarr()
-    private var settings = Settings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
-        // Load UserDefaults data
-        settings.load()
-        
         // Initial setup
-        setSettingsTextFieldContent()
-        setSettingsTextFieldContentTypes()
-        setSettingsTextFieldDelegates()
         registerGesture()
         setupViewSettings()
         
@@ -76,10 +65,10 @@ final class ShareViewController: UIViewController {
                                 do {
                                     try self.validationService.validateSharedURL(with: shareURL)
 
-                                    self.settings.imdbID = shareURL.pathComponents![2]
+                                    self.settingsService.imdbID = shareURL.pathComponents![2]
                                     // Send movie id to TMDBService as soon as possible
-                                    self.tmdbService.tmdbAPIKey = self.settings.tmdbAPIKey
-                                    self.tmdbService.ImdbId = self.settings.imdbID
+                                    self.tmdbService.tmdbAPIKey = self.settingsService.tmdbAPIKey
+                                    self.tmdbService.ImdbId = self.settingsService.imdbID
                                     
                                 } catch {
                                     
@@ -112,8 +101,8 @@ final class ShareViewController: UIViewController {
     private func sendMovieToRadarr() {
         
         // Fill Radarr model with user settings and movie data
-        self.radarr.monitored = settings.searchNow
-        self.radarr.addOptions.searchForMovie = settings.searchNow
+        self.radarr.monitored = settingsService.searchNow
+        self.radarr.addOptions.searchForMovie = settingsService.searchNow
         self.radarr.title = tmdbService.title
         self.radarr.tmdbId = tmdbService.TmdbId
         self.radarr.year = tmdbService.release_date
@@ -121,7 +110,7 @@ final class ShareViewController: UIViewController {
             self.radarr.titleSlug = "\(titleSlug)-\(tmdbService.TmdbId)"
         }
         self.radarr.images[0].url = "https://image.tmdb.org/t/p/w1280\(tmdbService.poster_path)"
-        self.radarr.rootFolderPath = self.settings.rootFolderPath
+        self.radarr.rootFolderPath = self.settingsService.rootFolderPath
         
         // Construct JSON from Radarr model
         if let radarrJSON = radarrService.radarrToJSON(data: self.radarr) {
@@ -129,42 +118,10 @@ final class ShareViewController: UIViewController {
             // Post JSON to Radarr server
             radarrService.postJSON(
                 from: radarrJSON,
-                url: settings.urlString
+                url: settingsService.urlString
             )
         }
         
-    }
-    
-    //MARK: - Handle Keyboard -
-    
-    // Move text fields up when keyboard appears
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        
-        guard let keyboardSize =
-            (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
-            as? NSValue)?.cgRectValue
-        else {
-            return
-        }
-        
-        // move the root view up by the distance of keyboard height
-        self.view.frame.origin.y = 0 - keyboardSize.height
-//        print(keyboardSize.height)
-    }
-    
-    // Auto save user text from text fields into Settings model when keyboard is dismissed
-    // Call settings.save() to save to UserDefaults
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        
-        // move back the root view origin to zero
-        self.view.frame.origin.y = 0
-    
-        // Store user settings
-        self.storeUserSettings()
-        
-        // Save UserDefaults data
-        settings.save()
-
     }
     
     //MARK: - Handle buttons / controls -
@@ -177,36 +134,27 @@ final class ShareViewController: UIViewController {
         let selectedSegment = sender.selectedSegmentIndex
         
         if selectedSegment == 0 {
-            settings.searchNow = true
+            settingsService.searchNow = true
         } else {
-            settings.searchNow = false
+            settingsService.searchNow = false
         }
         
         // Save UserDefaults data
-        settings.save()
+        settingsService.save()
 
     }
     
-    // Expand / collapse settings fields when "Edit Settings" toggled
     @IBAction private func editSwitchPressed(_ sender: UISwitch) {
         
         if sender.isOn {
-            
+         
             registerKeyboardObservers()
-            viewHeight.constant = 490
-            settingsStack.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                self.view.layoutIfNeeded()
-            }
+            expandSettingsView()
             
         } else {
             
             view.endEditing(true)
-            settingsStack.isHidden = true
-            viewHeight.constant = 240
-            UIView.animate(withDuration: 0.5) {
-                self.view.layoutIfNeeded()
-            }
+            collapseSettingsView()
             removeKeyboardObservers()
         }
     }
@@ -223,10 +171,7 @@ final class ShareViewController: UIViewController {
     // Check for empty settings fields before sending movie to Radarr server
     @IBAction private func sendButtonPressed(_ sender: UIButton) {
         
-        if serverAddressField.text! == ""
-            || radarrAPIKeyField.text! == ""
-            || rootFolderPathField.text! == ""
-            || tmdbAPIKeyField.text! == ""
+        if settingsService.settingsAreIncomplete()
         {
             self.alertService.displayErrorUIAlertController(
                 sender: self,
@@ -242,36 +187,10 @@ final class ShareViewController: UIViewController {
     
     // MARK: - Setup Functions -
     
-    fileprivate func setSettingsTextFieldContent() {
-        
-        // Populate settings text fields with data from Settings model
-        serverAddressField.text = settings.radarrServerAddress
-        radarrAPIKeyField.text = settings.radarrAPIKey
-        rootFolderPathField.text = settings.rootFolderPath
-        tmdbAPIKeyField.text = settings.tmdbAPIKey
-    }
-    
-    fileprivate func setSettingsTextFieldContentTypes() {
-        
-        serverAddressField.textContentType = .URL
-        radarrAPIKeyField.textContentType = .newPassword
-        rootFolderPathField.textContentType = .URL
-        tmdbAPIKeyField.textContentType = .newPassword
-    }
-    
-    fileprivate func setSettingsTextFieldDelegates() {
-        
-        // Register text field delegates
-        serverAddressField.delegate = self
-        radarrAPIKeyField.delegate = self
-        rootFolderPathField.delegate = self
-        tmdbAPIKeyField.delegate = self
-    }
-    
     fileprivate func setupViewSettings() {
         
         // Set search toggle state
-        if settings.searchNow {
+        if settingsService.searchNow {
             searchToggle.selectedSegmentIndex = 0
         } else {
             searchToggle.selectedSegmentIndex = 1
@@ -284,7 +203,50 @@ final class ShareViewController: UIViewController {
         
         // Settings panel initially closed
         viewHeight.constant = 240
-        settingsStack.isHidden = true
+        settingsView.isHidden = true
+
+    }
+    
+    fileprivate func registerGesture() {
+        
+        // Keyboard dismissal gesture
+        let tap = UITapGestureRecognizer(
+            target: self.view,
+            action: #selector(UIView.endEditing)
+        )
+        view.addGestureRecognizer(tap)
+    }
+    
+    //MARK: - Handle Keyboard -
+        
+    // Move text fields up when keyboard appears
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        
+        guard let keyboardSize =
+            (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+                as? NSValue)?.cgRectValue
+            else {
+                return
+        }
+        
+        // move the root view up by the distance of keyboard height
+        self.view.frame.origin.y = 0 - keyboardSize.height
+        //        print(keyboardSize.height)
+    }
+    
+    // Auto save user text from text fields into Settings model when keyboard is dismissed
+    // Call settings.save() to save to UserDefaults
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        
+        // move back the root view origin to zero
+        self.view.frame.origin.y = 0
+        
+        // Store user settings
+        self.storeUserSettings()
+        
+        // Save UserDefaults data
+        settingsService.save()
+        
     }
     
     fileprivate func registerKeyboardObservers() {
@@ -319,20 +281,10 @@ final class ShareViewController: UIViewController {
     
     fileprivate func storeUserSettings() {
         
-        settings.radarrServerAddress = serverAddressField.text!
-        settings.radarrAPIKey = radarrAPIKeyField.text!
-        settings.rootFolderPath = rootFolderPathField.text!
-        settings.tmdbAPIKey = tmdbAPIKeyField.text!
-        settings.urlString = "\(settings.radarrServerAddress)/api/movie?apikey=\(settings.radarrAPIKey)"
-    }
-    
-    fileprivate func registerGesture() {
-        
-        // Keyboard dismissal gesture
-        let tap = UITapGestureRecognizer(
-            target: self.view,
-            action: #selector(UIView.endEditing)
-        )
-        view.addGestureRecognizer(tap)
+        settingsService.radarrServerAddress = settingsView.serverAddressField.text!
+        settingsService.radarrAPIKey = settingsView.radarrAPIKeyField.text!
+        settingsService.rootFolderPath = settingsView.rootFolderPathField.text!
+        settingsService.tmdbAPIKey = settingsView.tmdbAPIKeyField.text!
+        settingsService.urlString = "\(settingsService.radarrServerAddress)/api/movie?apikey=\(settingsService.radarrAPIKey)"
     }
 }

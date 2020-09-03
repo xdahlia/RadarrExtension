@@ -10,7 +10,9 @@ import Foundation
 import KeychainAccess
 import Zephyr
 
-struct Settings {
+class SettingsService {
+    
+    static let shared = SettingsService()
 
     let defaults = UserDefaults.standard
     let keychain = Keychain(service: "com.ivanou.RadarrExtension")
@@ -37,12 +39,12 @@ struct Settings {
         defaults.setValue(searchNow, forKey: "searchNow")
 //
 //        // Sync UserDefaults with iCloud
-////        Zephyr.debugEnabled = true
+//        Zephyr.debugEnabled = true
 //        Zephyr.sync(keys: ["serverAddress", "rootFolderPath", "searchNow"])
         
     }
     
-    mutating func load() {
+    func load() {
         
         // Load from Keychain
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
@@ -61,6 +63,19 @@ struct Settings {
 
         // Construct Radarr URL
         urlString = "\(radarrServerAddress)/api/movie?apikey=\(radarrAPIKey)"
+    }
+    
+    func settingsAreIncomplete() -> Bool {
+        
+        if radarrServerAddress == ""
+            || radarrAPIKey == ""
+            || rootFolderPath == ""
+            || tmdbAPIKey == ""
+        {
+            return true
+        } else {
+            return false
+        }
     }
     
 }
