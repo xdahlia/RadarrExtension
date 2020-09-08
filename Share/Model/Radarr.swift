@@ -10,15 +10,15 @@ import Foundation
 
 struct Radarr: Codable {
     
-    var title: String = ""
+    var title: String
     var qualityProfileId: Int = 4
-    var tmdbId: Int = 0
-    var titleSlug: String = ""
-    var monitored: Bool = false
+    var tmdbId: Int
+    var titleSlug: String
+    var monitored: Bool
     var minimumAvailability: String = "released"
     var profileId: Int = 4
-    var year: Int = 0
-    var rootFolderPath: String = ""
+    var year: Int
+    var rootFolderPath: String
     var addOptions: Option = Option()
     var images: Array<Image> = [Image(url: "")]
     
@@ -29,6 +29,26 @@ struct Radarr: Codable {
     struct Image: Codable {
         var covertype: String = "poster"
         var url: String = ""
+    }
+    
+    init(
+        title: String = "",
+        tmdbId: Int = 0,
+        titleSlug: String = "",
+        monitored: Bool = false,
+        year: Int = 0,
+        rootFolderPath: String = "",
+        searchNow: Bool = false,
+        imageUrl: String = ""
+    ) {
+        self.title = title
+        self.tmdbId = tmdbId
+        self.titleSlug = titleSlug
+        self.monitored = monitored
+        self.year = year
+        self.rootFolderPath = rootFolderPath
+        self.addOptions = Option(searchForMovie: searchNow)
+        self.images = [Image(covertype: "poster", url: imageUrl)]
     }
 
 }

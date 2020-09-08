@@ -101,14 +101,6 @@ class TMDbHandler {
 
                     return results[0]
 
-//                    // Set movie details from JSON
-//                    self.TmdbId = title.id
-//                    self.title = title.title
-//                    self.poster_path = "https://image.tmdb.org/t/p/w1280\(title.poster_path)"
-//                    if let year = self.extractYearFromDate(date: title.release_date) {
-//                        self.release_date = year
-//                    }
-
                 } else {
                     throw TMDbError.movieNotFound
                 }
@@ -121,16 +113,5 @@ class TMDbHandler {
             throw TMDbError.general
         }
     }
-    
-    // Extract year from date
-    private func extractYearFromDate(date: String) -> Int? {
-        
-        if let year = Int(String(date.prefix(4))) {
-            return year
-        } else {
-            return nil
-        }
-        
-    }
-    
+
 }
