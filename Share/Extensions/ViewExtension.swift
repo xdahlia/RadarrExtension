@@ -36,7 +36,7 @@ extension ShareViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.settingsView.alpha = 0
         }, completion: {
-            finished in
+            (finished) in
             UIView.animate(withDuration: 0.3) {
                 self.viewHeight.constant = 240
                 self.settingsView.isHidden = true

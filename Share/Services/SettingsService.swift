@@ -67,14 +67,22 @@ class SettingsService {
     
     func settingsAreIncomplete() -> Bool {
         
-        if radarrServerAddress == ""
-            || radarrAPIKey == ""
-            || rootFolderPath == ""
-            || tmdbAPIKey == ""
+        if radarrServerAddress.isEmpty
+            || radarrAPIKey.isEmpty
+            || rootFolderPath.isEmpty
+            || tmdbAPIKey.isEmpty
         {
             return true
         } else {
             return false
+        }
+    }
+    
+    func TMDbAPIKeyIsSet() -> Bool {
+        if tmdbAPIKey.isEmpty{
+            return false
+        } else {
+            return true
         }
     }
     

@@ -31,6 +31,9 @@ final class ShareViewController: UIViewController {
     private var settingsService = SettingsService.shared
     private var radarr = Radarr()
     
+    private let extensionHandler = ExtensionHandler.shared
+    private let validateURLHandler = ValidateURLHandler.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,8 +46,26 @@ final class ShareViewController: UIViewController {
         // Make reference to itself available to RadarrService and TMDBService
         radarrService.viewController = self
         tmdbService.viewController = self
+        
+//        let extractedURL = Result { try extensionHandler.handle(input: extensionContext) }
 
-        self.handleSharedFile()
+//        self.handleSharedFile()
+        extensionHandler.handle(input: extensionContext) { (result) in
+            switch result {
+            case .success(let shareURL):
+//                return urlResponse
+                print(shareURL)
+                
+                let imdbId = Result { try self.validateURLHandler.returnIMDbId(from: shareURL) }
+                print(imdbId)
+                
+                break // Handle response
+            case .failure(let error):
+                print(error.localizedDescription)
+                break // Handle error
+            }
+        }
+        
     }
     
     //MARK: - Core Functionality -
