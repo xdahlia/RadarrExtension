@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Takes TMDb model and returns Response
 class RadarrHandler {
 
     static let shared = RadarrHandler()

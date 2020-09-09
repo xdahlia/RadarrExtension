@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Takes IMDb ID and returns TMDb model
 class TMDbHandler {
     
     static let shared = TMDbHandler()

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Validates IMDb URL and returns IMDb movie ID
 struct ValidateURLHandler {
     
     static let shared = ValidateURLHandler()

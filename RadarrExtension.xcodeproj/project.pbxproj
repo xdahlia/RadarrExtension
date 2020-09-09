@@ -20,6 +20,7 @@
 		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
 		E44B36B0250804A600FF12CA /* RadarrHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36AF250804A600FF12CA /* RadarrHandler.swift */; };
 		E44B36B2250815A600FF12CA /* RadarrError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B1250815A600FF12CA /* RadarrError.swift */; };
+		E44B36B4250855A100FF12CA /* ExtensionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B3250855A100FF12CA /* ExtensionError.swift */; };
 		E47564DD24EDEE8000B0D5B5 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = E47564DB24EDEE7F00B0D5B5 /* header.png */; };
 		E47564DE24EDEE8000B0D5B5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E47564DC24EDEE7F00B0D5B5 /* README.md */; };
 		E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F024E71A3B0057D135 /* Zephyr */; };
@@ -98,6 +99,7 @@
 		E43A9F3E24D390CC000C23DB /* RadarrDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RadarrDebug.entitlements; sourceTree = "<group>"; };
 		E44B36AF250804A600FF12CA /* RadarrHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrHandler.swift; sourceTree = "<group>"; };
 		E44B36B1250815A600FF12CA /* RadarrError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrError.swift; sourceTree = "<group>"; };
+		E44B36B3250855A100FF12CA /* ExtensionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionError.swift; sourceTree = "<group>"; };
 		E47564DB24EDEE7F00B0D5B5 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		E47564DC24EDEE7F00B0D5B5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E4B066A124F6D25A005684BB /* UrlError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlError.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			children = (
 				E4B066A124F6D25A005684BB /* UrlError.swift */,
 				E4B066A324F6FD66005684BB /* ResultError.swift */,
+				E44B36B3250855A100FF12CA /* ExtensionError.swift */,
 				E4EB7C222502E87000AA9081 /* TMDbError.swift */,
 				E44B36B1250815A600FF12CA /* RadarrError.swift */,
 				E43A9F1F24D1D332000C23DB /* Radarr.swift */,
@@ -474,6 +477,7 @@
 				E4E2026024F2164F00713D2B /* RadarrService.swift in Sources */,
 				E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */,
 				E4EB7C10250077A000AA9081 /* SettingsView.swift in Sources */,
+				E44B36B4250855A100FF12CA /* ExtensionError.swift in Sources */,
 				E4EB7C212502DD0500AA9081 /* TMDbHandler.swift in Sources */,
 				E4B066A224F6D25A005684BB /* UrlError.swift in Sources */,
 				E4B066D224F742EA005684BB /* ValidationService.swift in Sources */,
