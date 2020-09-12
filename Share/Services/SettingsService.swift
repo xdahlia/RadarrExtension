@@ -13,6 +13,9 @@ import Zephyr
 class SettingsService {
     
     static let shared = SettingsService()
+    
+    private init() {
+    }
 
     let defaults = UserDefaults.standard
     let keychain = Keychain(service: "com.ivanou.RadarrExtension")

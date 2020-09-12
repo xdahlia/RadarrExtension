@@ -12,9 +12,7 @@ import AwaitKit
 
 // Takes IMDb ID and returns TMDb model
 class TMDbHandler {
-    
-    static let shared = TMDbHandler()
-    
+       
     let settingsService = SettingsService.shared
     
     func fetchMovieData(IMDbId: String) throws -> TMDB.Movies? {

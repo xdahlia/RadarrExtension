@@ -13,8 +13,6 @@ import AwaitKit
 // Takes TMDb model and returns Response
 class RadarrHandler {
 
-    static let shared = RadarrHandler()
-
     let settingsService = SettingsService.shared
     
     func sendMovieToRadarr(movie: TMDB.Movies) throws -> URLResponse? {

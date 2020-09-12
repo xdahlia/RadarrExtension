@@ -12,9 +12,7 @@ import AwaitKit
 
 // Extract IMDb url from share
 class ExtensionHandler {
-    
-    static let shared = ExtensionHandler()
-    
+
     // External method
     func handleShare(context: NSExtensionContext) throws -> URL? {
         

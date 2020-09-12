@@ -9,9 +9,7 @@
 import Foundation
 
 struct ResultHandler {
-    
-    static let shared = ResultHandler()
-    
+      
     // Checks for valid response
     func validateRadarrResponse(with response: URLResponse) throws {
         
