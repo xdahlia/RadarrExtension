@@ -13,6 +13,7 @@ open class SettingsView: UIView, UITextFieldDelegate {
 
     //MARK: - Settings Properties -
     @IBOutlet weak var serverAddressField: UITextField!
+    @IBOutlet weak var serverPortField: UITextField!
     @IBOutlet weak var radarrAPIKeyField: UITextField!
     @IBOutlet weak var rootFolderPathField: UITextField!
     @IBOutlet weak var tmdbAPIKeyField: UITextField!
@@ -60,6 +61,7 @@ open class SettingsView: UIView, UITextFieldDelegate {
         
         // Populate settings text fields with data from Settings model
         serverAddressField.text = settingsService.radarrServerAddress
+        serverPortField.text = String(settingsService.radarrServerPort)
         radarrAPIKeyField.text = settingsService.radarrAPIKey
         rootFolderPathField.text = settingsService.rootFolderPath
         tmdbAPIKeyField.text = settingsService.tmdbAPIKey
@@ -68,6 +70,7 @@ open class SettingsView: UIView, UITextFieldDelegate {
     fileprivate func setSettingsTextFieldContentTypes() {
         
         serverAddressField.textContentType = .URL
+        serverPortField.textContentType = .URL
         radarrAPIKeyField.textContentType = .newPassword
         rootFolderPathField.textContentType = .URL
         tmdbAPIKeyField.textContentType = .newPassword
@@ -77,6 +80,7 @@ open class SettingsView: UIView, UITextFieldDelegate {
         
         // Register text field delegates
         serverAddressField.delegate = self
+        serverPortField.delegate = self
         radarrAPIKeyField.delegate = self
         rootFolderPathField.delegate = self
         tmdbAPIKeyField.delegate = self

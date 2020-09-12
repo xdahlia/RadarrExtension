@@ -20,18 +20,19 @@ class SettingsService {
     let defaults = UserDefaults.standard
     let keychain = Keychain(service: "com.ivanou.RadarrExtension")
     
-    var imdbID: String = ""
     var radarrServerAddress: String = ""
+    var radarrServerPort: Int = 0
     var radarrAPIKey: String = ""
     var rootFolderPath: String = ""
-    var urlString: String = ""
-    var searchNow: Bool = false
     var tmdbAPIKey: String = ""
+    
+    var searchNow: Bool = false
     
     func save() {
         
         // Save into Keychain
         keychain["serverAddress"] = radarrServerAddress
+        keychain["serverPort"] = String(radarrServerPort)
         keychain["radarAPIKey"] = radarrAPIKey
         keychain["rootFolderPath"] = rootFolderPath
         keychain["tmdbAPIKey"] = tmdbAPIKey
@@ -52,6 +53,7 @@ class SettingsService {
         // Load from Keychain
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
         radarrServerAddress = keychain["serverAddress"] ?? ""
+        radarrServerPort = Int(keychain["serverPort"]!) ?? 0
         rootFolderPath = keychain["rootFolderPath"] ?? ""
         tmdbAPIKey = keychain["tmdbAPIKey"] ?? ""
         
@@ -64,13 +66,12 @@ class SettingsService {
 //        rootFolderPath = defaults.string(forKey: "rootFolderPath") ?? ""
         searchNow = defaults.bool(forKey: "searchNow")
 
-        // Construct Radarr URL
-        urlString = "\(radarrServerAddress)/api/movie?apikey=\(radarrAPIKey)"
-    }
+     }
     
     func settingsAreIncomplete() -> Bool {
         
         if radarrServerAddress.isEmpty
+            || radarrServerPort == 0
             || radarrAPIKey.isEmpty
             || rootFolderPath.isEmpty
             || tmdbAPIKey.isEmpty

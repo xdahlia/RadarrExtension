@@ -29,6 +29,7 @@ class RadarrHandler {
         
         guard let radarrURL = constructRadarrUrl(
             serverAddress: settingsService.radarrServerAddress,
+            serverPort: settingsService.radarrServerPort,
             apiKey: settingsService.radarrAPIKey
         ) else {
             throw RadarrError.cannotConstructURL
@@ -117,7 +118,7 @@ class RadarrHandler {
         return radarrModel
     }
 
-    private func constructRadarrUrl(serverAddress: String, apiKey: String) -> URL? {
+    private func constructRadarrUrl(serverAddress: String, serverPort: Int, apiKey: String) -> URL? {
         
         print("RadarrHandler.constructRadarrUrl")
         
@@ -128,7 +129,7 @@ class RadarrHandler {
         var components = URLComponents()
             components.scheme = "http"
             components.host = serverAddress
-            components.port = 7878 // TODO: get port from user
+            components.port = serverPort
             components.path = "/api/movie"
             components.queryItems = [
                 URLQueryItem(name: "apikey", value: apiKey)

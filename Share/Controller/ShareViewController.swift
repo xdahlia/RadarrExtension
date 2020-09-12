@@ -252,9 +252,9 @@ final class ShareViewController: UIViewController {
     fileprivate func storeUserSettings() {
         
         settingsService.radarrServerAddress = settingsView.serverAddressField.text!
+        settingsService.radarrServerPort = Int(settingsView.serverPortField.text!)!
         settingsService.radarrAPIKey = settingsView.radarrAPIKeyField.text!
         settingsService.rootFolderPath = settingsView.rootFolderPathField.text!
         settingsService.tmdbAPIKey = settingsView.tmdbAPIKeyField.text!
-        settingsService.urlString = "\(settingsService.radarrServerAddress)/api/movie?apikey=\(settingsService.radarrAPIKey)"
-    }
+     }
 }
