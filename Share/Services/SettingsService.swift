@@ -12,6 +12,8 @@ import Zephyr
 
 class SettingsService {
     
+    // TODO: Add error handling
+    
     static let shared = SettingsService()
     
     private init() {
@@ -53,7 +55,12 @@ class SettingsService {
         // Load from Keychain
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
         radarrServerAddress = keychain["serverAddress"] ?? ""
-        radarrServerPort = Int(keychain["serverPort"]!) ?? 0
+
+        if let portString = keychain["serverPort"] {
+            if let portInt = Int(portString) {
+                radarrServerPort = portInt
+            }
+        }
         rootFolderPath = keychain["rootFolderPath"] ?? ""
         tmdbAPIKey = keychain["tmdbAPIKey"] ?? ""
         
