@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import PromiseKit
+import AwaitKit
 
 // Takes IMDb ID and returns TMDb model
 class TMDbHandler {
@@ -15,7 +17,9 @@ class TMDbHandler {
     
     let settingsService = SettingsService.shared
     
-    func fetchMovieData(IMDbId: String) throws -> TMDB.Movies {
+    func fetchMovieData(IMDbId: String) throws -> TMDB.Movies? {
+        
+        print("TMDbHandler.fetchMovieData")
         
         guard settingsService.TMDbAPIKeyIsSet() else {
             throw TMDbError.APIKeyNotSet
@@ -25,7 +29,7 @@ class TMDbHandler {
             throw TMDbError.cannotConstructUrl
         }
         
-        guard let jsonString = returnJSONStringFrom(url: TMDbUrl) else {
+        guard let jsonString = try await(returnJSONStringFrom(url: TMDbUrl)) else {
             throw TMDbError.cannotReturnJSONString
         }
         
@@ -38,32 +42,34 @@ class TMDbHandler {
         
     }
     
-    private func returnJSONStringFrom(url: URL) -> String? {
+    private func returnJSONStringFrom(url: URL) -> Promise<String?> {
         
-        var jsonResult: String?
+        print("TMDbHandler.returnJSONStringFrom")
         
-        let session = URLSession.shared
-        
-        let task = session.dataTask(with: url) { (data, response, error) in
+        return Promise { result in
             
-            if let json = data {
-                jsonResult = String(data: json, encoding: .utf8)
+            let session = URLSession.shared
+            
+            let task = session.dataTask(with: url) { (data, response, error) in
+                
+                if let json = data {
+                    print(String(data: json, encoding: .utf8).debugDescription)
+                    result.fulfill(String(data: json, encoding: .utf8))
+                }
+    
+                if let error = error {
+                    result.reject(error)
+                }
             }
-            
-            
-            // TODO: Implement error handling
-//            if let error = error {
-//
-//            }
+            task.resume()
         }
-        task.resume()
-        
-        return jsonResult
         
     }
     
     // Construct TMDB API url with given IMDB movie id
     private func constructTMDbUrlFromId(_ ImdbId: String, tmdbAPIKey: String) -> URL? {
+        
+        print("TMDbHandler.constructTMDbUrlFromId")
         
         if ImdbId.isEmpty, tmdbAPIKey.isEmpty {
             return nil
@@ -88,6 +94,8 @@ class TMDbHandler {
     
     // Instantiate TMDB model from JSON
     private func jsonToTMDB(json: String) throws -> TMDB.Movies {
+        
+        print("TMDbHandler.jsonToTMDB")
         
         let decoder = JSONDecoder()
         

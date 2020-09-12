@@ -15,6 +15,7 @@ enum RadarrError: Error {
     case cannotEncodeJSON
     case cannotConstructURL
     case cannotConstructModel
+    case cannotConstructJSON
     case general
 }
 
@@ -46,6 +47,11 @@ extension RadarrError: LocalizedError {
         case .cannotConstructModel:
             return NSLocalizedString(
                 "Unable to construct Radarr model",
+                comment: ""
+            )
+        case .cannotConstructJSON:
+            return NSLocalizedString(
+                "Unable to construct JSON",
                 comment: ""
             )
         case .general:

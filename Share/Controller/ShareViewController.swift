@@ -24,15 +24,14 @@ final class ShareViewController: UIViewController {
     @IBOutlet weak var editSwitch: UISwitch!
     
     //MARK: - Initialization -
-    private let tmdbService = TMDBService.shared
-    private let radarrService = RadarrService.shared
     private let alertService = AlertService.shared
-    private let validationService = ValidationService.shared
     private var settingsService = SettingsService.shared
-    private var radarr = Radarr()
     
-    private let extensionHandler = ExtensionHandler.shared
-    private let validateURLHandler = ValidateURLHandler.shared
+    private let extensionHandler = ExtensionHandler()
+    private let validateURLHandler = ValidateURLHandler()
+    private let tmdbHandler = TMDbHandler()
+    private let radarrHandler = RadarrHandler()
+    private let resultHandler = ResultHandler()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,108 +42,35 @@ final class ShareViewController: UIViewController {
         registerGesture()
         setupViewSettings()
         
-        // Make reference to itself available to RadarrService and TMDBService
-        radarrService.viewController = self
-        tmdbService.viewController = self
+    }
+    
+    func startChainReaction() throws {
         
-//        let extractedURL = Result { try extensionHandler.handle(input: extensionContext) }
+        guard let url = try extensionHandler.handleShare(context: self.extensionContext!) else {
+            throw ExtensionError.general
+        }
+        
+        guard let imdbId = try validateURLHandler.returnIMDbId(from: url) else {
+            throw UrlError.general
+        }
+        
+        guard let movieData = try tmdbHandler.fetchMovieData(IMDbId: imdbId) else {
+            throw TMDbError.general
+        }
+        
+        guard let result = try radarrHandler.sendMovieToRadarr(movie: movieData) else {
+            throw RadarrError.general
+        }
+        
+        do {
+            try resultHandler.validateRadarrResponse(with: result)
+        } catch {
+            throw error
+        }
 
-//        self.handleSharedFile()
-        extensionHandler.handle(input: extensionContext) { (result) in
-            switch result {
-            case .success(let shareURL):
-//                return urlResponse
-                print(shareURL)
-                
-                let imdbId = Result { try self.validateURLHandler.returnIMDbId(from: shareURL) }
-                print(imdbId)
-                
-                break // Handle response
-            case .failure(let error):
-                print(error.localizedDescription)
-                break // Handle error
-            }
-        }
         
     }
-    
-    //MARK: - Core Functionality -
-    
-    // Take shared IMDb url, extract id, send to TMDb model
-    private func handleSharedFile() {
-        
-        if let item = extensionContext?.inputItems.first as? NSExtensionItem {
-            item.attachments?.forEach({ (attachment) in
-                if attachment.hasItemConformingToTypeIdentifier("public.url") {
-                    
-                    attachment.loadItem(
-                        forTypeIdentifier: "public.url",
-                        options: nil,
-                        completionHandler: { (url, error) -> Void in
-                            
-                            if let shareURL = url as? NSURL {
-                                do {
-                                    try self.validationService.validateSharedURL(with: shareURL)
-
-                                    self.settingsService.imdbID = shareURL.pathComponents![2]
-                                    // Send movie id to TMDBService as soon as possible
-                                    self.tmdbService.tmdbAPIKey = self.settingsService.tmdbAPIKey
-                                    self.tmdbService.ImdbId = self.settingsService.imdbID
-                                    
-                                } catch {
-                                    
-                                    self.alertService.displayErrorUIAlertController(
-                                        sender: self,
-                                        title: "Error",
-                                        message: error.localizedDescription,
-                                        dismissShareSheet: true
-                                    )
-                                }
-                                // Method sendMovieToRadarr() is triggered once user activates sendButtonPressed() method
-                            }
-                            
-                            if let error = error {
-                                
-                                self.alertService.displayErrorUIAlertController(
-                                    sender: self,
-                                    title: "Error",
-                                    message: error.localizedDescription,
-                                    dismissShareSheet: false
-                                )
-                            }
-                    })
-                }
-            })
-        }
-    }
-    
-    // Extract movie data from TMDB, fill Radarr model with movie data, call "postURL" with data
-    private func sendMovieToRadarr() {
-        
-        // Fill Radarr model with user settings and movie data
-        self.radarr.monitored = settingsService.searchNow
-        self.radarr.addOptions.searchForMovie = settingsService.searchNow
-        self.radarr.title = tmdbService.title
-        self.radarr.tmdbId = tmdbService.TmdbId
-        self.radarr.year = tmdbService.release_date
-        if let titleSlug = tmdbService.title.convertedToSlug() {
-            self.radarr.titleSlug = "\(titleSlug)-\(tmdbService.TmdbId)"
-        }
-        self.radarr.images[0].url = "https://image.tmdb.org/t/p/w1280\(tmdbService.poster_path)"
-        self.radarr.rootFolderPath = self.settingsService.rootFolderPath
-        
-        // Construct JSON from Radarr model
-        if let radarrJSON = radarrService.radarrToJSON(data: self.radarr) {
-            
-            // Post JSON to Radarr server
-            radarrService.postJSON(
-                from: radarrJSON,
-                url: settingsService.urlString
-            )
-        }
-        
-    }
-    
+   
     //MARK: - Handle buttons / controls -
     
     // Save Search Now preference when segmented control is changed
@@ -201,7 +127,28 @@ final class ShareViewController: UIViewController {
                 dismissShareSheet: false
             )
         } else {
-            self.sendMovieToRadarr()
+            
+            let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
+            dispatchQueue.async{
+                         
+                 do {
+                    try self.startChainReaction()
+                    
+                    self.alertService.displayUIAlertController(
+                        sender: self,
+                        title: "Done",
+                        message: "Movie sent to Radarr!")
+                    
+                 } catch {
+                     print(error.localizedDescription)
+                     
+                     self.alertService.displayErrorUIAlertController(
+                         sender: self,
+                         title: "Error",
+                         message: error.localizedDescription,
+                         dismissShareSheet: false)
+                 }
+            }
         }
         
     }

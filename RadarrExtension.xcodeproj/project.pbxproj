@@ -21,6 +21,7 @@
 		E44B36B0250804A600FF12CA /* RadarrHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36AF250804A600FF12CA /* RadarrHandler.swift */; };
 		E44B36B2250815A600FF12CA /* RadarrError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B1250815A600FF12CA /* RadarrError.swift */; };
 		E44B36B4250855A100FF12CA /* ExtensionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B3250855A100FF12CA /* ExtensionError.swift */; };
+		E44B36B62508634B00FF12CA /* ResultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B52508634B00FF12CA /* ResultHandler.swift */; };
 		E47564DD24EDEE8000B0D5B5 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = E47564DB24EDEE7F00B0D5B5 /* header.png */; };
 		E47564DE24EDEE8000B0D5B5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E47564DC24EDEE7F00B0D5B5 /* README.md */; };
 		E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3F024E71A3B0057D135 /* Zephyr */; };
@@ -29,19 +30,17 @@
 		E4AAC3FB24EB41F20057D135 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E4AAC3FA24EB41F20057D135 /* KeychainAccess */; };
 		E4B066A224F6D25A005684BB /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
 		E4B066A424F6FD66005684BB /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A324F6FD66005684BB /* ResultError.swift */; };
-		E4B066D224F742EA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
 		E4B0671624F773A7005684BB /* ValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0671524F773A7005684BB /* ValidationServiceTests.swift */; };
-		E4B0671724F773BA005684BB /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066D124F742EA005684BB /* ValidationService.swift */; };
 		E4B1DBC824E2068C008BC46C /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* SettingsService.swift */; };
 		E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
-		E4E2025D24F1E98C00713D2B /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2025C24F1E98C00713D2B /* TMDBService.swift */; };
-		E4E2026024F2164F00713D2B /* RadarrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2025F24F2164F00713D2B /* RadarrService.swift */; };
+		E4C759F0250BDF09003616CE /* AwaitKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759EF250BDF09003616CE /* AwaitKit */; };
+		E4C759F3250BDFF3003616CE /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759F2250BDFF3003616CE /* PromiseKit */; };
+		E4C759F5250BE037003616CE /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759F4250BE037003616CE /* PromiseKit */; };
+		E4C759F7250BE045003616CE /* AwaitKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759F6250BE045003616CE /* AwaitKit */; };
 		E4E2026224F35A9F00713D2B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2026124F35A9F00713D2B /* AlertService.swift */; };
 		E4EB7C10250077A000AA9081 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C0F250077A000AA9081 /* SettingsView.swift */; };
 		E4EB7C12250077E500AA9081 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4EB7C11250077E500AA9081 /* SettingsView.xib */; };
 		E4EB7C16250162AF00AA9081 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C15250162AF00AA9081 /* ViewExtension.swift */; };
-		E4EB7C1925017D0000AA9081 /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C1825017D0000AA9081 /* Handler.swift */; };
-		E4EB7C1B25017E0000AA9081 /* PrerequisiteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C1A25017E0000AA9081 /* PrerequisiteHandler.swift */; };
 		E4EB7C1D25017F3400AA9081 /* ExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C1C25017F3400AA9081 /* ExtensionHandler.swift */; };
 		E4EB7C1F2502CAA500AA9081 /* ValidateURLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C1E2502CAA400AA9081 /* ValidateURLHandler.swift */; };
 		E4EB7C212502DD0500AA9081 /* TMDbHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C202502DD0500AA9081 /* TMDbHandler.swift */; };
@@ -100,11 +99,11 @@
 		E44B36AF250804A600FF12CA /* RadarrHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrHandler.swift; sourceTree = "<group>"; };
 		E44B36B1250815A600FF12CA /* RadarrError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrError.swift; sourceTree = "<group>"; };
 		E44B36B3250855A100FF12CA /* ExtensionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionError.swift; sourceTree = "<group>"; };
+		E44B36B52508634B00FF12CA /* ResultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHandler.swift; sourceTree = "<group>"; };
 		E47564DB24EDEE7F00B0D5B5 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		E47564DC24EDEE7F00B0D5B5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E4B066A124F6D25A005684BB /* UrlError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlError.swift; sourceTree = "<group>"; };
 		E4B066A324F6FD66005684BB /* ResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultError.swift; sourceTree = "<group>"; };
-		E4B066D124F742EA005684BB /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		E4B0670B24F77313005684BB /* RadarrExtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarrExtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B0670F24F77314005684BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4B0671524F773A7005684BB /* ValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceTests.swift; sourceTree = "<group>"; };
@@ -112,14 +111,10 @@
 		E4B1DBC924E23D1B008BC46C /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		E4B1DBCA24E23D1E008BC46C /* Radarr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Radarr.entitlements; sourceTree = "<group>"; };
 		E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		E4E2025C24F1E98C00713D2B /* TMDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBService.swift; sourceTree = "<group>"; };
-		E4E2025F24F2164F00713D2B /* RadarrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarrService.swift; sourceTree = "<group>"; };
 		E4E2026124F35A9F00713D2B /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		E4EB7C0F250077A000AA9081 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E4EB7C11250077E500AA9081 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		E4EB7C15250162AF00AA9081 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
-		E4EB7C1825017D0000AA9081 /* Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
-		E4EB7C1A25017E0000AA9081 /* PrerequisiteHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisiteHandler.swift; sourceTree = "<group>"; };
 		E4EB7C1C25017F3400AA9081 /* ExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHandler.swift; sourceTree = "<group>"; };
 		E4EB7C1E2502CAA400AA9081 /* ValidateURLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateURLHandler.swift; sourceTree = "<group>"; };
 		E4EB7C202502DD0500AA9081 /* TMDbHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbHandler.swift; sourceTree = "<group>"; };
@@ -133,7 +128,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4AAC3F924EB41DC0057D135 /* KeychainAccess in Frameworks */,
+				E4C759F3250BDFF3003616CE /* PromiseKit in Frameworks */,
 				E4AAC3F124E71A3B0057D135 /* Zephyr in Frameworks */,
+				E4C759F0250BDF09003616CE /* AwaitKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +139,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4AAC3FB24EB41F20057D135 /* KeychainAccess in Frameworks */,
+				E4C759F5250BE037003616CE /* PromiseKit in Frameworks */,
+				E4C759F7250BE045003616CE /* AwaitKit in Frameworks */,
 				E4AAC3F424E773DB0057D135 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,10 +278,7 @@
 		E4E2025B24F1E8D600713D2B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E4E2025C24F1E98C00713D2B /* TMDBService.swift */,
-				E4E2025F24F2164F00713D2B /* RadarrService.swift */,
 				E4E2026124F35A9F00713D2B /* AlertService.swift */,
-				E4B066D124F742EA005684BB /* ValidationService.swift */,
 				E4B1DBC724E2068C008BC46C /* SettingsService.swift */,
 			);
 			path = Services;
@@ -291,12 +287,11 @@
 		E4EB7C1725017C7F00AA9081 /* Handler */ = {
 			isa = PBXGroup;
 			children = (
-				E4EB7C1825017D0000AA9081 /* Handler.swift */,
-				E4EB7C1A25017E0000AA9081 /* PrerequisiteHandler.swift */,
 				E4EB7C1C25017F3400AA9081 /* ExtensionHandler.swift */,
 				E4EB7C1E2502CAA400AA9081 /* ValidateURLHandler.swift */,
 				E4EB7C202502DD0500AA9081 /* TMDbHandler.swift */,
 				E44B36AF250804A600FF12CA /* RadarrHandler.swift */,
+				E44B36B52508634B00FF12CA /* ResultHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -331,6 +326,8 @@
 			packageProductDependencies = (
 				E4AAC3F024E71A3B0057D135 /* Zephyr */,
 				E4AAC3F824EB41DC0057D135 /* KeychainAccess */,
+				E4C759EF250BDF09003616CE /* AwaitKit */,
+				E4C759F2250BDFF3003616CE /* PromiseKit */,
 			);
 			productName = RadarrExtension;
 			productReference = E43A9EF524D0C771000C23DB /* RadarrExt.app */;
@@ -352,6 +349,8 @@
 			packageProductDependencies = (
 				E4AAC3F324E773DB0057D135 /* Zephyr */,
 				E4AAC3FA24EB41F20057D135 /* KeychainAccess */,
+				E4C759F4250BE037003616CE /* PromiseKit */,
+				E4C759F6250BE045003616CE /* AwaitKit */,
 			);
 			productName = Share;
 			productReference = E43A9F1024D0C7F7000C23DB /* Share.appex */;
@@ -409,6 +408,8 @@
 			packageReferences = (
 				E4AAC3EF24E71A3B0057D135 /* XCRemoteSwiftPackageReference "Zephyr" */,
 				E4AAC3F724EB41DC0057D135 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				E4C759EE250BDF09003616CE /* XCRemoteSwiftPackageReference "AwaitKit" */,
+				E4C759F1250BDFF3003616CE /* XCRemoteSwiftPackageReference "PromiseKit" */,
 			);
 			productRefGroup = E43A9EF624D0C771000C23DB /* Products */;
 			projectDirPath = "";
@@ -467,25 +468,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4E2025D24F1E98C00713D2B /* TMDBService.swift in Sources */,
 				E4B066A424F6FD66005684BB /* ResultError.swift in Sources */,
 				E43A9F1324D0C7F7000C23DB /* ShareViewController.swift in Sources */,
-				E4EB7C1925017D0000AA9081 /* Handler.swift in Sources */,
 				E4EB7C1F2502CAA500AA9081 /* ValidateURLHandler.swift in Sources */,
-				E4EB7C1B25017E0000AA9081 /* PrerequisiteHandler.swift in Sources */,
 				E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */,
-				E4E2026024F2164F00713D2B /* RadarrService.swift in Sources */,
 				E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */,
 				E4EB7C10250077A000AA9081 /* SettingsView.swift in Sources */,
 				E44B36B4250855A100FF12CA /* ExtensionError.swift in Sources */,
 				E4EB7C212502DD0500AA9081 /* TMDbHandler.swift in Sources */,
 				E4B066A224F6D25A005684BB /* UrlError.swift in Sources */,
-				E4B066D224F742EA005684BB /* ValidationService.swift in Sources */,
 				E4FC206B24F8577500ADE4C5 /* StringExtension.swift in Sources */,
 				E4EB7C16250162AF00AA9081 /* ViewExtension.swift in Sources */,
 				E4EB7C1D25017F3400AA9081 /* ExtensionHandler.swift in Sources */,
 				E44B36B2250815A600FF12CA /* RadarrError.swift in Sources */,
 				E4B1DBC824E2068C008BC46C /* SettingsService.swift in Sources */,
+				E44B36B62508634B00FF12CA /* ResultHandler.swift in Sources */,
 				E4E2026224F35A9F00713D2B /* AlertService.swift in Sources */,
 				E44B36B0250804A600FF12CA /* RadarrHandler.swift in Sources */,
 				E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */,
@@ -498,7 +495,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B0671624F773A7005684BB /* ValidationServiceTests.swift in Sources */,
-				E4B0671724F773BA005684BB /* ValidationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,6 +845,22 @@
 				minimumVersion = 4.2.0;
 			};
 		};
+		E4C759EE250BDF09003616CE /* XCRemoteSwiftPackageReference "AwaitKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yannickl/AwaitKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+		E4C759F1250BDFF3003616CE /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -871,6 +883,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4AAC3F724EB41DC0057D135 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		E4C759EF250BDF09003616CE /* AwaitKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4C759EE250BDF09003616CE /* XCRemoteSwiftPackageReference "AwaitKit" */;
+			productName = AwaitKit;
+		};
+		E4C759F2250BDFF3003616CE /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4C759F1250BDFF3003616CE /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+		E4C759F4250BE037003616CE /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4C759F1250BDFF3003616CE /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+		E4C759F6250BE045003616CE /* AwaitKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4C759EE250BDF09003616CE /* XCRemoteSwiftPackageReference "AwaitKit" */;
+			productName = AwaitKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

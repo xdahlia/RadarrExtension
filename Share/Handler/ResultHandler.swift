@@ -1,37 +1,21 @@
 //
-//  ValidationService.swift
+//  ResultHandler.swift
 //  Share
 //
-//  Created by Ivan Ou on 8/26/20.
+//  Created by Ivan Ou on 9/8/20.
 //  Copyright © 2020 Ivan Ou. All rights reserved.
 //
 
 import Foundation
 
-struct ValidationService {
+struct ResultHandler {
     
-    static let shared = ValidationService()
-    
-    private init() {
-    }
-    
-    // MARK: - Validation -
-
-    func validateSharedURL(with url: NSURL) throws {
-        
-        guard url.host == "www.imdb.com" else {
-            throw UrlError.notIMDb
-        }
-        guard url.pathComponents!.count > 2 else {
-            throw UrlError.notMovie
-        }
-        guard url.pathComponents![1] == "title" else {
-            throw UrlError.notMovie
-        }
-    }
+    static let shared = ResultHandler()
     
     // Checks for valid response
     func validateRadarrResponse(with response: URLResponse) throws {
+        
+        print("ResultHandler.validateRadarrResponse")
         
         guard let httpResponse =
             

@@ -13,24 +13,23 @@ struct ValidateURLHandler {
     
     static let shared = ValidateURLHandler()
     
-    private init() {
-    }
-    
     // MARK: - URL Validation -
 
-    func returnIMDbId(from url: NSURL) throws -> String {
+    func returnIMDbId(from url: URL) throws -> String? {
+        
+        print("ValidateURLHandler.returnIMDbId")
         
         guard url.host == "www.imdb.com" else {
             throw UrlError.notIMDb
         }
-        guard url.pathComponents!.count > 2 else {
+        guard url.pathComponents.count > 2 else {
             throw UrlError.notMovie
         }
-        guard url.pathComponents![1] == "title" else {
+        guard url.pathComponents[1] == "title" else {
             throw UrlError.notMovie
         }
         
-        return url.pathComponents![2]
+        return url.pathComponents[2]
     }
     
 }

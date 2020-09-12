@@ -13,6 +13,7 @@ enum UrlError: Error {
     case notIMDb
     case notMovie
     case noResult
+    case general
 }
 
 extension UrlError: LocalizedError {
@@ -33,6 +34,11 @@ extension UrlError: LocalizedError {
         case .noResult:
             return NSLocalizedString(
                 "Shared link does not contain movie data",
+                comment: ""
+            )
+        case .general:
+            return NSLocalizedString(
+                "There was a problem with the shared URL",
                 comment: ""
             )
 

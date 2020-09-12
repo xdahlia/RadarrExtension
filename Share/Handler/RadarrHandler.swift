@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import PromiseKit
+import AwaitKit
 
 // Takes TMDb model and returns Response
 class RadarrHandler {
@@ -16,23 +18,25 @@ class RadarrHandler {
     let settingsService = SettingsService.shared
     
     func sendMovieToRadarr(movie: TMDB.Movies) throws -> URLResponse? {
+        
+        print("RadarrHandler.sendMovieToRadarr")
 
         guard let radarrModel = try constructRadarrModelFromTMDb(data: movie) else {
             throw RadarrError.cannotConstructModel
         }
     
         guard let radarrJSON = try constructJSONFromRadarr(model: radarrModel) else {
-            throw RadarrError.general
+            throw RadarrError.cannotConstructJSON
         }
         
         guard let radarrURL = constructRadarrUrl(
             serverAddress: settingsService.radarrServerAddress,
-            apiKey: settingsService.tmdbAPIKey
+            apiKey: settingsService.radarrAPIKey
         ) else {
             throw RadarrError.cannotConstructURL
         }
 
-        if let response = postJSON(using: radarrJSON, to: radarrURL) {
+        if let response = try await(postJSON(using: radarrJSON, to: radarrURL)) {
             return response
         } else {
             throw RadarrError.general
@@ -41,9 +45,9 @@ class RadarrHandler {
     }
     
     // POST JSON to Radarr server
-    private func postJSON(using data: Data, to url: URL) -> URLResponse? {
+    private func postJSON(using data: Data, to url: URL) -> Promise<URLResponse?> {
         
-        var radarrResponse: URLResponse?
+        print("RadarrHandler.postJSON")
             
         var request = URLRequest(url: url)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -51,27 +55,37 @@ class RadarrHandler {
             request.httpMethod = "POST"
         
         let session = URLSession.shared
-        let task = session.dataTask(with: request) { (data, response, error) in
-            
-            if let unwrappedResponse = response {
-                radarrResponse = unwrappedResponse
-            }
-            
-            // TODO: Add error handling
-            
-        }
-        task.resume()
         
-        return radarrResponse
+        return Promise { result in
+        
+            let task = session.dataTask(with: request) { (data, response, error) in
+                
+                if let unwrappedResponse = response {
+                    
+                    print(unwrappedResponse.debugDescription)
+                    
+                    result.fulfill(unwrappedResponse)
+                }
+
+                if let error = error {
+                    result.reject(error)
+                }
+                
+            }
+            task.resume()
+        }
     }
     
     private func constructJSONFromRadarr(model: Radarr) throws -> Data? {
+        
+        print("RadarrHandler.constructJSONFromRadarr")
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = .withoutEscapingSlashes
         
         do {
             let json = try encoder.encode(model)
+            print(String(data: json, encoding: .utf8).debugDescription)
             return json
             
         } catch {
@@ -80,6 +94,8 @@ class RadarrHandler {
     }
 
     private func constructRadarrModelFromTMDb(data: TMDB.Movies) throws -> Radarr? {
+        
+        print("RadarrHandler.constructRadarrModelFromTMDb")
         
         guard let year = extractYearFromDate(date: data.release_date) else {
             throw RadarrError.cannotExtractYear
@@ -105,6 +121,8 @@ class RadarrHandler {
 
     private func constructRadarrUrl(serverAddress: String, apiKey: String) -> URL? {
         
+        print("RadarrHandler.constructRadarrUrl")
+        
         if serverAddress.isEmpty, apiKey.isEmpty {
             return nil
         }
@@ -112,6 +130,7 @@ class RadarrHandler {
         var components = URLComponents()
             components.scheme = "http"
             components.host = serverAddress
+            components.port = 7878 // TODO: get port from user
             components.path = "/api/movie"
             components.queryItems = [
                 URLQueryItem(name: "apikey", value: apiKey)
