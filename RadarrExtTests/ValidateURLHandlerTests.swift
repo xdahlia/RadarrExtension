@@ -1,5 +1,5 @@
 //
-//  ValidationServiceTests.swift
+//  ValidateURLHandlerTests.swift
 //  RadarrExtTests
 //
 //  Created by Ivan Ou on 8/26/20.
@@ -9,13 +9,13 @@
 import XCTest
 @testable import Share
 
-class ValidationServiceTests: XCTestCase {
+class ValidateURLHandlerTests: XCTestCase {
 
-    var validation: ValidationService!
+    var validation: ValidateURLHandler!
 
     override func setUp() {
         super.setUp()
-        validation = ValidationService.shared
+        validation = ValidateURLHandler()
     }
     
     override func tearDown() {
@@ -24,15 +24,15 @@ class ValidationServiceTests: XCTestCase {
     }
     
     func test_url_is_imdb_movie() throws {
-        let good_url = NSURL(string: "https://www.imdb.com/title/tt123456")!
-        XCTAssertNoThrow(try validation.validateSharedURL(with: good_url))
+        let good_url = URL(string: "https://www.imdb.com/title/tt123456")!
+        XCTAssertNoThrow(try validation.returnIMDbId(from: good_url))
     }
     
     func test_is_valid_url() throws {
         let expectedError = UrlError.notMovie
         var error: UrlError?
-        let bad_url2 = NSURL(string: "https://www.imdb.com/movie/tt123456")!
-        XCTAssertThrowsError(try validation.validateSharedURL(with: bad_url2)) { thrownError in
+        let bad_url2 = URL(string: "https://www.imdb.com/movie/tt123456")!
+        XCTAssertThrowsError(try validation.returnIMDbId(from: bad_url2)) { thrownError in
             error = thrownError as? UrlError
         }
         XCTAssertEqual(expectedError, error)
