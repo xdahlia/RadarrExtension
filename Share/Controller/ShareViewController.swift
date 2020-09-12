@@ -33,6 +33,8 @@ final class ShareViewController: UIViewController {
     private let radarrHandler = RadarrHandler()
     private let resultHandler = ResultHandler()
     
+    // MARK: - Main -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
