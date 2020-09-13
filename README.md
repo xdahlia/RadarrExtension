@@ -20,8 +20,8 @@ Ever wish you could send a movie to Radarr straight from an IMDb movie page? Wel
 
 - [x] Set whether to search immediately or later
 - [x] Set monitored status
-- [x] Set quality profile
-- [x] Set min availability
+- [ ] Set quality profile
+- [ ] Set min availability
 - [x] Set path
 
 ## Requirements
