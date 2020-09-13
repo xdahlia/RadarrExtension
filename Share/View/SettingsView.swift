@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-open class SettingsView: UIView, UITextFieldDelegate {
+open class SettingsView: UIView {
 
     //MARK: - Settings Properties -
     @IBOutlet weak var serverAddressField: UITextField!
@@ -40,7 +40,8 @@ open class SettingsView: UIView, UITextFieldDelegate {
         
         setSettingsTextFieldContent()
         setSettingsTextFieldContentTypes()
-        setSettingsTextFieldDelegates()
+
+        setTextFieldResponderChain()
     }
     
     fileprivate func setupView() {
@@ -76,28 +77,14 @@ open class SettingsView: UIView, UITextFieldDelegate {
         tmdbAPIKeyField.textContentType = .newPassword
     }
     
-    fileprivate func setSettingsTextFieldDelegates() {
-        
-        // Register text field delegates
-        serverAddressField.delegate = self
-        serverPortField.delegate = self
-        radarrAPIKeyField.delegate = self
-        rootFolderPathField.delegate = self
-        tmdbAPIKeyField.delegate = self
-    }
-    
-    // Set textfields as first responder
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        let nextTag = textField.tag + 1
-        
-        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
-            nextResponder.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-        }
-        
-        return true
+    fileprivate func setTextFieldResponderChain() {
+        UITextField.connectFields(fields: [
+            serverAddressField,
+            serverPortField,
+            radarrAPIKeyField,
+            rootFolderPathField,
+            tmdbAPIKeyField
+        ])
     }
 
 }

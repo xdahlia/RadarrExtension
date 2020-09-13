@@ -19,27 +19,27 @@ struct Radarr: Codable {
     var profileId: Int = 4
     var year: Int
     var rootFolderPath: String
-    var addOptions: Option = Option()
-    var images: Array<Image> = [Image(url: "")]
+    var addOptions: Option = Option(searchForMovie: false)
+    var images: Array<Image> = [Image(covertype: "poster", url: "")]
     
     struct Option: Codable {
-        var searchForMovie: Bool = false
+        var searchForMovie: Bool
     }
 
     struct Image: Codable {
-        var covertype: String = "poster"
-        var url: String = ""
+        var covertype: String
+        var url: String
     }
     
     init(
-        title: String = "",
-        tmdbId: Int = 0,
-        titleSlug: String = "",
-        monitored: Bool = false,
-        year: Int = 0,
-        rootFolderPath: String = "",
-        searchNow: Bool = false,
-        imageUrl: String = ""
+        title: String,
+        tmdbId: Int,
+        titleSlug: String,
+        monitored: Bool,
+        year: Int,
+        rootFolderPath: String,
+        searchNow: Bool,
+        imageUrl: String
     ) {
         self.title = title
         self.tmdbId = tmdbId

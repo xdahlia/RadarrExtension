@@ -57,7 +57,6 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrc-M2-JyT" customClass="SettingsView" customModule="Share" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="124.5" width="374" height="236"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="374" id="pMC-YX-kv0"/>
                                                     <constraint firstAttribute="height" constant="236" id="vIc-t6-WX5"/>
                                                 </constraints>
                                             </view>

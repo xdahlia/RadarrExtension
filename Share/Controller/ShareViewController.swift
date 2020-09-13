@@ -43,7 +43,6 @@ final class ShareViewController: UIViewController {
         // Initial setup
         registerGesture()
         setupViewSettings()
-        
     }
     
     func startChainReaction() throws {
