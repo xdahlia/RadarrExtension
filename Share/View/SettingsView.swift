@@ -78,6 +78,7 @@ open class SettingsView: UIView {
     }
     
     fileprivate func setTextFieldResponderChain() {
+        
         UITextField.connectFields(fields: [
             serverAddressField,
             serverPortField,
