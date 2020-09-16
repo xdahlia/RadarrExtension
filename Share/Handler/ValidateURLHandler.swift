@@ -1,5 +1,5 @@
 //
-//  ValidationService.swift
+//  ValidateURLHandler.swift
 //  Share
 //
 //  Created by Ivan Ou on 8/26/20.

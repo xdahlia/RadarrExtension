@@ -1,5 +1,5 @@
 //
-//  Settings.swift
+//  SettingsService.swift
 //  Share
 //
 //  Created by Ivan Ou on 8/10/20.
