@@ -121,7 +121,7 @@ final class ShareViewController: UIViewController {
         
         if settingsService.settingsAreIncomplete()
         {
-            self.alertService.displayErrorUIAlertController(
+            self.alertService.displayErrorAlert(
                 sender: self,
                 title: "Error",
                 message: "All settings fields must be filled out",
@@ -135,7 +135,7 @@ final class ShareViewController: UIViewController {
                  do {
                     try self.startChainReaction()
                     
-                    self.alertService.displayUIAlertController(
+                    self.alertService.displayAlert(
                         sender: self,
                         title: "Done",
                         message: "Movie sent to Radarr!")
@@ -143,7 +143,7 @@ final class ShareViewController: UIViewController {
                  } catch {
                      print(error.localizedDescription)
                      
-                     self.alertService.displayErrorUIAlertController(
+                     self.alertService.displayErrorAlert(
                          sender: self,
                          title: "Error",
                          message: error.localizedDescription,
@@ -251,7 +251,7 @@ final class ShareViewController: UIViewController {
     fileprivate func storeUserSettings() {
         
         settingsService.radarrServerAddress = settingsView.serverAddressField.text!
-        settingsService.radarrServerPort = Int(settingsView.serverPortField.text!)!
+        settingsService.radarrServerPort = settingsView.serverPortField.text!
         settingsService.radarrAPIKey = settingsView.radarrAPIKeyField.text!
         settingsService.rootFolderPath = settingsView.rootFolderPathField.text!
         settingsService.tmdbAPIKey = settingsView.tmdbAPIKeyField.text!

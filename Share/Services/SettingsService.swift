@@ -23,7 +23,7 @@ class SettingsService {
     let keychain = Keychain(service: "com.ivanou.RadarrExtension")
     
     var radarrServerAddress: String = ""
-    var radarrServerPort: Int = 0
+    var radarrServerPort: String = ""
     var radarrAPIKey: String = ""
     var rootFolderPath: String = ""
     var tmdbAPIKey: String = ""
@@ -34,7 +34,7 @@ class SettingsService {
         
         // Save into Keychain
         keychain["serverAddress"] = radarrServerAddress
-        keychain["serverPort"] = String(radarrServerPort)
+        keychain["serverPort"] = radarrServerPort
         keychain["radarAPIKey"] = radarrAPIKey
         keychain["rootFolderPath"] = rootFolderPath
         keychain["tmdbAPIKey"] = tmdbAPIKey
@@ -55,12 +55,7 @@ class SettingsService {
         // Load from Keychain
         radarrAPIKey = keychain["radarAPIKey"] ?? ""
         radarrServerAddress = keychain["serverAddress"] ?? ""
-
-        if let portString = keychain["serverPort"] {
-            if let portInt = Int(portString) {
-                radarrServerPort = portInt
-            }
-        }
+        radarrServerPort = keychain["serverPort"] ?? ""
         rootFolderPath = keychain["rootFolderPath"] ?? ""
         tmdbAPIKey = keychain["tmdbAPIKey"] ?? ""
         
@@ -78,7 +73,7 @@ class SettingsService {
     func settingsAreIncomplete() -> Bool {
         
         if radarrServerAddress.isEmpty
-            || radarrServerPort == 0
+            || radarrServerPort.isEmpty
             || radarrAPIKey.isEmpty
             || rootFolderPath.isEmpty
             || tmdbAPIKey.isEmpty

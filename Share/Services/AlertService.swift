@@ -19,7 +19,7 @@ final class AlertService {
     //MARK: - Display Alerts -
     
     // Display alert box and auto dismiss after delay
-    func displayUIAlertController(
+    func displayAlert(
         sender: UIViewController,
         title: String,
         message: String
@@ -56,7 +56,7 @@ final class AlertService {
     }
     
     // Display alert box with options to dismiss itself or share sheet as well
-    func displayErrorUIAlertController(
+    func displayErrorAlert(
         sender: UIViewController,
         title: String,
         message: String,
