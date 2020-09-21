@@ -1,5 +1,5 @@
 //
-//  TextFieldError.swift
+//  SettingsError.swift
 //  Share
 //
 //  Created by Ivan Ou on 9/21/20.
@@ -8,26 +8,26 @@
 
 import Foundation
 
-enum TextFieldError: Error {
+enum SettingsError: Error {
     
-    case server
-    case port
+    case radarrServer
+    case radarrPort
     case radarrAPI
     case radarrPath
     case TMDbAPI
 }
 
-extension TextFieldError: LocalizedError {
+extension SettingsError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
             
-        case .server:
+        case .radarrServer:
             return NSLocalizedString(
                 "Please check Radarr server address",
                 comment: ""
             )
-        case .port:
+        case .radarrPort:
             return NSLocalizedString(
                 "Please check Radarr server port",
                 comment: ""
