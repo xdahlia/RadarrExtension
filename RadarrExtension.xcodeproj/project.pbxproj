@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E417E164251969C9006B7E96 /* TextFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E163251969C9006B7E96 /* TextFieldError.swift */; };
 		E43A9EF924D0C771000C23DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EF824D0C771000C23DB /* AppDelegate.swift */; };
 		E43A9EFB24D0C771000C23DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */; };
 		E43A9EFD24D0C771000C23DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EFC24D0C771000C23DB /* ViewController.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E417E163251969C9006B7E96 /* TextFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldError.swift; sourceTree = "<group>"; };
 		E43A9EF524D0C771000C23DB /* RadarrExt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadarrExt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43A9EF824D0C771000C23DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				E4EB7C222502E87000AA9081 /* TMDbError.swift */,
 				E44B36B1250815A600FF12CA /* RadarrError.swift */,
 				E4B066A324F6FD66005684BB /* ResultError.swift */,
+				E417E163251969C9006B7E96 /* TextFieldError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				E4B1DBC824E2068C008BC46C /* SettingsService.swift in Sources */,
 				E44B36B62508634B00FF12CA /* ResultHandler.swift in Sources */,
 				E4E2026224F35A9F00713D2B /* AlertService.swift in Sources */,
+				E417E164251969C9006B7E96 /* TextFieldError.swift in Sources */,
 				E44B36B0250804A600FF12CA /* RadarrHandler.swift in Sources */,
 				E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */,
 				E4EB7C232502E87000AA9081 /* TMDbError.swift in Sources */,

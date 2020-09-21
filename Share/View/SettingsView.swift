@@ -62,7 +62,7 @@ open class SettingsView: UIView {
         
         // Populate settings text fields with data from Settings model
         serverAddressField.text = settingsService.radarrServerAddress
-        serverPortField.text = String(settingsService.radarrServerPort)
+        serverPortField.text = settingsService.radarrServerPort
         radarrAPIKeyField.text = settingsService.radarrAPIKey
         rootFolderPathField.text = settingsService.rootFolderPath
         tmdbAPIKeyField.text = settingsService.tmdbAPIKey
