@@ -23,7 +23,7 @@ class TMDbHandler {
             throw TMDbError.APIKeyNotSet
         }
         
-        guard let TMDbUrl = constructTMDbUrlFromId(IMDbId, tmdbAPIKey: settingsService.tmdbAPIKey) else {
+        guard let TMDbUrl = try constructTMDbUrlFromId(IMDbId, tmdbAPIKey: settingsService.tmdbAPIKey) else {
             throw TMDbError.cannotConstructUrl
         }
         
@@ -31,13 +31,11 @@ class TMDbHandler {
             throw TMDbError.cannotReturnJSONString
         }
         
-        do {
-            let tmdb = try jsonToTMDB(json: jsonString)
-            return tmdb
-        } catch {
+        guard let tmdb = try jsonToTMDB(json: jsonString) else {
             throw TMDbError.cannotConvertToModel
         }
         
+        return tmdb
     }
     
     private func returnJSONStringFrom(url: URL) -> Promise<String?> {
@@ -65,12 +63,12 @@ class TMDbHandler {
     }
     
     // Construct TMDB API url with given IMDB movie id
-    private func constructTMDbUrlFromId(_ ImdbId: String, tmdbAPIKey: String) -> URL? {
+    private func constructTMDbUrlFromId(_ ImdbId: String, tmdbAPIKey: String) throws -> URL? {
         
         print("TMDbHandler.constructTMDbUrlFromId")
         
         if ImdbId.isEmpty, tmdbAPIKey.isEmpty {
-            return nil
+            fatalError("IMDb ID / TMDb API Key should not be empty at this point")
         }
 
         var components = URLComponents()
@@ -82,16 +80,15 @@ class TMDbHandler {
                 URLQueryItem(name: "api_key", value: tmdbAPIKey)
             ]
         
-        if let url = components.url {
-            return url
-        } else {
-            return nil
+        guard let url = components.url else {
+            throw TMDbError.cannotConstructUrl
         }
         
+        return url
     }
     
     // Instantiate TMDB model from JSON
-    private func jsonToTMDB(json: String) throws -> TMDB.Movies {
+    private func jsonToTMDB(json: String) throws -> TMDB.Movies? {
         
         print("TMDbHandler.jsonToTMDB")
         

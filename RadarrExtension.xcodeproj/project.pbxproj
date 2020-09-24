@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E417E164251969C9006B7E96 /* SettingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E163251969C9006B7E96 /* SettingsError.swift */; };
+		E417E16C2519708A006B7E96 /* SettingsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E16B2519708A006B7E96 /* SettingsValidator.swift */; };
 		E43A9EF924D0C771000C23DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EF824D0C771000C23DB /* AppDelegate.swift */; };
 		E43A9EFB24D0C771000C23DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */; };
 		E43A9EFD24D0C771000C23DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EFC24D0C771000C23DB /* ViewController.swift */; };
@@ -83,6 +84,7 @@
 
 /* Begin PBXFileReference section */
 		E417E163251969C9006B7E96 /* SettingsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsError.swift; sourceTree = "<group>"; };
+		E417E16B2519708A006B7E96 /* SettingsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsValidator.swift; sourceTree = "<group>"; };
 		E43A9EF524D0C771000C23DB /* RadarrExt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadarrExt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43A9EF824D0C771000C23DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				E43A9F1F24D1D332000C23DB /* Radarr.swift */,
 				E43A9F2124D206AC000C23DB /* TMDB.swift */,
+				E417E16B2519708A006B7E96 /* SettingsValidator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				E4B066A424F6FD66005684BB /* ResultError.swift in Sources */,
 				E43A9F1324D0C7F7000C23DB /* ShareViewController.swift in Sources */,
 				E4EB7C1F2502CAA500AA9081 /* ValidateURLHandler.swift in Sources */,
+				E417E16C2519708A006B7E96 /* SettingsValidator.swift in Sources */,
 				E4B1DBCE24E2584E008BC46C /* RoundedButton.swift in Sources */,
 				E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */,
 				E4EB7C10250077A000AA9081 /* SettingsView.swift in Sources */,

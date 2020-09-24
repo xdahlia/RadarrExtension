@@ -27,20 +27,19 @@ class RadarrHandler {
             throw RadarrError.cannotConstructJSON
         }
         
-        guard let radarrURL = constructRadarrUrl(
+        guard let radarrURL = try constructRadarrUrl(
             serverAddress: settingsService.radarrServerAddress,
             serverPort: settingsService.radarrServerPort,
             apiKey: settingsService.radarrAPIKey
         ) else {
             throw RadarrError.cannotConstructURL
         }
-
-        if let response = try await(postJSON(using: radarrJSON, to: radarrURL)) {
-            return response
-        } else {
+        
+        guard let response = try await(postJSON(using: radarrJSON, to: radarrURL)) else {
             throw RadarrError.general
         }
-
+        
+        return response
     }
     
     // POST JSON to Radarr server
@@ -118,12 +117,12 @@ class RadarrHandler {
         return radarrModel
     }
 
-    private func constructRadarrUrl(serverAddress: String, serverPort: String, apiKey: String) -> URL? {
+    private func constructRadarrUrl(serverAddress: String, serverPort: String, apiKey: String) throws -> URL? {
         
         print("RadarrHandler.constructRadarrUrl")
         
         if serverAddress.isEmpty, apiKey.isEmpty {
-            return nil
+            fatalError("Radarr server address and API Key should not be empty at this point")
         }
         
         var components = URLComponents()
@@ -135,11 +134,11 @@ class RadarrHandler {
                 URLQueryItem(name: "apikey", value: apiKey)
             ]
         
-        if let url = components.url {
-            return url
-        } else {
-            return nil
+        guard let url = components.url else {
+            throw RadarrError.cannotConstructURL
         }
+        
+        return url
     }
     
     // Extract year from date

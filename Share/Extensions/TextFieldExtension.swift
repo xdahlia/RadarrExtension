@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-// By Amos Joshua
-// https://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
-
 extension UITextField {
     
+    
+    
+    // By Amos Joshua
+    // https://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
     class func connectFields(fields:[UITextField]) -> Void {
         
         guard let last = fields.last else {

@@ -39,12 +39,18 @@ class ExtensionHandler {
         
         print("ExtensionHandler.extractProviderFromContext")
         
-        if let item = context.inputItems.first as? NSExtensionItem {
-            
-            return item.attachments
-        } else {
+        guard let item = context.inputItems.first as? NSExtensionItem else {
             throw ExtensionError.cannotExtractProvider
         }
+        
+        return item.attachments
+        
+//        if let item = context.inputItems.first as? NSExtensionItem {
+//
+//            return item.attachments
+//        } else {
+//            throw ExtensionError.cannotExtractProvider
+//        }
     }
     
     // Return only the provider whose attachment contains "public.url" type
