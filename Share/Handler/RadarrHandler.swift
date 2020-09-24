@@ -14,8 +14,8 @@ import AwaitKit
 class RadarrHandler {
 
     let settingsService = SettingsService.shared
-    
-    func sendMovieToRadarr(movie: TMDB.Movies) throws -> URLResponse? {
+     
+    func sendMovieToRadarr(movie: TMDB.Movies) throws -> URLResponse {
         
         print("RadarrHandler.sendMovieToRadarr")
 
@@ -40,6 +40,76 @@ class RadarrHandler {
         }
         
         return response
+    }
+
+    // Construct Radarr model using data from TMDb
+    private func constructRadarrModelFromTMDb(data: TMDB.Movies) throws -> Radarr? {
+        
+        print("RadarrHandler.constructRadarrModelFromTMDb")
+        
+        guard let year = extractYearFromDate(date: data.release_date) else {
+            throw RadarrError.cannotExtractYear
+        }
+        
+        guard let titleSlug = data.title.convertedToSlug() else {
+            throw RadarrError.cannotConvertTitleSlug
+        }
+        
+        let radarrModel = Radarr(
+            title: data.title,
+            tmdbId: data.id,
+            titleSlug: titleSlug,
+            monitored: settingsService.searchNow,
+            year: year,
+            rootFolderPath: settingsService.rootFolderPath,
+            searchNow: settingsService.searchNow,
+            imageUrl: "https://image.tmdb.org/t/p/w1280\(data.poster_path)"
+        )
+        
+        return radarrModel
+    }
+    
+    // Construct JSON from data from Radarr model
+    private func constructJSONFromRadarr(model: Radarr) throws -> Data? {
+        
+        print("RadarrHandler.constructJSONFromRadarr")
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .withoutEscapingSlashes
+        
+        do {
+            let json = try encoder.encode(model)
+            print(String(data: json, encoding: .utf8).debugDescription)
+            return json
+            
+        } catch {
+            throw RadarrError.cannotEncodeJSON
+        }
+    }
+
+    // Construct URL for Radarr server
+    private func constructRadarrUrl(serverAddress: String, serverPort: String, apiKey: String) throws -> URL? {
+        
+        print("RadarrHandler.constructRadarrUrl")
+        
+        if serverAddress.isEmpty, apiKey.isEmpty {
+            fatalError("Radarr server address and API Key should not be empty at this point")
+        }
+        
+        var components = URLComponents()
+            components.scheme = "http"
+            components.host = serverAddress
+            components.port = Int(serverPort) // TODO: Add error handling
+            components.path = "/api/movie"
+            components.queryItems = [
+                URLQueryItem(name: "apikey", value: apiKey)
+            ]
+        
+        guard let url = components.url else {
+            throw RadarrError.cannotConstructURL
+        }
+        
+        return url
     }
     
     // POST JSON to Radarr server
@@ -72,73 +142,6 @@ class RadarrHandler {
             }
             task.resume()
         }
-    }
-    
-    private func constructJSONFromRadarr(model: Radarr) throws -> Data? {
-        
-        print("RadarrHandler.constructJSONFromRadarr")
-        
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .withoutEscapingSlashes
-        
-        do {
-            let json = try encoder.encode(model)
-            print(String(data: json, encoding: .utf8).debugDescription)
-            return json
-            
-        } catch {
-            throw RadarrError.cannotEncodeJSON
-        }
-    }
-
-    private func constructRadarrModelFromTMDb(data: TMDB.Movies) throws -> Radarr? {
-        
-        print("RadarrHandler.constructRadarrModelFromTMDb")
-        
-        guard let year = extractYearFromDate(date: data.release_date) else {
-            throw RadarrError.cannotExtractYear
-        }
-        
-        guard let titleSlug = data.title.convertedToSlug() else {
-            throw RadarrError.cannotConvertTitleSlug
-        }
-        
-        let radarrModel = Radarr(
-            title: data.title,
-            tmdbId: data.id,
-            titleSlug: titleSlug,
-            monitored: settingsService.searchNow,
-            year: year,
-            rootFolderPath: settingsService.rootFolderPath,
-            searchNow: settingsService.searchNow,
-            imageUrl: "https://image.tmdb.org/t/p/w1280\(data.poster_path)"
-        )
-        
-        return radarrModel
-    }
-
-    private func constructRadarrUrl(serverAddress: String, serverPort: String, apiKey: String) throws -> URL? {
-        
-        print("RadarrHandler.constructRadarrUrl")
-        
-        if serverAddress.isEmpty, apiKey.isEmpty {
-            fatalError("Radarr server address and API Key should not be empty at this point")
-        }
-        
-        var components = URLComponents()
-            components.scheme = "http"
-            components.host = serverAddress
-            components.port = Int(serverPort) // TODO: Add error handling
-            components.path = "/api/movie"
-            components.queryItems = [
-                URLQueryItem(name: "apikey", value: apiKey)
-            ]
-        
-        guard let url = components.url else {
-            throw RadarrError.cannotConstructURL
-        }
-        
-        return url
     }
     
     // Extract year from date

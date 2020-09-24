@@ -45,38 +45,22 @@ final class ShareViewController: UIViewController {
         setupViewSettings()
     }
     
+    // Starts entire chain when user clicks on "Send" button
     func startChainReaction() throws {
-        
-        guard let url = try extensionHandler.handleShare(context: self.extensionContext!) else {
-            throw ExtensionError.general
-        }
-        
-        guard let imdbId = try validateURLHandler.returnIMDbId(from: url) else {
-            throw UrlError.general
-        }
-        
-        guard let movieData = try tmdbHandler.fetchMovieData(IMDbId: imdbId) else {
-            throw TMDbError.general
-        }
-        
-        guard let result = try radarrHandler.sendMovieToRadarr(movie: movieData) else {
-            throw RadarrError.general
-        }
-        
+
         do {
+            let url = try extensionHandler.handleShare(context: self.extensionContext!)
+            let imdbId = try validateURLHandler.returnIMDbId(from: url)
+            let movieData = try tmdbHandler.fetchMovieData(IMDbId: imdbId)
+            let result = try radarrHandler.sendMovieToRadarr(movie: movieData)
             try resultHandler.validateRadarrResponse(with: result)
         } catch {
             throw error
         }
-
-        
     }
    
     //MARK: - Handle buttons / controls -
     
-    // Save Search Now preference when segmented control is changed
-    // Call settings.save() to save to UserDefaults
-    // Call Zephyr.sync to sync selected UserDefaults to iCloud
     @IBAction private func searchSegmentedControlChanged(_ sender: UISegmentedControl) {
         
         let selectedSegment = sender.selectedSegmentIndex

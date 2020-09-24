@@ -11,6 +11,7 @@ import Foundation
 enum ExtensionError: Error {
     
     case cannotExtractProvider
+    case cannotExtractAttachment
     case cannotLoadAttachment
     case cannotLoadURL
     case general
@@ -24,6 +25,11 @@ extension ExtensionError: LocalizedError {
         case .cannotExtractProvider:
             return NSLocalizedString(
                 "Unable to extract Provider from Context",
+                comment: ""
+            )
+        case .cannotExtractAttachment:
+            return NSLocalizedString(
+                "Unable to extract Attachment from Provider",
                 comment: ""
             )
         case .cannotLoadAttachment:

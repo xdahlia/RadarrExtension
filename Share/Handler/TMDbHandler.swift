@@ -15,7 +15,7 @@ class TMDbHandler {
        
     let settingsService = SettingsService.shared
     
-    func fetchMovieData(IMDbId: String) throws -> TMDB.Movies? {
+    func fetchMovieData(IMDbId: String) throws -> TMDB.Movies {
         
         print("TMDbHandler.fetchMovieData")
         
@@ -36,30 +36,6 @@ class TMDbHandler {
         }
         
         return tmdb
-    }
-    
-    private func returnJSONStringFrom(url: URL) -> Promise<String?> {
-        
-        print("TMDbHandler.returnJSONStringFrom")
-        
-        return Promise { result in
-            
-            let session = URLSession.shared
-            
-            let task = session.dataTask(with: url) { (data, response, error) in
-                
-                if let json = data {
-                    print(String(data: json, encoding: .utf8).debugDescription)
-                    result.fulfill(String(data: json, encoding: .utf8))
-                }
-    
-                if let error = error {
-                    result.reject(error)
-                }
-            }
-            task.resume()
-        }
-        
     }
     
     // Construct TMDB API url with given IMDB movie id
@@ -85,6 +61,31 @@ class TMDbHandler {
         }
         
         return url
+    }
+    
+    // Retrive JSON from URL
+    private func returnJSONStringFrom(url: URL) -> Promise<String?> {
+        
+        print("TMDbHandler.returnJSONStringFrom")
+        
+        return Promise { result in
+            
+            let session = URLSession.shared
+            
+            let task = session.dataTask(with: url) { (data, response, error) in
+                
+                if let json = data {
+                    print(String(data: json, encoding: .utf8).debugDescription)
+                    result.fulfill(String(data: json, encoding: .utf8))
+                }
+    
+                if let error = error {
+                    result.reject(error)
+                }
+            }
+            task.resume()
+        }
+        
     }
     
     // Instantiate TMDB model from JSON

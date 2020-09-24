@@ -14,28 +14,31 @@ import AwaitKit
 class ExtensionHandler {
 
     // External method
-    func handleShare(context: NSExtensionContext) throws -> URL? {
+    func handleShare(context: NSExtensionContext) throws -> URL {
         
         print("ExtensionHandler.handleShare")
         
-        guard let provider = try extractProviderFrom(context) else {
-            throw ExtensionError.cannotExtractProvider
+        do {
+            let provider = try extractProviderFrom(context)
+            
+            guard let attachment = try await(loadAttachmentsFrom(provider)) else {
+                throw ExtensionError.cannotLoadAttachment
+            }
+            
+            guard let url = try await(loadUrlFrom(attachment)) else {
+                throw ExtensionError.cannotLoadURL
+            }
+            
+            return url
+            
+        } catch {
+            throw error
         }
-        
-        guard let attachment = try? await(loadAttachmentsFrom(provider)) else {
-            throw ExtensionError.cannotLoadAttachment
-        }
-        print("exit from attachment guard")
-        
-        guard let url = try await(loadUrlFrom(attachment)) else {
-            print("before throwing cannotloadURL")
-            throw ExtensionError.cannotLoadURL
-        }
-        return url
+
     }
     
     // Extract item provider from share context
-    private func extractProviderFrom(_ context: NSExtensionContext) throws -> [NSItemProvider]? {
+    private func extractProviderFrom(_ context: NSExtensionContext) throws -> [NSItemProvider] {
         
         print("ExtensionHandler.extractProviderFromContext")
         
@@ -43,18 +46,15 @@ class ExtensionHandler {
             throw ExtensionError.cannotExtractProvider
         }
         
-        return item.attachments
+        guard let attachment = item.attachments else {
+            throw ExtensionError.cannotExtractAttachment
+        }
         
-//        if let item = context.inputItems.first as? NSExtensionItem {
-//
-//            return item.attachments
-//        } else {
-//            throw ExtensionError.cannotExtractProvider
-//        }
+        return attachment
     }
     
     // Return only the provider whose attachment contains "public.url" type
-    private func loadAttachmentsFrom(_ provider: [NSItemProvider]) -> Promise<NSItemProvider> {
+    private func loadAttachmentsFrom(_ provider: [NSItemProvider]) -> Promise<NSItemProvider?> {
         
         print("ExtensionHandler.loadAttachmentsFrom")
         

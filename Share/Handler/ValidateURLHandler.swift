@@ -13,7 +13,7 @@ struct ValidateURLHandler {
     
     // MARK: - URL Validation -
 
-    func returnIMDbId(from url: URL) throws -> String? {
+    func returnIMDbId(from url: URL) throws -> String {
         
         print("ValidateURLHandler.returnIMDbId")
         
