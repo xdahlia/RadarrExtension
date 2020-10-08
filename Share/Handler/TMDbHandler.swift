@@ -71,6 +71,9 @@ class TMDbHandler {
         return Promise { result in
             
             let session = URLSession.shared
+  
+            session.configuration.waitsForConnectivity = true
+            session.configuration.timeoutIntervalForResource = 10
             
             let task = session.dataTask(with: url) { (data, response, error) in
                 
