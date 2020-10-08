@@ -40,6 +40,28 @@
 		E4C759F3250BDFF3003616CE /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759F2250BDFF3003616CE /* PromiseKit */; };
 		E4C759F5250BE037003616CE /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759F4250BE037003616CE /* PromiseKit */; };
 		E4C759F7250BE045003616CE /* AwaitKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C759F6250BE045003616CE /* AwaitKit */; };
+		E4CFB84D252F68C000684F70 /* UrlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A124F6D25A005684BB /* UrlError.swift */; };
+		E4CFB851252F68E200684F70 /* ValidateURLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C1E2502CAA400AA9081 /* ValidateURLHandler.swift */; };
+		E4CFB855252F693500684F70 /* ExtensionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B3250855A100FF12CA /* ExtensionError.swift */; };
+		E4CFB859252F693900684F70 /* TMDbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C222502E87000AA9081 /* TMDbError.swift */; };
+		E4CFB85D252F693B00684F70 /* RadarrError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B1250815A600FF12CA /* RadarrError.swift */; };
+		E4CFB861252F693E00684F70 /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B066A324F6FD66005684BB /* ResultError.swift */; };
+		E4CFB865252F694000684F70 /* SettingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E163251969C9006B7E96 /* SettingsError.swift */; };
+		E4CFB869252F694400684F70 /* ExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C1C25017F3400AA9081 /* ExtensionHandler.swift */; };
+		E4CFB86D252F694700684F70 /* TMDbHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C202502DD0500AA9081 /* TMDbHandler.swift */; };
+		E4CFB871252F694A00684F70 /* RadarrHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36AF250804A600FF12CA /* RadarrHandler.swift */; };
+		E4CFB875252F694C00684F70 /* ResultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36B52508634B00FF12CA /* ResultHandler.swift */; };
+		E4CFB879252F695600684F70 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2026124F35A9F00713D2B /* AlertService.swift */; };
+		E4CFB87D252F695800684F70 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBC724E2068C008BC46C /* SettingsService.swift */; };
+		E4CFB881252F695D00684F70 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC206A24F8577500ADE4C5 /* StringExtension.swift */; };
+		E4CFB885252F695F00684F70 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C15250162AF00AA9081 /* ViewExtension.swift */; };
+		E4CFB889252F696200684F70 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4827FAB250D9FE40092523C /* TextFieldExtension.swift */; };
+		E4CFB88D252F696900684F70 /* Radarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1F24D1D332000C23DB /* Radarr.swift */; };
+		E4CFB891252F696B00684F70 /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
+		E4CFB895252F696E00684F70 /* SettingsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E16B2519708A006B7E96 /* SettingsValidator.swift */; };
+		E4CFB899252F697100684F70 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
+		E4CFB89D252F697500684F70 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C0F250077A000AA9081 /* SettingsView.swift */; };
+		E4CFB8A1252F697A00684F70 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1224D0C7F7000C23DB /* ShareViewController.swift */; };
 		E4E2026224F35A9F00713D2B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2026124F35A9F00713D2B /* AlertService.swift */; };
 		E4EB7C10250077A000AA9081 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C0F250077A000AA9081 /* SettingsView.swift */; };
 		E4EB7C12250077E500AA9081 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4EB7C11250077E500AA9081 /* SettingsView.xib */; };
@@ -514,7 +536,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4CFB869252F694400684F70 /* ExtensionHandler.swift in Sources */,
+				E4CFB879252F695600684F70 /* AlertService.swift in Sources */,
+				E4CFB881252F695D00684F70 /* StringExtension.swift in Sources */,
+				E4CFB889252F696200684F70 /* TextFieldExtension.swift in Sources */,
+				E4CFB899252F697100684F70 /* RoundedButton.swift in Sources */,
+				E4CFB84D252F68C000684F70 /* UrlError.swift in Sources */,
+				E4CFB865252F694000684F70 /* SettingsError.swift in Sources */,
+				E4CFB851252F68E200684F70 /* ValidateURLHandler.swift in Sources */,
+				E4CFB885252F695F00684F70 /* ViewExtension.swift in Sources */,
+				E4CFB871252F694A00684F70 /* RadarrHandler.swift in Sources */,
+				E4CFB85D252F693B00684F70 /* RadarrError.swift in Sources */,
+				E4CFB86D252F694700684F70 /* TMDbHandler.swift in Sources */,
+				E4CFB8A1252F697A00684F70 /* ShareViewController.swift in Sources */,
+				E4CFB88D252F696900684F70 /* Radarr.swift in Sources */,
+				E4CFB891252F696B00684F70 /* TMDB.swift in Sources */,
+				E4CFB895252F696E00684F70 /* SettingsValidator.swift in Sources */,
+				E4CFB875252F694C00684F70 /* ResultHandler.swift in Sources */,
+				E4CFB861252F693E00684F70 /* ResultError.swift in Sources */,
+				E4CFB855252F693500684F70 /* ExtensionError.swift in Sources */,
 				E4B0671624F773A7005684BB /* ValidateURLHandlerTests.swift in Sources */,
+				E4CFB87D252F695800684F70 /* SettingsService.swift in Sources */,
+				E4CFB859252F693900684F70 /* TMDbError.swift in Sources */,
+				E4CFB89D252F697500684F70 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
