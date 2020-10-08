@@ -15,23 +15,20 @@ struct ResultHandler {
         
         print("ResultHandler.validateRadarrResponse")
         
-        guard let httpResponse =
-            
-            response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode)
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { return }
+        
+        guard (200...299).contains(statusCode)
             
         else {
-                let statusCode = (response as? HTTPURLResponse)?.statusCode
+            if statusCode == 400 {
+                throw ResultError.fourHundred
                 
-                if statusCode == 400 {
-                    throw ResultError.fourHundred
-                    
-                } else if statusCode == 401 {
-                    throw ResultError.fourZeroOne
-                    
-                } else {
-                    throw ResultError.general
-                }
+            } else if statusCode == 401 {
+                throw ResultError.fourZeroOne
+                
+            } else {
+                throw ResultError.general
+            }
         }
     }
     

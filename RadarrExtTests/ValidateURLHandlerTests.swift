@@ -38,11 +38,11 @@ class ValidateURLHandlerTests: XCTestCase {
         XCTAssertEqual(expectedError, error)
         XCTAssertEqual(expectedError.localizedDescription, error?.localizedDescription)
         
-//        let bad_url3 = NSURL(string: "https://www.imdb.com/")!
-//        XCTAssertThrowsError(try validation.validateSharedURL(with: bad_url3))
+//        let bad_url3 = URL(string: "https://www.imdb.com/")!
+//        XCTAssertThrowsError(try validation.returnIMDbId(from: bad_url3))
 //
-//        let bad_url4 = NSURL(string: "https://www.google.com/")!
-//        XCTAssertThrowsError(try validation.validateSharedURL(with: bad_url4))
+//        let bad_url4 = URL(string: "https://www.google.com/")!
+//        XCTAssertThrowsError(try validation.returnIMDbId(from: bad_url4))
         
     }
 
