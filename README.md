@@ -31,10 +31,10 @@ Ever wish you could send a movie to Radarr straight from an IMDb movie page? Wel
 
 ## SPM Dependencies
 
-- [KeychainAccess 4.2+](https://github.com/kishikawakatsumi/KeychainAccess)
-- [Zephyr 3.6+](https://github.com/ArtSabintsev/Zephyr)
-- [PromiseKit 6.13.3+](https://github.com/mxcl/PromiseKit)
 - [AwaitKit 5.2+](https://github.com/yannickl/AwaitKit)
+- [KeychainAccess 4.2+](https://github.com/kishikawakatsumi/KeychainAccess)
+- [PromiseKit 6.13.3+](https://github.com/mxcl/PromiseKit)
+- [Zephyr 3.6+](https://github.com/ArtSabintsev/Zephyr)
 
 ## Credits
 

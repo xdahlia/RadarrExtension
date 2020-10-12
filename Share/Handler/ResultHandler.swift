@@ -15,10 +15,12 @@ struct ResultHandler {
         
         print("ResultHandler.validateRadarrResponse")
         
-        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { return }
+        guard
+            let statusCode = (response as? HTTPURLResponse)?.statusCode
+        else { return }
         
-        guard (200...299).contains(statusCode)
-            
+        guard
+            (200...299).contains(statusCode)
         else {
             if statusCode == 400 {
                 throw ResultError.fourHundred
