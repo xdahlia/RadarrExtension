@@ -11,8 +11,8 @@ Ever wish you could send a movie to Radarr straight from an IMDb movie page? Wel
 As this is work in progress, there are a few things to be aware of:
 
 - Hard coded to use HTTP, not HTTPS
-- Quality Profile hard coded to HD-1080p
-- "Search Now" option turns on monitoring and triggers an immediate search. "Later" is the opposite
+- Quality Profile hard coded to "HD-1080p"
+- "Search Now" option turns on monitoring and triggers an immediate search. "Search Later" is the opposite
 - Min Availability hard coded to "Physical / Web"
 
 ## Features

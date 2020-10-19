@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -65,17 +67,18 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="525" id="bMT-gS-F38"/>
                                         </constraints>
-                                        <string key="text">Begin by sharing a movie link from either IMDB app or webpage
+                                        <mutableString key="text">Begin by sharing a movie link from either IMDB app or webpage
 
 Settings 
 1. Radarr Server Settings Use this format: 
-“http://111.222.333.444:1234“ 
+Server: “111.222.333.444“
+Port: "1234" 
 2. Radarr API Key Use the API Key from your Radarr Server. 
-3. Radarr rootFolderPath Enter the path to your movies folder using the following sample format:  Windows “C:\Movies\” Linux “/Movies/“
+3. Radarr rootFolderPath Enter the path to your movies folder using one of the following sample formats:  Windows “C:\Movies\” Linux “/Movies/“
 
-4. TMDB API Key
+4. TMDb API Key
 Get your API key at:
-https://developers.themoviedb.org/3/getting-started/introduction</string>
+https://developers.themoviedb.org/3/getting-started/introduction</mutableString>
                                         <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -94,14 +97,14 @@ https://developers.themoviedb.org/3/getting-started/introduction</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
                             <constraint firstItem="GgE-CU-B97" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MTP-6l-AfP"/>
                             <constraint firstItem="GgE-CU-B97" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Owd-p9-6Bc"/>
                             <constraint firstItem="GgE-CU-B97" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QxA-bv-GsU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GgE-CU-B97" secondAttribute="trailing" constant="20" id="uDs-ql-KXk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="logoHeight" destination="Yen-bz-jty" id="uCP-1c-hc3"/>
@@ -117,5 +120,8 @@ https://developers.themoviedb.org/3/getting-started/introduction</string>
     </scenes>
     <resources>
         <image name="Logo" width="450" height="146"/>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
