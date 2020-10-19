@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>This app needs network access in order to talk to Radarr server</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -35,8 +33,8 @@
               SUBQUERY (
                 $extensionItem.attachments,
                 $attachment,
-                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.url&quot; ||
-                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.plain-text&quot;
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.url" ||
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.plain-text"
               ).@count == $extensionItem.attachments.@count
             ).@count == 1</string>
 		</dict>
@@ -45,5 +43,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This app needs network access in order to talk to Radarr server</string>
 </dict>
 </plist>
