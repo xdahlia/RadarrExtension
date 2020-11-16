@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E417E164251969C9006B7E96 /* SettingsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E163251969C9006B7E96 /* SettingsError.swift */; };
 		E417E16C2519708A006B7E96 /* SettingsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417E16B2519708A006B7E96 /* SettingsValidator.swift */; };
+		E42CA5D9256339A1007245AE /* SwiftyPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42CA5D8256339A1007245AE /* SwiftyPing.swift */; };
 		E43A9EF924D0C771000C23DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EF824D0C771000C23DB /* AppDelegate.swift */; };
 		E43A9EFB24D0C771000C23DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */; };
 		E43A9EFD24D0C771000C23DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9EFC24D0C771000C23DB /* ViewController.swift */; };
@@ -17,7 +18,6 @@
 		E43A9F0524D0C774000C23DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43A9F0324D0C774000C23DB /* LaunchScreen.storyboard */; };
 		E43A9F1324D0C7F7000C23DB /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1224D0C7F7000C23DB /* ShareViewController.swift */; };
 		E43A9F1624D0C7F7000C23DB /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43A9F1424D0C7F7000C23DB /* MainInterface.storyboard */; };
-		E43A9F1A24D0C7F7000C23DB /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E43A9F1024D0C7F7000C23DB /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E43A9F2024D1D332000C23DB /* Radarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1F24D1D332000C23DB /* Radarr.swift */; };
 		E43A9F2224D206AC000C23DB /* TMDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F2124D206AC000C23DB /* TMDB.swift */; };
 		E44B36B0250804A600FF12CA /* RadarrHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B36AF250804A600FF12CA /* RadarrHandler.swift */; };
@@ -62,6 +62,7 @@
 		E4CFB899252F697100684F70 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1DBCD24E2584E008BC46C /* RoundedButton.swift */; };
 		E4CFB89D252F697500684F70 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C0F250077A000AA9081 /* SettingsView.swift */; };
 		E4CFB8A1252F697A00684F70 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43A9F1224D0C7F7000C23DB /* ShareViewController.swift */; };
+		E4DF73FB25605D4C0066E5F8 /* Share.appex in Resources */ = {isa = PBXBuildFile; fileRef = E43A9F1024D0C7F7000C23DB /* Share.appex */; };
 		E4E2026224F35A9F00713D2B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E2026124F35A9F00713D2B /* AlertService.swift */; };
 		E4EB7C10250077A000AA9081 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB7C0F250077A000AA9081 /* SettingsView.swift */; };
 		E4EB7C12250077E500AA9081 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4EB7C11250077E500AA9081 /* SettingsView.xib */; };
@@ -97,7 +98,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E43A9F1A24D0C7F7000C23DB /* Share.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +107,7 @@
 /* Begin PBXFileReference section */
 		E417E163251969C9006B7E96 /* SettingsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsError.swift; sourceTree = "<group>"; };
 		E417E16B2519708A006B7E96 /* SettingsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsValidator.swift; sourceTree = "<group>"; };
+		E42CA5D8256339A1007245AE /* SwiftyPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyPing.swift; sourceTree = "<group>"; };
 		E43A9EF524D0C771000C23DB /* RadarrExt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadarrExt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43A9EF824D0C771000C23DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E43A9EFA24D0C771000C23DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 			children = (
 				E47564DB24EDEE7F00B0D5B5 /* header.png */,
 				E47564DC24EDEE7F00B0D5B5 /* README.md */,
+				E42CA5D8256339A1007245AE /* SwiftyPing.swift */,
 				E43A9EF724D0C771000C23DB /* RadarrExtension */,
 				E43A9F1124D0C7F7000C23DB /* Share */,
 				E4B0670C24F77313005684BB /* RadarrExtTests */,
@@ -470,6 +472,7 @@
 				E43A9F0224D0C774000C23DB /* Assets.xcassets in Resources */,
 				E47564DE24EDEE8000B0D5B5 /* README.md in Resources */,
 				E47564DD24EDEE8000B0D5B5 /* header.png in Resources */,
+				E4DF73FB25605D4C0066E5F8 /* Share.appex in Resources */,
 				E43A9F0024D0C771000C23DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +503,7 @@
 				E43A9EFD24D0C771000C23DB /* ViewController.swift in Sources */,
 				E43A9EF924D0C771000C23DB /* AppDelegate.swift in Sources */,
 				E43A9EFB24D0C771000C23DB /* SceneDelegate.swift in Sources */,
+				E42CA5D9256339A1007245AE /* SwiftyPing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
