@@ -40,6 +40,7 @@ As this is work in progress, there are a few things to be aware of:
 - String Extension from [Hacking With Swift](https://www.hackingwithswift.com/example-code/strings/how-to-convert-a-string-to-a-safe-format-for-url-slugs-and-filenames)
 - Rounded buttons by [Adam Fils](https://medium.com/@filswino/easiest-implementation-of-rounded-buttons-in-xcode-6627efe39f84)
 - Text Field Extension by [Amos Joshua](https://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons)
+- SwiftyPing by [Sami Yrjänheikki](https://github.com/samiyr/SwiftyPing)
 
 ## Acknowledgements / Disclaimer / Copyright / Attribution
 - [TMDb API](https://developers.themoviedb.org/3)
